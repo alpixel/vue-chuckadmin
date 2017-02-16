@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="cc-txt-center">
-      {{msg}} {{$route.params.id}}
+      {{msg}} {{id}}
     </h2>
   </div>
 </template>
@@ -13,6 +13,9 @@ export default {
     return {
       msg: 'Homepage of user'
     }
+  },
+  props : {
+    id : Number
   },
   watch: {
     '$route' (to, from) {

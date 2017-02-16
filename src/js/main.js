@@ -18,22 +18,26 @@ var routes = [
     {
         path: '/page/:id',
         name:'page',
-        component: require(viewPath + 'pages/page.vue')
+        component: require(viewPath + 'pages/page.vue'),
+        props : true
     },
     {
         path: '/user/:id',
         name:'user',
         component: require(viewPath + 'user/user.vue'),
+        props: true,
         children : [
             {
-                path : '',
+                path: '',
                 name: 'user-home',
-                component : require(viewPath + 'user/userHome.vue')
+                component: require(viewPath + 'user/userHome.vue'),
+                props: true
             },
             {
-                path : 'profile',
+                path: 'profile',
                 name: 'user-profile',
-                component : require(viewPath + 'user/userProfile.vue')
+                component: require(viewPath + 'user/userProfile.vue'),
+                props: true
             }
         ]
     }
@@ -42,11 +46,6 @@ var router = new VueRouter({
   routes: routes
 });
 
-// // push a new route
-// router.push({
-//     path: '/page2',
-//     component: require(viewPath + 'pages/page2.vue')
-// });
 
 
 // ================

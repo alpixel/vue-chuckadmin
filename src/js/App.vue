@@ -12,19 +12,21 @@
                     <router-link :to="{name : 'home'}" exact>Home</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'page', params: {id: 1}}" exact>Page 1</router-link>
+                    <router-link :to="{name : 'page', params: {id: 1}}">Page 1</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'user-home', params: {id:1}}" exact>User</router-link>
+                    <router-link :to="{name : 'user-home', params: {id:1}}">User</router-link>
                     <ul>
-                        <li><router-link :to="{name : 'user-profile', params: {id:1}}" exact>User profil</router-link></li>
+                        <li><router-link :to="{name : 'user-profile', params: {id:1}}">User profil</router-link></li>
                     </ul>
                 </li>
             </ul>
         </nav>
 
         <main>
-            <router-view></router-view>
+            <!-- <transition name="fade" mode="out-in"> -->
+                <router-view></router-view>
+            <!-- </transition> -->
         </main>
     </div>
 </template>
