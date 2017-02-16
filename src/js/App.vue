@@ -1,12 +1,22 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{msg}}</h1>
+    <div id="app">
+        <header>
+            <p class="cc-txt-center">
+                <img src="./assets/logo.png" alt="VueJS logo">
+            </p>
+        </header>
 
-    <div class="alert alert-success">
-      <i class="fa fa-thumbs-up"></i> Install success :) Good work dude!
+        <nav>
+            <ul>
+                <router-link to="/" tag="li">Home</router-link>
+                <router-link to="/page1" tag="li">Page 1</router-link>
+            </ul>
+        </nav>
+
+        <main>
+            <router-view></router-view>
+        </main>
     </div>
-  </div>
 </template>
 
 <script>
