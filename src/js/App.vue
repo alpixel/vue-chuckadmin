@@ -8,8 +8,18 @@
 
         <nav>
             <ul>
-                <router-link to="/" tag="li">Home</router-link>
-                <router-link to="/page1" tag="li">Page 1</router-link>
+                <li>
+                    <router-link :to="{name : 'home'}" exact>Home</router-link>
+                </li>
+                <li>
+                    <router-link :to="{name : 'page', params: {id: 1}}" exact>Page 1</router-link>
+                </li>
+                <li>
+                    <router-link :to="{name : 'user-home', params: {id:1}}" exact>User</router-link>
+                    <ul>
+                        <li><router-link :to="{name : 'user-profile', params: {id:1}}" exact>User profil</router-link></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
