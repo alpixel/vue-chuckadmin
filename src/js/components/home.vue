@@ -11,12 +11,12 @@
 </template>
 
 <script>
-export default {
-  name: 'home',
-  data () {
-    return {
-      msg: 'I am the homepage'
+    export default {
+        name: 'home',
+        data () {
+            return {
+                msg: 'I am the homepage'
+            }
+        }
     }
-  }
-}
 </script>

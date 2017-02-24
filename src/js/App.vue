@@ -8,19 +8,18 @@
             </p>
         </header>
 
-        <nav>
-            <ul>
+        <h1 class="cc-txt-center">{{msg}}</h1>
+
+        <nav class="cc-ma-30">
+            <ul class="tabs cc-underlined cc-align-center">
                 <li>
                     <router-link :to="{name : 'home'}" exact>Home</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'page', params: {id: 1}}">Page 1</router-link>
+                    <router-link :to="{name : 'user', params: {id: 1, gender:'male'}}">Male only</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'user-home', params: {id: 1}}">User 1</router-link>
-                    <ul>
-                        <li><router-link :to="{name : 'user-profile', params: {id: 1}}">User profil</router-link></li>
-                    </ul>
+                    <router-link :to="{name : 'user', params: {id: 2, gender:'female'}}">Female only</router-link>
                 </li>
             </ul>
         </nav>
@@ -34,12 +33,12 @@
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    export default {
+        name: 'app',
+        data () {
+            return {
+                msg: 'Welcome to Your Vue.js App'
+            }
+        }
     }
-  }
-}
 </script>
