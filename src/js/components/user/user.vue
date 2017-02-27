@@ -50,14 +50,18 @@
             gender : String
         },
         watch: {
-            // When route change, launch fetchData method
+            // When route change but same component is called, launch "fetchData" method
+            // for exemple : from "user/25" -> to -> "user/52"
             '$route' : 'fetchData'
         },
         created () {
             this.fetchData();
+            console.log('created');
         },
         methods: {
             fetchData () {
+                console.log('fetchData');
+
                 this.error = null;
                 this.loading = true;
 
