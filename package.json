@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "ChuckCSS": "^3",
-    "vue": "^2.2"
+    "vue": "^2.2",
+    "vue-paginate": "^3.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

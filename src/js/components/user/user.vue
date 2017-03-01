@@ -1,24 +1,60 @@
 <template>
   <div>
+
+    <!-- If loading -->
     <div class="cc-loader" v-if="loading">
       <div class="spinner"></div>
     </div>
 
+    <!-- else -->
     <div v-else>
-        <div v-if="data.name.first" class="cc-txt-center">
-            <p v-if="data.picture.medium">
-                <img :src="data.picture.medium" :alt="getFullname" />
-            </p>
-            <h1>{{getFullname}}</h1>
+
+        <!-- If no errors after fetching datas -->
+        <div v-if="!error">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Picture</th>
+                        <th>Full name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Picture</th>
+                        <th>Full name</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr v-for="(user,index) in users">
+                        <td>
+                            {{index}}
+                        </td>
+                        <td>
+                            <img :src="user.picture.thumbnail" :alt="user.name.first" />
+                        </td>
+                        <td>
+                            {{getFullname(index)}}
+                        </td>
+                        <td>
+                            <router-link class="btn cc-bg-primary" :to="{name : 'user', params: {id: user.id.value}}">Edit</router-link>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
         </div>
 
+        <!-- else, show errors logs -->
         <div v-else class="alert alert-error">
             {{error}}
         </div>
 
-        <div style="font-size:1rem;">
-            <pre>{{$data}}</pre>
-        </div>
     </div>
     <router-view></router-view>
   </div>
@@ -29,6 +65,7 @@
     import axios from 'axios'
     import VueAxios from 'vue-axios'
 
+
     Vue.use(VueAxios, axios)
 
     export default {
@@ -37,17 +74,10 @@
             return {
                 loading:false,
                 error : '',
-                data: []
+                users: [],
+                searchUser : '',
+                paginate: ['users']
             }
-        },
-        computed : {
-            getFullname () {
-                return this.capitalizeFirstLetter(this.data.name.first)+' '+this.data.name.last.toUpperCase()
-            }
-        },
-        props : {
-            id : null,
-            gender : String
         },
         watch: {
             // When route change but same component is called, launch "fetchData" method
@@ -65,27 +95,29 @@
                 this.error = null;
                 this.loading = true;
 
-                const api = 'https://randomuser.me/api/?gender='+this.gender;
+                const api = 'https://randomuser.me/api/?results=10&nat=fr';
 
                 Vue.axios.get(api, {
-
-                    dataType: 'PrettyJSON'
-
+                    // params
                 }).then(response => {
 
                     this.loading = false;
-                    this.data = response.data.results[0];
+                    this.users = response.data.results;
+                    console.log(this.users);
 
                 }).catch(error => {
 
-                    this.error = 'User not found';
+                    this.error = 'Users not found';
                     this.loading = false;
-                    this.data = [];
+                    this.users = [];
 
                 });
             },
             capitalizeFirstLetter(str) {
                 return str.charAt(0).toUpperCase() + str.slice(1);
+            },
+            getFullname(index) {
+                return this.capitalizeFirstLetter(this.users[index].name.first)+' '+this.users[index].name.last.toUpperCase()
             }
         }
     }

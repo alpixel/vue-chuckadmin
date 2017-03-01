@@ -16,10 +16,7 @@
                     <router-link :to="{name : 'home'}" exact>Home</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'user', params: {id: 1, gender:'male'}}">Male only</router-link>
-                </li>
-                <li>
-                    <router-link :to="{name : 'user', params: {id: 2, gender:'female'}}">Female only</router-link>
+                    <router-link :to="{name : 'users'}">Users</router-link>
                 </li>
             </ul>
         </nav>
