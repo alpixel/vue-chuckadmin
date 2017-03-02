@@ -10,7 +10,7 @@
 
         <h1 class="cc-txt-center">{{msg}}</h1>
 
-        <nav class="cc-ma-30">
+        <nav class="cc-mat-30 cc-mab-30">
             <ul class="tabs cc-underlined cc-align-center">
                 <li>
                     <router-link :to="{name : 'home'}" exact>Home</router-link>

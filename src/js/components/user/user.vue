@@ -11,42 +11,76 @@
 
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
+
+            <form>
+                <div class="form-item">
+                    <select v-model="nbPerPageSelect">
+                        <option value="1">1 ligne</option>
+                        <option value="5">5 lignes</option>
+                        <option value="10">10 lignes</option>
+                        <option value="20">20 lignes</option>
+                        <option value="50">50 lignes</option>
+                    </select>
+                </div>
+            </form>
+
+            <pagination :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th @click="sortBy(['id.value'])">ID</th>
                         <th>Picture</th>
-                        <th>Full name</th>
+                        <th @click="sortBy(['name.first', 'name.last'])">Full name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th></th>
+                         <th @click="sortBy(['id.value'])">ID</th>
                         <th>Picture</th>
-                        <th>Full name</th>
+                        <th @click="sortBy(['name.first', 'name.last'])">Full name</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
 
                 <tbody>
-                    <tr v-for="(user,index) in users">
-                        <td>
-                            {{index}}
+                    <tr v-for="(user,index) in userShowed">
+                        <td width="200">
+                            {{user.id.value}}
                         </td>
-                        <td>
+                        <td width="100">
                             <img :src="user.picture.thumbnail" :alt="user.name.first" />
                         </td>
                         <td>
-                            {{getFullname(index)}}
+                            {{user.name.first|capitalizeFirstLetter}} {{user.name.last|toUppercase}}
                         </td>
-                        <td>
+                        <td width="60">
                             <router-link class="btn cc-bg-primary" :to="{name : 'user', params: {id: user.id.value}}">Edit</router-link>
                         </td>
                     </tr>
                 </tbody>
-
             </table>
+
+            <pagination :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+
+            <form>
+                <div class="form-item">
+                    <select v-model="nbPerPageSelect">
+                        <option value="1">1 ligne</option>
+                        <option value="5">5 lignes</option>
+                        <option value="10">10 lignes</option>
+                        <option value="20">20 lignes</option>
+                        <option value="50">50 lignes</option>
+                    </select>
+                </div>
+            </form>
+
+            <!--
+                <pre>
+                    {{$data}}
+                </pre>
+            -->
 
         </div>
 
@@ -64,61 +98,168 @@
     import Vue from 'vue'
     import axios from 'axios'
     import VueAxios from 'vue-axios'
+    import Pagination from '../utils/pagination.vue'
+
+    // Set const api url to get users
+    const api = 'https://randomuser.me/api/?results=30&nat=fr';
 
 
     Vue.use(VueAxios, axios)
 
+
     export default {
+        // Name of the component
         name: 'user',
+
+        // Datas : model
         data () {
             return {
                 loading:false,
                 error : '',
+
+                sortKey: null,
+                sortType : ['asc','desc'],
+
+                // Tab contains all users
                 users: [],
-                searchUser : '',
-                paginate: ['users']
+
+                // Tab contains shown users
+                userShowed: [],
+
+                // Current active page (1 by default)
+                currentPage: 1,
+
+                // Nb of user per page
+                nbPerPage: 5,
+
+                // Select list default value
+                nbPerPageSelect: 5
             }
         },
+
+        // Computed datas : Here the total nb of users
+        computed: {
+            maxUsers: function() {
+              return this.users.length
+            }
+        },
+
+        // Watchers
         watch: {
             // When route change but same component is called, launch "fetchData" method
             // for exemple : from "user/25" -> to -> "user/52"
-            '$route' : 'fetchData'
+            '$route' : 'fetchData',
+
+            // When select pagination changes
+            nbPerPageSelect : function() {
+
+                // Nb of user per page is set to the select value
+                this.nbPerPage = _.toInteger(this.nbPerPageSelect);
+
+                // Set the first pagination active
+                this.currentPage = 1;
+
+                // Refresh page
+                this.refreshPage();
+            }
         },
+
+        // When view is created, launch ajax fetchData
         created () {
             this.fetchData();
-            console.log('created');
         },
-        methods: {
-            fetchData () {
-                console.log('fetchData');
 
-                this.error = null;
+        // Methods
+        methods: {
+
+            // Ajax to get users
+            fetchData () {
+                // Reset error msg
+                this.error = '';
+
+                // It's loading dude :)
                 this.loading = true;
 
-                const api = 'https://randomuser.me/api/?results=10&nat=fr';
 
+                // AJAX FIRE!
                 Vue.axios.get(api, {
+
                     // params
+
                 }).then(response => {
 
+                    // Loading is finished :)
                     this.loading = false;
+
+                    // Contains all users (100)
                     this.users = response.data.results;
-                    console.log(this.users);
+
+                    // Slice users to show the `this.nbPerPage` first users
+                    this.userShowed = this.users.slice(0, this.nbPerPage);
 
                 }).catch(error => {
 
+                    // Set the error msg
                     this.error = 'Users not found';
+
+                    // Loading is finished :)
                     this.loading = false;
+
+                    // Clear users tab
                     this.users = [];
 
                 });
             },
-            capitalizeFirstLetter(str) {
-                return str.charAt(0).toUpperCase() + str.slice(1);
+
+            // Bind when the page changes
+            changePage(index) {
+
+                // Active class to the current number
+                this.currentPage = index
+
+                // Refresh page
+                this.refreshPage()
             },
-            getFullname(index) {
-                return this.capitalizeFirstLetter(this.users[index].name.first)+' '+this.users[index].name.last.toUpperCase()
+
+            // Refresh page
+            refreshPage() {
+
+                // Set start to the first user of the current line
+                let start = this.getStartPagination()
+
+                // Set userShow from `start` to `this.nbPerPage`
+                this.userShowed = this.users.slice(start, start + this.nbPerPage)
+            },
+
+            // Return the start of the current pagination
+            getStartPagination() {
+                return (this.currentPage - 1) * this.nbPerPage
+            },
+
+
+            sortBy(sortKey) {
+                // Order users tabs with lodash
+                this.users = _.orderBy(this.users, sortKey, [this.sortType[0]]);
+
+                // Reverse sortType for next click (reverse)
+                this.sortType = _.reverse(this.sortType);
+
+                // Refresh, always refresh :)
+                this.refreshPage();
+            },
+        },
+        filters: {
+            // Return a string with a the first letter capitalized
+            capitalizeFirstLetter(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1)
+            },
+            // Return a string with a the first letter capitalized
+            toUppercase(str) {
+                return str.toUpperCase()
             }
+        },
+        components: {
+            Pagination
         }
     }
 </script>
