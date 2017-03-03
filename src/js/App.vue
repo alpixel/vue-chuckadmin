@@ -3,7 +3,7 @@
         <header>
             <p class="cc-txt-center">
                 <router-link :to="{name : 'home'}" exact>
-                    <img src="./assets/logo.png" alt="VueJS logo">
+                    <img src="assets/logo.png" alt="VueJS logo">
                 </router-link>
             </p>
         </header>
