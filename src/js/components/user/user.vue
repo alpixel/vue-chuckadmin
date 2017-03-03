@@ -36,36 +36,49 @@
             </div>
 
             <!-- Results table datas -->
-            <table v-show="userShowed.length >= 1">
+            <table v-show="userShowed.length >= 1" class="cc-equal-cols">
                 <thead>
                     <tr>
-                        <th @click="sortBy(['id.value'])">ID</th>
-                        <th>Picture</th>
-                        <th @click="sortBy(['name.first', 'name.last'])">Full name</th>
-                        <th>Action</th>
+                        <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
+                            ID
+                        </th>
+                        <th>
+                            Picture
+                        </th>
+                        <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
+                            Firstname
+                        </th>
+                        <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
+                            Lastname
+                        </th>
+                        <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
+                            Date inscription
+                        </th>
+                        <th>
+                            Action
+                        </th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                         <th @click="sortBy(['id.value'])">ID</th>
-                        <th>Picture</th>
-                        <th @click="sortBy(['name.first', 'name.last'])">Full name</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
+
 
                 <tbody>
                     <tr v-for="(user,index) in userShowed">
-                        <td width="200">
+                        <td>
                             {{user.id.value}}
                         </td>
-                        <td width="100">
+                        <td>
                             <img :src="user.picture.thumbnail" :alt="user.name.first" />
                         </td>
                         <td>
-                            {{user.name.first|capitalizeFirstLetter}} {{user.name.last|toUppercase}}
+                            {{user.name.first|capitalize}}
                         </td>
-                        <td width="60">
+                        <td>
+                             {{user.name.last|upper}}
+                        </td>
+                        <td>
+                            {{user.registered | frenchDate}}
+                        </td>
+                        <td>
                             <router-link class="btn cc-bg-primary" :to="{name : 'user', params: {id: user.id.value}}">Edit</router-link>
                         </td>
                     </tr>
@@ -107,16 +120,10 @@
 
 <script>
     import Vue from 'vue'
-    import axios from 'axios'
-    import VueAxios from 'vue-axios'
-
     import Pagination from '../utils/pagination.vue'
 
     // Set const api url to get users
     const api = 'https://randomuser.me/api/?results=50&nat=fr';
-
-
-    Vue.use(VueAxios, axios)
 
 
     export default {
@@ -126,18 +133,24 @@
         // Datas : model
         data () {
             return {
+                // Is the page loading ?
                 loading:false,
+
+                // If fetchData return an error, will be filled with error detail
                 error : '',
 
                 // Asc / Desc sort datas
-                sortKey: null,
                 sortType : ['asc','desc'],
+
+                sortKey: 'name.last',
 
                 // Search input
                 searchQuery : '',
 
                 // Tab contains all users
                 users: [],
+
+                // Tab contains users when searching in names
                 usersSearch: [],
 
                 // Tab contains shown users
@@ -220,6 +233,8 @@
                     // Slice users to show the `this.nbPerPage` first users
                     this.userShowed = this.usersSearch.slice(0, this.nbPerPage);
 
+                    this.sortBy(this.sortKey);
+
                 }).catch(error => {
 
                     // Set the error msg
@@ -261,12 +276,15 @@
             },
 
             // Ordering datas into table
-            sortBy(sortKey) {
+            sortBy(key) {
                 // Order users tabs with lodash
-                this.usersSearch = _.orderBy(this.usersSearch, sortKey, [this.sortType[0]]);
+                this.usersSearch = _.orderBy(this.usersSearch, key, [this.sortType[0]]);
 
-                // Reverse sortType for next click (reverse)
+                // Reverse sortType for next click (reverse order)
                 this.sortType = _.reverse(this.sortType);
+
+                // Set `this.sortKey`to the 'key' value for active class on <th> elements
+                this.sortKey = key;
 
                 // Refresh, always refresh :)
                 this.refreshPage();
@@ -292,16 +310,6 @@
 
         // Filters
         filters: {
-            // Return a string with a the first letter capitalized
-            capitalizeFirstLetter(str) {
-                return str.charAt(0).toUpperCase() + str.slice(1)
-            },
-
-            // Return a string with a the first letter capitalized
-            toUppercase(str) {
-                return str.toUpperCase()
-            },
-
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
                 return (value > 1) ? value+' users found' : value+ ' user found';

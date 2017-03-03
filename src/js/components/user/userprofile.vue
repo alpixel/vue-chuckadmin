@@ -24,10 +24,6 @@
 
 <script>
     import Vue from 'vue'
-    import axios from 'axios'
-    import VueAxios from 'vue-axios'
-
-    Vue.use(VueAxios, axios)
 
     export default {
         name: 'user-profile',
@@ -62,21 +58,15 @@
                 }).then(response => {
 
                     this.loading = false;
-                    this.user = response.data.results;
+                    this.user = response.data.results[0];
 
                 }).catch(error => {
 
                     this.error = 'User not found';
                     this.loading = false;
-                    this.users = [];
+                    this.user = [];
 
                 });
-            },
-            capitalizeFirstLetter(str) {
-                return str.charAt(0).toUpperCase() + str.slice(1);
-            },
-            getFullname(index) {
-                return this.capitalizeFirstLetter(this.user.name.first)+' '+this.user.name.last.toUpperCase()
             }
         }
     }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import "~ChuckCSS/chuckcss/front";
 
-// @import "~font-awesome/less/font-awesome";
+@import "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 // @import "~ionicons/less/ionicons";
 
 //@text-fs-old:18px; // font-size
@@ -24,6 +24,40 @@ body {
         li:not(.disabled) {
             a {
                 cursor:pointer;
+            }
+        }
+    }
+
+    table {
+        th {
+            position: relative;
+
+            &.sort {
+
+                &:after {
+                    display:block;
+                    position: absolute;
+                    right: 12px;
+                    top: 10px;
+                    ._fa('\f0dc', 1.5rem, #cccccc);
+                }
+            }
+
+            &.active {
+                background-color:@primary;
+                color:white;
+
+                &.asc {
+                    &:after {
+                        ._fa('\f0d7', 1.5rem, white);
+                    }
+                }
+
+                &.desc {
+                    &:after {
+                        ._fa('\f0d8', 1.5rem, white);
+                    }
+                }
             }
         }
     }

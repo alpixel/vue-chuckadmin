@@ -1,11 +1,15 @@
 import Vue from 'vue'
-import Less from '../less/front.less'
+import lodash from 'lodash'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import less from '../less/front.less'
 import App from './App.vue'
 import router from './router'
-import _ from 'lodash'
+import filters from './components/utils/filters.vue'
 
-Vue.use(_);
 
+// Use plugin axios
+Vue.use(VueAxios, axios)
 
 
 
