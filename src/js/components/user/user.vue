@@ -59,8 +59,6 @@
                         </th>
                     </tr>
                 </thead>
-
-
                 <tbody>
                     <tr v-for="(user,index) in userShowed">
                         <td>
@@ -73,7 +71,7 @@
                             {{user.name.first|capitalize}}
                         </td>
                         <td>
-                             {{user.name.last|upper}}
+                            {{user.name.last|upper}}
                         </td>
                         <td>
                             {{user.registered | frenchDate}}
@@ -84,6 +82,7 @@
                     </tr>
                 </tbody>
             </table>
+
 
             <div class="alert alert-error" v-show="userShowed.length < 1">
                 No users found, please change your filters
@@ -142,6 +141,7 @@
                 // Asc / Desc sort datas
                 sortType : ['asc','desc'],
 
+                // Default sort table (ie. "sort by lastname")
                 sortKey: 'name.last',
 
                 // Search input
