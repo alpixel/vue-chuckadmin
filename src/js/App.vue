@@ -3,7 +3,7 @@
         <header>
             <p class="cc-txt-center">
                 <router-link :to="{name : 'home'}" exact>
-                    <img src="dist/logo.png" alt="VueJS logo">
+                    <img src="./assets/logo.png" alt="VueJS logo">
                 </router-link>
             </p>
         </header>
@@ -34,7 +34,7 @@
         name: 'app',
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                msg: 'A Users management Vue.js App'
             }
         }
     }
