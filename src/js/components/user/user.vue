@@ -12,6 +12,8 @@
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
 
+            <h2 class="cc-txt-center cc-purple">{{maxUsers|pluralize}}</h2>
+
             <!-- Pagination, pages -->
             <div class="columns cc-align-center">
                 <form>
@@ -34,7 +36,7 @@
             </div>
 
             <!-- Results table datas -->
-            <table>
+            <table v-show="userShowed.length >= 1">
                 <thead>
                     <tr>
                         <th @click="sortBy(['id.value'])">ID</th>
@@ -70,6 +72,10 @@
                 </tbody>
             </table>
 
+            <div class="alert alert-error" v-show="userShowed.length < 1">
+                No users found, please change your filters
+            </div>
+
             <!-- Pagination, pages -->
             <div class="columns cc-align-center">
                 <form>
@@ -95,7 +101,7 @@
         </div>
 
     </div>
-    <router-view></router-view>
+
   </div>
 </template>
 
@@ -273,7 +279,7 @@
 
                 // Make an array with matching search
                 var filtered_users = _.filter(that.users, function(p){
-                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase());
+                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase())
                 });
 
                 // set usersSearch with filtered results
@@ -290,9 +296,15 @@
             capitalizeFirstLetter(str) {
                 return str.charAt(0).toUpperCase() + str.slice(1)
             },
+
             // Return a string with a the first letter capitalized
             toUppercase(str) {
                 return str.toUpperCase()
+            },
+
+            // Pluralize nb of results found (for <h2> in top of page)
+            pluralize(value) {
+                return (value > 1) ? value+' users found' : value+ ' user found';
             }
         },
 

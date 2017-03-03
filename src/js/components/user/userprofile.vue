@@ -7,6 +7,10 @@
     <div v-else>
 
         <div v-if="!error">
+            <p class="cc-txt-center">
+                <router-link class="btn cc-bg-primary" :to="{name : 'users'}">Back to users</router-link>
+            </p>
+
             <pre>{{user}}</pre>
         </div>
 
@@ -14,7 +18,7 @@
             {{error}}
         </div>
     </div>
-    <router-view></router-view>
+
   </div>
 </template>
 
@@ -44,11 +48,9 @@
         },
         created () {
             this.fetchData();
-            console.log('created');
         },
         methods: {
             fetchData () {
-                console.log('fetchData');
 
                 this.error = null;
                 this.loading = true;
@@ -61,7 +63,6 @@
 
                     this.loading = false;
                     this.user = response.data.results;
-                    console.log(response.data);
 
                 }).catch(error => {
 
