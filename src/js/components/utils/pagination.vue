@@ -1,5 +1,5 @@
 <template>
-  <ul id="pagination" v-if="this.records > this.numberPerPage" class="tabs cc-pills cc-align-center cc-mat-20 cc-mab-20">
+  <ul id="pagination" v-if="this.records > this.numberPerPage" class="tabs cc-pills">
     <li v-show="showLeft" @click="goFirst">
       <a>
         &lt;&lt;

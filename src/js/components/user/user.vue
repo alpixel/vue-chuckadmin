@@ -12,20 +12,28 @@
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
 
-            <form>
-                <div class="form-item">
-                    <select v-model="nbPerPageSelect">
-                        <option value="1">1 ligne</option>
-                        <option value="5">5 lignes</option>
-                        <option value="10">10 lignes</option>
-                        <option value="20">20 lignes</option>
-                        <option value="50">50 lignes</option>
-                    </select>
-                </div>
-            </form>
+            <!-- Pagination, pages -->
+            <div class="columns cc-align-center">
+                <form>
+                    <div class="form-item cc-inline">
+                        <select v-model="nbPerPageSelect">
+                            <option value="1">1 ligne</option>
+                            <option value="5">5 lignes</option>
+                            <option value="10">10 lignes</option>
+                            <option value="20">20 lignes</option>
+                            <option value="50">50 lignes</option>
+                        </select>
+                    </div>
 
-            <pagination :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+                    <div class="form-item cc-inline">
+                        <input type="text" v-model="searchQuery" placeholder="Search in names..." />
+                    </div>
+                </form>
 
+                <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+            </div>
+
+            <!-- Results table datas -->
             <table>
                 <thead>
                     <tr>
@@ -62,25 +70,22 @@
                 </tbody>
             </table>
 
-            <pagination :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+            <!-- Pagination, pages -->
+            <div class="columns cc-align-center">
+                <form>
+                    <div class="form-item">
+                        <select v-model="nbPerPageSelect">
+                            <option value="1">1 ligne</option>
+                            <option value="5">5 lignes</option>
+                            <option value="10">10 lignes</option>
+                            <option value="20">20 lignes</option>
+                            <option value="50">50 lignes</option>
+                        </select>
+                    </div>
+                </form>
 
-            <form>
-                <div class="form-item">
-                    <select v-model="nbPerPageSelect">
-                        <option value="1">1 ligne</option>
-                        <option value="5">5 lignes</option>
-                        <option value="10">10 lignes</option>
-                        <option value="20">20 lignes</option>
-                        <option value="50">50 lignes</option>
-                    </select>
-                </div>
-            </form>
-
-            <!--
-                <pre>
-                    {{$data}}
-                </pre>
-            -->
+                <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+            </div>
 
         </div>
 
@@ -98,10 +103,11 @@
     import Vue from 'vue'
     import axios from 'axios'
     import VueAxios from 'vue-axios'
+
     import Pagination from '../utils/pagination.vue'
 
     // Set const api url to get users
-    const api = 'https://randomuser.me/api/?results=30&nat=fr';
+    const api = 'https://randomuser.me/api/?results=50&nat=fr';
 
 
     Vue.use(VueAxios, axios)
@@ -117,11 +123,16 @@
                 loading:false,
                 error : '',
 
+                // Asc / Desc sort datas
                 sortKey: null,
                 sortType : ['asc','desc'],
 
+                // Search input
+                searchQuery : '',
+
                 // Tab contains all users
                 users: [],
+                usersSearch: [],
 
                 // Tab contains shown users
                 userShowed: [],
@@ -140,7 +151,7 @@
         // Computed datas : Here the total nb of users
         computed: {
             maxUsers: function() {
-              return this.users.length
+              return this.usersSearch.length
             }
         },
 
@@ -161,6 +172,11 @@
 
                 // Refresh page
                 this.refreshPage();
+            },
+
+            // When search input change, launch request
+            searchQuery () {
+                this.searchInTable();
             }
         },
 
@@ -193,9 +209,10 @@
 
                     // Contains all users (100)
                     this.users = response.data.results;
+                    this.usersSearch = response.data.results;
 
                     // Slice users to show the `this.nbPerPage` first users
-                    this.userShowed = this.users.slice(0, this.nbPerPage);
+                    this.userShowed = this.usersSearch.slice(0, this.nbPerPage);
 
                 }).catch(error => {
 
@@ -207,6 +224,7 @@
 
                     // Clear users tab
                     this.users = [];
+                    this.usersSearch = [];
 
                 });
             },
@@ -228,7 +246,7 @@
                 let start = this.getStartPagination()
 
                 // Set userShow from `start` to `this.nbPerPage`
-                this.userShowed = this.users.slice(start, start + this.nbPerPage)
+                this.userShowed = this.usersSearch.slice(start, start + this.nbPerPage)
             },
 
             // Return the start of the current pagination
@@ -236,10 +254,10 @@
                 return (this.currentPage - 1) * this.nbPerPage
             },
 
-
+            // Ordering datas into table
             sortBy(sortKey) {
                 // Order users tabs with lodash
-                this.users = _.orderBy(this.users, sortKey, [this.sortType[0]]);
+                this.usersSearch = _.orderBy(this.usersSearch, sortKey, [this.sortType[0]]);
 
                 // Reverse sortType for next click (reverse)
                 this.sortType = _.reverse(this.sortType);
@@ -247,7 +265,26 @@
                 // Refresh, always refresh :)
                 this.refreshPage();
             },
+
+            // Search in table
+            searchInTable() {
+                // Refer to the instance
+                let that = this
+
+                // Make an array with matching search
+                var filtered_users = _.filter(that.users, function(p){
+                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase());
+                });
+
+                // set usersSearch with filtered results
+                that.usersSearch = filtered_users;
+
+                // Refrsh :)
+                that.refreshPage();
+            }
         },
+
+        // Filters
         filters: {
             // Return a string with a the first letter capitalized
             capitalizeFirstLetter(str) {
@@ -258,6 +295,8 @@
                 return str.toUpperCase()
             }
         },
+
+        // Components
         components: {
             Pagination
         }
