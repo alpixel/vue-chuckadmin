@@ -18,20 +18,26 @@
             <div class="columns cc-align-center">
                 <form>
                     <div class="form-item cc-inline">
-                        <select v-model="nbPerPageSelect">
-                            <option value="1">1 ligne</option>
-                            <option value="5">5 lignes</option>
-                            <option value="10">10 lignes</option>
-                            <option value="20">20 lignes</option>
-                            <option value="50">50 lignes</option>
-                        </select>
+                        <div class="form-ps">
+                            <span>Nb per page</span>
+                            <select v-model="nbPerPageSelect">
+                                <option value="1">1 ligne</option>
+                                <option value="5">5 lignes</option>
+                                <option value="10">10 lignes</option>
+                                <option value="20">20 lignes</option>
+                                <option value="50">50 lignes</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-item cc-inline">
-                        <input type="text" v-model="searchQuery" placeholder="Search in names..." />
+                        <div class="form-ps">
+                            <span>Search</span>
+                            <input type="text" v-model="searchQuery" placeholder="Search in names..." />
+                        </div>
                     </div>
 
-                    <div class="form-item cc-inline">
+                    <!-- <div class="form-item cc-inline">
                         <div class="form-checkbox">
                             <label>
                                 <input type="checkbox" name="gender" value="male" v-model="checkedGender" />
@@ -44,7 +50,7 @@
                                 Women only
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
 
                 <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
@@ -219,10 +225,10 @@
                 currentPage: 1,
 
                 // Nb of user per page
-                nbPerPage: 5,
+                nbPerPage: 10,
 
                 // Select list default value
-                nbPerPageSelect: 5
+                nbPerPageSelect: 10
             }
         },
 
@@ -257,10 +263,10 @@
                 this.searchInTable()
             },
 
-            // When checked gender change
-            checkedGender() {
-                this.filterGender()
-            }
+            // // When checked gender change
+            // checkedGender() {
+            //     this.filterGender()
+            // }
         },
 
         // When view is created, launch ajax fetchData
@@ -375,26 +381,26 @@
             },
 
             // Filter results by gender
-            filterGender() {
-                // Refer to instance
-                let that = this
+            // filterGender() {
+            //     // Refer to instance
+            //     let that = this
 
-                if(_.isEmpty(that.checkedGender)) {
+            //     if(_.isEmpty(that.checkedGender)) {
 
-                } else {
-                    var filtered_users = _.filter(that.usersSearch, function(p) {
-                      return _.some(that.checkedGender, (el) => _.includes(p.gender, el));
-                    })
+            //     } else {
+            //         var filtered_users = _.filter(that.usersSearch, function(p) {
+            //           return _.some(that.checkedGender, (el) => _.includes(p.gender, el));
+            //         })
 
-                    that.usersSearch = filtered_users
+            //         that.usersSearch = filtered_users
 
-                    // Set the first pagination active
-                    this.currentPage = 1
+            //         // Set the first pagination active
+            //         this.currentPage = 1
 
-                    // Refreshpage
-                    that.refreshPage()
-                }
-            },
+            //         // Refreshpage
+            //         that.refreshPage()
+            //     }
+            // },
 
             // Open Modal before deleting user
             openModal(id_user,index) {
