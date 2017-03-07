@@ -33,7 +33,7 @@
                     <div class="form-item cc-inline">
                         <div class="form-ps">
                             <span>Search</span>
-                            <input type="text" v-model="searchQuery" placeholder="Search in names..." />
+                            <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
             </div>
 
             <!-- Results table datas -->
-            <table v-show="userShowed.length >= 1" class="cc-equal-cols">
+            <table v-show="userShown.length >= 1" class="cc-equal-cols">
                 <thead>
                     <tr>
                         <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
@@ -81,7 +81,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(user,index) in userShowed">
+                    <tr v-for="(user,index) in userShown">
                         <td>
                             {{user.id.value}}
                         </td>
@@ -107,7 +107,7 @@
             </table>
 
 
-            <div class="alert alert-error" v-show="userShowed.length < 1">
+            <div class="alert alert-error" v-show="userShown.length < 1">
                 No users found, please change your filters
             </div>
 
@@ -201,7 +201,7 @@
                 searchQuery : '',
 
                 // Gender checkboxes
-                checkedGender : [],
+                // checkedGender : [],
 
                 // ============
                 // Users datas
@@ -210,10 +210,10 @@
                 users: [],
 
                 // Tab contains users when searching in names
-                usersSearch: [],
+                usersFiltered: [],
 
                 // Tab contains shown users
-                userShowed: [],
+                userShown: [],
 
                 // Array with user to delete
                 userToDelete : {},
@@ -235,7 +235,7 @@
         // Computed datas : Here the total nb of users
         computed: {
             maxUsers: function() {
-              return this.usersSearch.length
+              return this.usersFiltered.length
             }
         },
 
@@ -298,10 +298,10 @@
 
                     // Contains all users (100)
                     this.users = response.data.results
-                    this.usersSearch = response.data.results
+                    this.usersFiltered = response.data.results
 
                     // Slice users to show the `this.nbPerPage` first users
-                    this.userShowed = this.usersSearch.slice(0, this.nbPerPage)
+                    this.userShown = this.usersFiltered.slice(0, this.nbPerPage)
 
                     this.sortBy(this.sortKey)
 
@@ -315,7 +315,7 @@
 
                     // Clear users tab
                     this.users = []
-                    this.usersSearch = []
+                    this.usersFiltered = []
 
                 })
             },
@@ -336,8 +336,8 @@
                 // Set start to the first user of the current line
                 let start = this.getStartPagination()
 
-                // Set userShowed from `start` to `this.nbPerPage`
-                this.userShowed = this.usersSearch.slice(start, start + this.nbPerPage)
+                // Set userShown from `start` to `this.nbPerPage`
+                this.userShown = this.usersFiltered.slice(start, start + this.nbPerPage)
             },
 
             // Return the start of the current pagination
@@ -348,7 +348,7 @@
             // Ordering datas into table
             sortBy(key) {
                 // Order users tabs with lodash _.orderBy method
-                this.usersSearch = _.orderBy(this.usersSearch, key, [this.sortType[0]])
+                this.usersFiltered = _.orderBy(this.usersFiltered, key, [this.sortType[0]])
 
                 // Reverse sortType for next click (reverse order)
                 this.sortType = _.reverse(this.sortType)
@@ -367,11 +367,11 @@
 
                 // Make an array with matching search
                 var filtered_users = _.filter(that.users, function(p){
-                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase())
+                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.id.value,that.searchQuery.toLowerCase())
                 })
 
-                // set usersSearch with filtered results
-                that.usersSearch = filtered_users
+                // set usersFiltered with filtered results
+                that.usersFiltered = filtered_users
 
                 // Set the first pagination active
                 this.currentPage = 1
@@ -388,11 +388,11 @@
             //     if(_.isEmpty(that.checkedGender)) {
 
             //     } else {
-            //         var filtered_users = _.filter(that.usersSearch, function(p) {
+            //         var filtered_users = _.filter(that.usersFiltered, function(p) {
             //           return _.some(that.checkedGender, (el) => _.includes(p.gender, el));
             //         })
 
-            //         that.usersSearch = filtered_users
+            //         that.usersFiltered = filtered_users
 
             //         // Set the first pagination active
             //         this.currentPage = 1
@@ -405,7 +405,7 @@
             // Open Modal before deleting user
             openModal(id_user,index) {
 
-                let user = this.userShowed[index]
+                let user = this.userShown[index]
 
                 // Fill the user to delete
                 this.userToDelete = {
@@ -432,15 +432,15 @@
                 this.users.splice(user,1)
 
 
-                // II. this.userShowed
-                this.userShowed.splice(indexSearch,1)
+                // II. this.userShown
+                this.userShown.splice(indexSearch,1)
 
 
-                // III. this.usersSearch
-                var user = _.findIndex(this.usersSearch,function(o) {
+                // III. this.usersFiltered
+                var user = _.findIndex(this.usersFiltered,function(o) {
                     return o.id.value == idSearch
                 })
-                this.usersSearch.splice(user,1)
+                this.usersFiltered.splice(user,1)
 
 
 
