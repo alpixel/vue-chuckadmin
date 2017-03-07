@@ -12,7 +12,7 @@
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
 
-            <h2 class="cc-txt-center cc-purple">{{maxUsers|pluralize}}</h2>
+            <h2 class="cc-txt-center cc-purple ion-ios-people">{{maxUsers|pluralize}}</h2>
 
             <!-- Pagination, pages -->
             <div class="columns cc-align-center">
