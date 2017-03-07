@@ -37,21 +37,6 @@
                         </div>
                     </div>
 
-                    <div class="form-item cc-inline">
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="checkbox1" value="1" checked="checked" />
-                                Choice 1 (checked)
-                            </label>
-                        </div>
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="checkbox2" value="2" />
-                                Choice 2
-                            </label>
-                        </div>
-                    </div>
-
                     <!-- <div class="form-item cc-inline">
                         <div class="form-checkbox">
                             <label>
