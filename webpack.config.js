@@ -38,16 +38,7 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader?importLoaders=1',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function () {
-                return [
-                  require('autoprefixer')({ browsers: ['last 2 versions', '> 1%', 'Safari >= 8']})
-                ];
-              }
-            }
-          },
+          'postcss-loader',
           'less-loader'
         ]
       }

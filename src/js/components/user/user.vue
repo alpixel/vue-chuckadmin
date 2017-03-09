@@ -36,30 +36,17 @@
                             <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
                         </div>
                     </div>
-
-                    <!-- <div class="form-item cc-inline">
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="gender" value="male" v-model="checkedGender" />
-                                Men only
-                            </label>
-                        </div>
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="gender" value="female" v-model="checkedGender"/>
-                                Women only
-                            </label>
-                        </div>
-                    </div> -->
                 </form>
 
                 <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
             </div>
 
+
             <!-- Results table datas -->
             <table v-show="userShown.length >= 1" class="cc-equal-cols">
                 <thead>
-                    <tr>
+                    <!-- OLD VERSION WITH NON-DYNAMIC HEADERS -->
+                    <!-- <tr>
                         <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
                             ID
                         </th>
@@ -78,10 +65,25 @@
                         <th>
                             Action
                         </th>
+                    </tr> -->
+
+                    <tr>
+                        <th
+                            v-for="(column, index) in tableColumns"
+                            :class="column.sort ? [
+                                {'active' : sortKey == column.key},
+                                {'asc': sortKey == column.key && sortType[0] == 'asc'},
+                                {'desc': sortKey == column.key && sortType[0] == 'desc'},
+                                'sort'
+                            ] : ''"
+                            @click="(column.sort ? sortBy(column.key) : null)"
+                        >
+                            {{column.label}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(user,index) in userShown">
+                    <tr v-for="(user, index) in userShown">
                         <td>
                             {{user.id.value}}
                         </td>
@@ -166,7 +168,7 @@
     import Pagination from '../utils/pagination.vue'
 
     // Set const api url to get users
-    const api = 'https://randomuser.me/api/?results=10&nat=fr';
+    const api = 'https://randomuser.me/api/?results=30&nat=fr';
 
 
     export default {
@@ -192,16 +194,13 @@
                 // Sort datas
                 // ============
                 // Asc / Desc sort datas
-                sortType : ['asc','desc'],
+                sortType : ['desc','asc'],
 
                 // Default sort table (ie. "sort by lastname")
-                sortKey: 'name.last',
+                sortKey: 'registered',
 
                 // Search input
                 searchQuery : '',
-
-                // Gender checkboxes
-                // checkedGender : [],
 
                 // ============
                 // Users datas
@@ -225,16 +224,52 @@
                 currentPage: 1,
 
                 // Nb of user per page
-                nbPerPage: 10,
+                nbPerPage: 5,
 
                 // Select list default value
-                nbPerPageSelect: 10
+                nbPerPageSelect: 5,
+
+                // ============
+                // Data Table Structure
+                // ============
+                tableColumns: [
+                    {
+                        label: 'ID',
+                        key: 'id.value',
+                        sort: true
+                    },
+                    {
+                        label: 'Picture',
+                        key: 'picture.thumbnail',
+                        sort: false
+                    },
+                    {
+                        label: 'Firstname',
+                        key: 'name.first',
+                        sort: true
+                    },
+                    {
+                        label: 'Lastname',
+                        key: 'name.last',
+                        sort: true
+                    },
+                    {
+                        label: 'Registration date',
+                        key: 'registered',
+                        sort: true
+                    },
+                    {
+                        label: 'Action',
+                        key: '',
+                        sort: false
+                    }
+                ]
             }
         },
 
         // Computed datas : Here the total nb of users
         computed: {
-            maxUsers: function() {
+            maxUsers () {
               return this.usersFiltered.length
             }
         },
@@ -246,7 +281,7 @@
             '$route' : 'fetchData',
 
             // When select pagination changes
-            nbPerPageSelect : function() {
+            nbPerPageSelect () {
 
                 // Nb of user per page is set to the select value
                 this.nbPerPage = _.toInteger(this.nbPerPageSelect)
@@ -263,10 +298,15 @@
                 this.searchInTable()
             },
 
-            // // When checked gender change
-            // checkedGender() {
-            //     this.filterGender()
-            // }
+            // When the table shows 0 user (by deleting the last user on the table for example)
+            userShown() {
+                if(this.userShown.length < 1) {
+                    if(this.users.length > 0) {
+                        this.currentPage = 1
+                        this.refreshPage()
+                    }
+                }
+            }
         },
 
         // When view is created, launch ajax fetchData
@@ -328,6 +368,7 @@
 
                 // Refresh page
                 this.refreshPage()
+
             },
 
             // Refresh page
@@ -353,7 +394,7 @@
                 // Reverse sortType for next click (reverse order)
                 this.sortType = _.reverse(this.sortType)
 
-                // Set `this.sortKey`to the 'key' value for active class on <th> elements
+                // Set `this.sortKey`to the 'key value for active class on <th> elements
                 this.sortKey = key
 
                 // Refresh, always refresh :)
@@ -379,28 +420,6 @@
                 // Refresh :)
                 that.refreshPage()
             },
-
-            // Filter results by gender
-            // filterGender() {
-            //     // Refer to instance
-            //     let that = this
-
-            //     if(_.isEmpty(that.checkedGender)) {
-
-            //     } else {
-            //         var filtered_users = _.filter(that.usersFiltered, function(p) {
-            //           return _.some(that.checkedGender, (el) => _.includes(p.gender, el));
-            //         })
-
-            //         that.usersFiltered = filtered_users
-
-            //         // Set the first pagination active
-            //         this.currentPage = 1
-
-            //         // Refreshpage
-            //         that.refreshPage()
-            //     }
-            // },
 
             // Open Modal before deleting user
             openModal(id_user,index) {
