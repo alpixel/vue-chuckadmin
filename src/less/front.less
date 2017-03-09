@@ -11,14 +11,58 @@
 }
 
 body {
-    padding:50px;
 
-    a.router-link-active {
-      color: #f66;
+    #app {
+        &>.columns {
+            min-height: 100vh;
+        }
     }
-    li.router-link-active a {
-      color: #f66;
+
+    // Left nav
+    nav {
+        background-color:#3a3a3a;
+
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #777;
+
+            &.router-link-active a {
+                color: @primary;
+            }
+
+            a {
+                display:block;
+                color:white;
+
+                &:hover,
+                &.router-link-active {
+                    color:@primary
+                }
+            }
+        }
     }
+
+    // Main container
+    .columns main {
+        padding: 1em 2em;
+
+        // Transitions effects
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .3s ease;
+        }
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
+        .child-view {
+            position: absolute;
+            ._transition;
+        }
+
+
+
+    }
+
+
 
     #pagination {
         li:not(.disabled) {
@@ -26,6 +70,11 @@ body {
                 cursor:pointer;
             }
         }
+    }
+
+    input.small {
+        width: 70px;
+        text-align:center;
     }
 
     table {

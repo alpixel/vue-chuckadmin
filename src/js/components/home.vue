@@ -15,7 +15,7 @@
         name: 'home',
         data () {
             return {
-                msg: 'I am the homepage'
+                msg: 'Dashboard'
             }
         }
     }

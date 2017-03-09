@@ -1,31 +1,31 @@
 <template>
     <div id="app">
-        <header>
+        <!-- <header>
             <p class="cc-txt-center">
                 <router-link :to="{name : 'home'}" exact>
                     <img src="./assets/logo.png" alt="VueJS logo">
                 </router-link>
             </p>
-        </header>
+        </header> -->
 
-        <h1 class="cc-txt-center">{{msg}}</h1>
+        <div class="columns">
+            <nav class="cc-3">
+                <ul>
+                    <li>
+                        <router-link :to="{name : 'home'}" class="fa-home" exact>Dashboard</router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{name : 'users'}" class="fa-users" >Users</router-link>
+                    </li>
+                </ul>
+            </nav>
 
-        <nav class="cc-mat-30 cc-mab-30">
-            <ul class="tabs cc-underlined cc-align-center">
-                <li>
-                    <router-link :to="{name : 'home'}" exact>Home</router-link>
-                </li>
-                <li>
-                    <router-link :to="{name : 'users'}">Users</router-link>
-                </li>
-            </ul>
-        </nav>
-
-        <main>
-            <!-- <transition name="fade" mode="out-in"> -->
-                <router-view></router-view>
-            <!-- </transition> -->
-        </main>
+            <main>
+                <transition name="fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+            </main>
+        </div>
     </div>
 </template>
 
@@ -34,7 +34,6 @@
         name: 'app',
         data () {
             return {
-                msg: 'A Users management Vue.js App'
             }
         }
     }

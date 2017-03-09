@@ -52,8 +52,10 @@ export default {
 
         // Current page
         'currentpage': {
-            type:Number,
-            required : false
+            required : false,
+            validator: function (value) {
+                return _.toNumber(value)
+            }
         }
     },
 
@@ -72,6 +74,8 @@ export default {
 
     // When component is created, create the pagination
     created() {
+        console.log('pagination - created')
+
         this.createPagination()
     },
 
@@ -79,10 +83,14 @@ export default {
     computed: {
         // Show first & prev buttons ?
         showLeft() {
+            console.log('pagination - computed showLeft')
+
             return this.current > 1
         },
         // Show last & next buttons ?
         showRight() {
+            console.log('pagination - computed showRight')
+
             return this.current < this.totalPages()
         }
     },
@@ -90,16 +98,22 @@ export default {
     watch: {
         // If nb per page changes (cf. select list), create pagination
         numberPerPage() {
+            console.log('pagination - watch numberPerPage')
+
             this.current = 1
             this.createPagination()
         },
         // If nb total of items changes, create pagination
         records() {
+            console.log('pagination - watch records')
+
             this.current = 1
             this.createPagination()
         },
         // If current page changes, create pagination
         current() {
+            console.log('pagination - watch current')
+
             // Check if current page is not less than 1
             this.current = (this.current < 1) ? 1 : this.current
 
@@ -107,6 +121,8 @@ export default {
             this.createPagination()
         },
         currentpage() {
+            console.log('pagination - watch currentpage')
+
             // Set currentpage with the current nb.
             this.current = (this.currentpage < 1) ? 1 : this.currentpage
         }
@@ -115,8 +131,12 @@ export default {
 
         // When the page change
         changePage(index) {
+            console.log('pagination - method changePage')
+
             // If click is not on a disabled li (ellipsis ...)
             if(!this.pagination[index].disabled) {
+
+
 
                 // Change current value
                 this.current = this.pagination[index].text;
@@ -129,6 +149,7 @@ export default {
 
         // Create the pagination
         createPagination() {
+            console.log('pagination - method createPagination')
 
             // Get nb of pages
             let total = this.totalPages();

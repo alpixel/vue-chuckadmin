@@ -10,16 +10,25 @@ import userprofile from '../components/user/userprofile.vue'
 Vue.use(VueRouter)
 
 var routes = [
+
+
+    // Homepage
     {
         path: '/',
         name: 'home',
         component: home
     },
+
+
+    // Users Dashboard
     {
         path: '/users',
         name: 'users',
         component: user
     },
+
+
+    // User edit
     {
         path: '/users/edit/:id',
         name: 'user',
