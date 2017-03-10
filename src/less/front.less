@@ -1,9 +1,14 @@
 @charset "UTF-8";
 @import "~ChuckCSS/chuckcss/front";
 
+// External libraries
 @import "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
 @import "//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
+
+// App Pages
+@import "pages/homepage";
+@import "pages/users";
 
 //@text-fs-old:18px; // font-size
 [v-cloak] {
@@ -25,7 +30,6 @@ body {
             margin: 0;
         }
     }
-
 
     // Left nav
     nav {
@@ -55,7 +59,7 @@ body {
                     color:white;
                     text-align: center;
                     padding: 10px 0;
-                    font-size: 2rem;
+                    font-size: 2.2rem;
 
                     i {
                         vertical-align: middle;
@@ -95,8 +99,8 @@ body {
 
                     a {
                         text-align: left;
-                        font-size: inherit;
                         padding-left: 10px;
+                        font-size: 1.6rem;
 
                         i {
                             &:before {
@@ -108,12 +112,24 @@ body {
                         }
                     }
                 }
+
+                ul {
+                    margin: 0;
+                    margin-left: 40px;
+
+                    li {
+                        border: 0;
+
+                        a {
+                            padding: 5px 0;
+                            color: #bbbbbb;
+                            font-size: 0.9em;
+                        }
+                    }
+                }
             }
         });
     }
-
-
-
 
 
     // Main container
@@ -125,83 +141,4 @@ body {
         });
     }
 
-    // Homepage
-    .home {
-
-    } // end/ -> Homepage
-
-
-
-    // Users Homepage
-    .users-home {
-
-        .filters {
-            .form-item {
-                margin: 0 0.8em
-            }
-
-            // Pagination
-            #pagination {
-                margin-right: 0.8em;
-
-                li {
-                    background-color: white;
-
-                    &:not(.disabled) {
-                        a {
-                            cursor:pointer;
-
-                        }
-                    }
-                }
-            }
-
-            input.small {
-                width: 70px;
-                text-align:center;
-            }
-        }
-
-
-        table {
-            background-color: white;
-            margin: 0;
-
-            th {
-                position: relative;
-                background-color: #fefefe;
-                padding: 15px 8px;
-
-                &.sort {
-                    cursor:pointer;
-                    color:darken(@text-mc,2%);
-
-                    &:after {
-                        display:block;
-                        position: absolute;
-                        right: 12px;
-                        top: 18px;
-                        ._fa('\f0dc', 1.5rem, #cccccc);
-                    }
-                }
-
-                &.active {
-                    background-color:@primary;
-                    color:white;
-
-                    &.asc {
-                        &:after {
-                            ._fa('\f0d7', 1.5rem, white);
-                        }
-                    }
-
-                    &.desc {
-                        &:after {
-                            ._fa('\f0d8', 1.5rem, white);
-                        }
-                    }
-                }
-            }
-        }
-    } // end/ -> Users Homepage
 }

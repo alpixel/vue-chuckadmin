@@ -1,0 +1,72 @@
+// Users Homepage
+.users-home {
+
+    .filters {
+        .form-item {
+            margin: 0 0.8em
+        }
+
+        // Pagination
+        #pagination {
+            margin-right: 0.8em;
+
+            li {
+                background-color: white;
+
+                &:not(.disabled) {
+                    a {
+                        cursor:pointer;
+
+                    }
+                }
+            }
+        }
+
+        input.small {
+            width: 70px;
+            text-align:center;
+        }
+    }
+
+
+    table {
+        background-color: white;
+        margin: 0;
+
+        th {
+            position: relative;
+            background-color: #fefefe;
+            padding: 15px 8px;
+
+            &.sort {
+                cursor:pointer;
+                color:darken(@text-mc,2%);
+
+                &:after {
+                    display:block;
+                    position: absolute;
+                    right: 12px;
+                    top: 18px;
+                    ._fa('\f0dc', 1.5rem, #cccccc);
+                }
+            }
+
+            &.active {
+                background-color:@primary;
+                color:white;
+
+                &.asc {
+                    &:after {
+                        ._fa('\f0d7', 1.5rem, white);
+                    }
+                }
+
+                &.desc {
+                    &:after {
+                        ._fa('\f0d8', 1.5rem, white);
+                    }
+                }
+            }
+        }
+    }
+} // end/ -> Users Homepage
