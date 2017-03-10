@@ -62,9 +62,8 @@ var routes = [
 
 
 export default new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes: routes,
-    base: '/',
     scrollBehavior (to, from, savedPosition) {
 
         // In the exemple below, if the user change route, the new view scroll to 0,0 position (top of page)
