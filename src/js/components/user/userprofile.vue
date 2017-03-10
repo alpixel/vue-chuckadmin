@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="user-profil">
     <div class="cc-loader" v-if="loading">
       <div class="spinner"></div>
     </div>

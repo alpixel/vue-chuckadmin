@@ -8,24 +8,29 @@
             </p>
         </header> -->
 
-        <div class="columns">
-            <nav class="cc-3">
-                <ul>
-                    <li>
-                        <router-link :to="{name : 'home'}" class="fa-home" exact>Dashboard</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{name : 'users'}" class="fa-users" >Users</router-link>
-                    </li>
-                </ul>
-            </nav>
+        <nav>
+            <h3 class="cc-txt-center">Menu</h3>
+            <ul>
+                <li>
+                    <router-link :to="{name : 'home'}" exact>
+                        <i class="ion-android-home"></i>
+                        <span>Dashboard</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{name : 'users'}">
+                    <i class="ion-person-stalker"></i>
+                        <span>Users</span>
+                    </router-link>
+                </li>
+            </ul>
+        </nav>
 
-            <main>
-                <transition name="fade" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </main>
-        </div>
+        <main>
+            <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                <router-view></router-view>
+            </transition>
+        </main>
     </div>
 </template>
 

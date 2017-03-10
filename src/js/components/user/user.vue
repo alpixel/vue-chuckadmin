@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="users-home">
 
     <!-- If loading -->
     <div class="cc-loader" v-if="loading">
@@ -12,10 +12,13 @@
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
 
-            <h2 class="cc-txt-center cc-purple ion-ios-people">Users - {{maxUsers|pluralize}}</h2>
+            <h1 class="cc-txt-center">
+                Registered Users<br />
+                <small>• {{maxUsers|pluralize}} •</small>
+            </h1>
 
             <!-- Pagination, pages -->
-            <div class="columns cc-align-center">
+            <div class="columns cc-align-center filters boxed">
                 <form>
                     <div class="form-item cc-inline">
                         <div class="form-ps">
@@ -65,70 +68,108 @@
 
 
             <!-- Results table datas -->
-            <table v-show="userShown.length >= 1" class="cc-equal-cols">
-                <thead>
+            <div class="boxed cc-ma-0" v-show="userShown.length >= 1">
+                <table class="cc-equal-cols">
+                    <thead>
+                        <tr>
+                            <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
+                                ID
+                            </th>
+                            <th>
+                                Picture
+                            </th>
+                            <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
+                                Firstname
+                            </th>
+                            <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
+                                Lastname
+                            </th>
+                            <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
+                                Date inscription
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        <!-- <tr>
+                            <th
+                                v-for="(column, index) in tableColumns"
+                                :class="column.sort ? [
+                                    {'active' : sortKey == column.key},
+                                    {'asc': sortKey == column.key && sortType[0] == 'asc'},
+                                    {'desc': sortKey == column.key && sortType[0] == 'desc'},
+                                    'sort'
+                                ] : ''"
+                                @click="(column.sort ? sortBy(column.key) : null)"
+                            >
+                                {{column.label}}
+                            </th>
+                        </tr> -->
+                    </thead>
 
-                    <tr>
-                        <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
-                            ID
-                        </th>
-                        <th>
-                            Picture
-                        </th>
-                        <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
-                            Firstname
-                        </th>
-                        <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
-                            Lastname
-                        </th>
-                        <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
-                            Date inscription
-                        </th>
-                        <th>
-                            Action
-                        </th>
-                    </tr>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Picture
+                            </th>
+                            <th>
+                                Firstname
+                            </th>
+                            <th>
+                                Lastname
+                            </th>
+                            <th>
+                                Date inscription
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        <!-- <tr>
+                            <th
+                                v-for="(column, index) in tableColumns"
+                                :class="column.sort ? [
+                                    {'active' : sortKey == column.key},
+                                    {'asc': sortKey == column.key && sortType[0] == 'asc'},
+                                    {'desc': sortKey == column.key && sortType[0] == 'desc'},
+                                    'sort'
+                                ] : ''"
+                                @click="(column.sort ? sortBy(column.key) : null)"
+                            >
+                                {{column.label}}
+                            </th>
+                        </tr> -->
+                    </tfoot>
 
-                    <!-- <tr>
-                        <th
-                            v-for="(column, index) in tableColumns"
-                            :class="column.sort ? [
-                                {'active' : sortKey == column.key},
-                                {'asc': sortKey == column.key && sortType[0] == 'asc'},
-                                {'desc': sortKey == column.key && sortType[0] == 'desc'},
-                                'sort'
-                            ] : ''"
-                            @click="(column.sort ? sortBy(column.key) : null)"
-                        >
-                            {{column.label}}
-                        </th>
-                    </tr> -->
-                </thead>
-                <tbody>
-                    <tr v-for="(user, index) in userShown">
-                        <td>
-                            {{user.id.value}}
-                        </td>
-                        <td>
-                            <img :src="user.picture.thumbnail" :alt="user.name.first" />
-                        </td>
-                        <td>
-                            {{user.name.first|capitalize}}
-                        </td>
-                        <td>
-                            {{user.name.last|upper}}
-                        </td>
-                        <td>
-                            {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
-                        </td>
-                        <td>
-                            <router-link class="btn cc-bg-primary fa-edit" :to="{name : 'user', params: {id: user.id.value}}">Edit</router-link>
+                    <tbody>
+                        <tr v-for="(user, index) in userShown">
+                            <td>
+                                {{user.id.value}}
+                            </td>
+                            <td>
+                                <img :src="user.picture.thumbnail" :alt="user.name.first" />
+                            </td>
+                            <td>
+                                {{user.name.first|capitalize}}
+                            </td>
+                            <td>
+                                {{user.name.last|upper}}
+                            </td>
+                            <td>
+                                {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
+                            </td>
+                            <td>
+                                <router-link class="btn cc-bg-primary fa-edit" :to="{name : 'user', params: {id: user.id.value}}">Edit</router-link>
 
-                            <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
 
             <div class="alert alert-error" v-show="userShown.length < 1">

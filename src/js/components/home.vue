@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1 class="cc-txt-center">
       {{msg}}
     </h1>

@@ -3,6 +3,7 @@
 
 @import "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+@import "//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
 
 //@text-fs-old:18px; // font-size
 [v-cloak] {
@@ -11,104 +12,196 @@
 }
 
 body {
+    background-color: #f7f7f7;
 
-    #app {
-        &>.columns {
-            min-height: 100vh;
+    .boxed {
+        padding: 1em;
+        margin: 1em 0;
+        background-color: white;
+        border-radius: 2px;
+        box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.2);
+
+        &.cc-ma-0 {
+            margin: 0;
         }
     }
+
 
     // Left nav
     nav {
         background-color:#3a3a3a;
+        position: fixed;
+        top: 0;
+        min-height: 100vh;
+        left: 0;
+        width: 70px;
+        padding: 10px;
 
-        li {
-            padding: 10px 0;
-            border-bottom: 1px solid #777;
 
-            &.router-link-active a {
-                color: @primary;
-            }
+        h3 {
+            display:none;
+        }
 
-            a {
-                display:block;
-                color:white;
+        ul {
+            margin: 20px 0;
 
-                &:hover,
-                &.router-link-active {
-                    color:@primary
+            li {
+                &.router-link-active a {
+                    color: @primary;
+                }
+
+                a {
+                    display:block;
+                    color:white;
+                    text-align: center;
+                    padding: 10px 0;
+                    font-size: 2rem;
+
+                    i {
+                        vertical-align: middle;
+
+                        &:before {
+                            margin-right: 0px !important;
+                        }
+                    }
+
+                    &:hover,
+                    &.router-link-active {
+                        color:@primary
+                    }
+
+                    span {
+                        vertical-align: middle;
+                        display: none
+                    }
                 }
             }
         }
+
+        ._media-m-up({
+            width: 15%;
+            padding:1.5em 1em;
+
+            h3 {
+                display:block;
+                color: white
+            }
+
+            ul {
+
+
+                li {
+                    border-bottom: 1px solid #777;
+
+                    a {
+                        text-align: left;
+                        font-size: inherit;
+                        padding-left: 10px;
+
+                        i {
+                            &:before {
+                                margin-right: 10px !important;
+                            }
+                        }
+                        span {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        });
     }
+
+
+
+
 
     // Main container
-    .columns main {
-        padding: 1em 2em;
+    main {
+        padding: 1em 20px 1em 90px;
 
-        // Transitions effects
-        .fade-enter-active, .fade-leave-active {
-            transition: opacity .3s ease;
-        }
-        .fade-enter, .fade-leave-active {
-            opacity: 0
-        }
-        .child-view {
-            position: absolute;
-            ._transition;
-        }
-
-
-
+        ._media-m-up({
+            padding:1em 2% 1em 17%;
+        });
     }
 
+    // Homepage
+    .home {
+
+    } // end/ -> Homepage
 
 
-    #pagination {
-        li:not(.disabled) {
-            a {
-                cursor:pointer;
-            }
-        }
-    }
 
-    input.small {
-        width: 70px;
-        text-align:center;
-    }
+    // Users Homepage
+    .users-home {
 
-    table {
-        th {
-            position: relative;
-            background-color:#f0f0f0;
-
-            &.sort {
-
-                &:after {
-                    display:block;
-                    position: absolute;
-                    right: 12px;
-                    top: 10px;
-                    ._fa('\f0dc', 1.5rem, #cccccc);
-                }
+        .filters {
+            .form-item {
+                margin: 0 0.8em
             }
 
-            &.active {
-                background-color:@primary;
-                color:white;
+            // Pagination
+            #pagination {
+                margin-right: 0.8em;
 
-                &.asc {
-                    &:after {
-                        ._fa('\f0d7', 1.5rem, white);
-                    }
-                }
+                li {
+                    background-color: white;
 
-                &.desc {
-                    &:after {
-                        ._fa('\f0d8', 1.5rem, white);
+                    &:not(.disabled) {
+                        a {
+                            cursor:pointer;
+
+                        }
                     }
                 }
             }
+
+            input.small {
+                width: 70px;
+                text-align:center;
+            }
         }
-    }
+
+
+        table {
+            background-color: white;
+            margin: 0;
+
+            th {
+                position: relative;
+                background-color: #fefefe;
+                padding: 15px 8px;
+
+                &.sort {
+                    cursor:pointer;
+                    color:darken(@text-mc,2%);
+
+                    &:after {
+                        display:block;
+                        position: absolute;
+                        right: 12px;
+                        top: 18px;
+                        ._fa('\f0dc', 1.5rem, #cccccc);
+                    }
+                }
+
+                &.active {
+                    background-color:@primary;
+                    color:white;
+
+                    &.asc {
+                        &:after {
+                            ._fa('\f0d7', 1.5rem, white);
+                        }
+                    }
+
+                    &.desc {
+                        &:after {
+                            ._fa('\f0d8', 1.5rem, white);
+                        }
+                    }
+                }
+            }
+        }
+    } // end/ -> Users Homepage
 }
