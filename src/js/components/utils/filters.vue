@@ -11,8 +11,6 @@
         } else {
             return moment(date).locale(locale).format(format)
         }
-
-
     })
 
     /*
