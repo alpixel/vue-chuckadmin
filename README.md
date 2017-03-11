@@ -2,7 +2,4 @@
 
 
 ### Demo
-[DEMO]
-
-
-[DEMO]: <https://alpixel.github.io/vue-chuckadmin/>
+[DEMO](https://alpixel.github.io/vue-chuckadmin/)
