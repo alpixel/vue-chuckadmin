@@ -1,5 +1,5 @@
 # A VueJS & ChuckCSS administration
 
 
-### Demo
+### Demonstration
 [DEMO](https://alpixel.github.io/vue-chuckadmin/)
