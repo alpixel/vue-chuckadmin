@@ -1,5 +1,5 @@
 .DS_Store
 node_modules/
 .vagrant
-npm-debug.log
+npm-debug.*
 *.sublime-*

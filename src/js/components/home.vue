@@ -15,36 +15,38 @@
         name: 'home',
         data () {
             return {
-                msg: 'VueJS App Dashboard'
+                msg: 'VueJS & ChuckCSS administration'
             }
         },
+
+        // Meta tags in <head> section
         head: {
             title() {
                 return {
                     inner: this.msg,
                     separator: '-',
-                    complement: 'complement'
+                    complement: 'Made by ALPIXEL agency'
                 }
             },
             meta() {
                 return [
-                    { name: 'application-name', content: 'Name of my application' },
-                    { name: 'description', content: 'A description of the page', id: 'desc' }, // id to replace intead of create element
+                    { name: 'application-name', content: 'ChuckAdmin' },
+                    { name: 'description', content: 'A VueJS & ChuckCSS administration', id: 'desc' }, // id to replace intead of create element
                     // ...
                     // Twitter
-                    { name: 'twitter:title', content: 'Content Title' },
+                    { name: 'twitter:title', content: 'ChuckAdmin' },
                     // with shorthand
-                    { n: 'twitter:description', c: 'Content description less than 200 characters'},
+                    { n: 'twitter:description', c: 'A VueJS & ChuckCSS administration'},
                     // ...
                     // Google+ / Schema.org
-                    { itemprop: 'name', content: 'Content Title' },
-                    { itemprop: 'description', content: 'Content Title' },
+                    { itemprop: 'name', content: 'ChuckAdmin' },
+                    { itemprop: 'description', content: 'A VueJS & ChuckCSS administration' }
                     // ...
                     // Facebook / Open Graph
-                    { property: 'fb:app_id', content: '123456789' },
-                    { property: 'og:title', content: 'Content Title' },
+                    // { property: 'fb:app_id', content: '123456789' },
+                    // { property: 'og:title', content: 'Content Title' },
                     // with shorthand
-                    { p: 'og:image', c: 'https://example.com/image.jpg' }
+                    // { p: 'og:image', c: 'https://example.com/image.jpg' }
                 ]
             }
         }

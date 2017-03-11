@@ -38,6 +38,20 @@
                 error : ''
             }
         },
+        // Meta tags in <head> section
+        head: {
+            title() {
+                return {
+                    inner: 'News panel',
+                    separator: '-',
+                    complement: 'Made by ALPIXEL agency'
+                }
+            },
+            meta() {
+                return [
+                ]
+            }
+        },
         props : {
 
         },

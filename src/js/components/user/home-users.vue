@@ -322,6 +322,21 @@
             }
         },
 
+        // Meta tags in <head> section
+        head: {
+            title() {
+                return {
+                    inner: 'Users panel',
+                    separator: '-',
+                    complement: 'Made by ALPIXEL agency'
+                }
+            },
+            meta() {
+                return [
+                ]
+            }
+        },
+
         // Computed datas : Here the total nb of users
         computed: {
             maxUsers () {
