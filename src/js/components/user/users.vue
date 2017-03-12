@@ -175,7 +175,7 @@
     import Pagination from '../utils/pagination.vue'
 
     // Set const api url to get users
-    const api = 'https://randomuser.me/api/?results=40&nat=fr';
+    const api = 'https://randomuser.me/api/?results=50&nat=fr';
 
 
     export default {
@@ -259,7 +259,7 @@
         // Computed datas : Here the total nb of users
         computed: {
             maxUsers () {
-                console.log('user - computed maxUsers')
+                console.log('users - computed maxUsers')
 
                 return this.usersFiltered.length
             }
@@ -273,7 +273,7 @@
 
             // When select pagination changes
             nbPerPageSelect () {
-                console.log('user - watch nbPerPageSelect')
+                console.log('users - watch nbPerPageSelect')
 
 
                 // Nb of user per page is set to the select value
@@ -288,7 +288,7 @@
 
             // When search input change, launch request
             searchQuery () {
-                console.log('user - watch searchQuery')
+                console.log('users - watch searchQuery')
 
                 // Launch search
                 this.searchInTable()
@@ -296,7 +296,7 @@
 
             // When the table pagiantion section shows 0 user (by deleting the last user on the table for example)
             userShown () {
-                console.log('user - watch userShown')
+                console.log('users - watch userShown')
 
                 if(this.userShown.length < 1 && this.usersFiltered.length > 0 && this.users.length > 0) {
                     this.currentPage = 1
@@ -306,7 +306,7 @@
 
             // Input "Go to page" binding value
             currentPage() {
-                console.log('user - watch currentPage')
+                console.log('users - watch currentPage')
 
                 this.changePage(this.currentPage);
             }
@@ -318,7 +318,7 @@
 
         // When view is created, launch ajax fetchData
         created () {
-            console.log('user - created')
+            console.log('users - created')
             this.fetchData()
         },
 
@@ -327,7 +327,7 @@
 
             // Ajax to get users
             fetchData () {
-                console.log('user - methods fetchData')
+                console.log('users - methods fetchData')
 
                 // Reset error msg
                 this.error = ''
@@ -373,7 +373,7 @@
 
             // Bind when the page changes
             changePage(index) {
-                console.log('user - methods changePage')
+                console.log('users - methods changePage')
                 // Active class to the current number
                 this.currentPage = index
 
@@ -384,7 +384,7 @@
 
             // Refresh page
             refreshPage() {
-                console.log('user - methods refreshPage')
+                console.log('users - methods refreshPage')
 
                 // Set start to the first user of the current line
                 let start = this.getStartPagination()
@@ -395,14 +395,14 @@
 
             // Return the start of the current pagination
             getStartPagination() {
-                console.log('user - methods getStartPagination')
+                console.log('users - methods getStartPagination')
 
                 return (this.currentPage - 1) * this.nbPerPage
             },
 
             // Ordering datas into table
             sortBy(key) {
-                console.log('user - methods sortBy')
+                console.log('users - methods sortBy')
 
                 // Order users tabs with lodash _.orderBy method
                 this.usersFiltered = _.orderBy(this.usersFiltered, key, [this.sortType[0]])
@@ -419,7 +419,7 @@
 
             // Search in table
             searchInTable() {
-                console.log('user - methods searchInTable')
+                console.log('users - methods searchInTable')
 
                 // Refer to the instance
                 let that = this
@@ -441,7 +441,7 @@
 
             // Open Modal before deleting user
             openModal(id_user,index) {
-                console.log('user - methods openModal')
+                console.log('users - methods openModal')
 
                 let user = this.userShown[index]
 
@@ -458,7 +458,7 @@
 
             // Delete a user
             deleteUser() {
-                console.log('user - methods deleteUser')
+                console.log('users - methods deleteUser')
 
                 let
                     idSearch = this.userToDelete.id,
@@ -525,7 +525,7 @@
 
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
-                console.log('user - filters pluralize')
+                console.log('users - filters pluralize')
 
                 return (value > 1) ? value+' users found' : value+ ' user found'
             }

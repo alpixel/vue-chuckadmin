@@ -7,10 +7,12 @@
 @import "//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
 
 // App Pages
+@import "pages/nav-left";
 @import "pages/homepage";
 @import "pages/users";
 
-@gray : #8f939e;
+@gray: #8f939e;
+@black: #23272d;
 
 // VueJS hide during loading app
 [v-cloak] {
@@ -40,130 +42,20 @@ body {
         top: 0;
         left: 0;
         right: 0;
-        background-color: #3a3a3a;
+        background-color: @black;
         max-height: 50px;
+        height: 50px;
         z-index: 11;
         color:white;
 
     }
 
-    // Left nav
-    nav {
-        background-color:#3a3a3a;
-        position: fixed;
-        top: 50px;
-        min-height: 100vh;
-        left: 0;
-        width: 70px;
-        padding: 10px;
 
-
-        h3 {
-            display:none;
-        }
-
-        ul {
-            margin: 20px 0;
-
-            li {
-                &.router-link-active a {
-                    color: @primary;
-                }
-
-                a {
-                    display:block;
-                    color:@gray;
-                    text-align: center;
-                    font-size: 2.2rem;
-
-                    i {
-                        vertical-align: middle;
-
-                        &:before {
-                            margin-right: 0px !important;
-                        }
-                    }
-
-                    &:hover,
-                    &.router-link-active {
-                        color:@primary
-                    }
-
-                    span {
-                        vertical-align: middle;
-                        display: none
-                    }
-                
-                    ul {
-                        display:none
-                    }
-                }
-            }
-        }
-
-        ._media-m-up({
-            width: 15%;
-            padding:1.5em 1em;
-
-            h3 {
-                display:block;
-                color: darken(@gray,15%);
-                font-weight: 700;
-                font-size: 1.5rem;
-            }
-
-            ul {
-
-
-                li {
-                    border-bottom: 1px solid #777;
-
-                    a {
-                        text-align: left;
-                        padding: 10px 0 10px 10px;
-                        font-size: 1.4rem;
-                        color: @gray;
-
-                        i {
-                            &:before {
-                                margin-right: 10px !important;
-                            }
-                        }
-                        span {
-                            display: inline-block;
-                        }
-                    }
-                }
-
-                ul {
-                    margin: 0;
-                    display:block;
-                    margin-left: 37px;
-
-                    li {
-                        border: 0;
-
-                        a {
-                            padding:0;   
-                        }
-
-                        &:last-of-type {
-                            padding-bottom: 5px
-                        }
-                    }
-                }
-            }
-        });
-    }
 
 
     // Main container
     main {
-        padding: 70px 20px 1em 90px;
-
-        ._media-m-up({
-            padding:70px 2% 1em 17%;
-        });
+        padding:70px 20px 20px 220px;
     }
 
 }

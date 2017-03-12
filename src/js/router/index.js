@@ -7,11 +7,12 @@ import VueRouter from 'vue-router'
 import home from '../components/home.vue'
 
 // Users
-import user from '../components/user/home-users.vue'
+import admins from '../components/user/admins.vue'
+import adminprofile from '../components/user/admin-profile.vue'
+import user from '../components/user/users.vue'
 import userprofile from '../components/user/user-profile.vue'
 
 // Pages
-import pages from '../components/pages/home-pages.vue'
 import news from '../components/pages/news.vue'
 import cms from '../components/pages/cms.vue'
 
@@ -30,6 +31,17 @@ var routes = [
 
 
     // Users Dashboard
+    // Users Dashboard
+    {
+        path: '/admins',
+        component: admins,
+        name: 'admins'
+    },
+    {
+        path: '/admins/edit/:id',
+        component: adminprofile,
+        name: 'admin-profile'
+    },
     {
         path: '/users',
         component: user,
@@ -43,11 +55,6 @@ var routes = [
 
 
     // Pages Dashboard
-    {
-        path: '/pages',
-        name: 'pages',
-        component: pages
-    },
     {
         path: '/pages/news',
         name: 'news',

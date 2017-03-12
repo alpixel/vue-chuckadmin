@@ -7,15 +7,13 @@
                 </router-link>
             </p> -->
             <div class="columns">
-                <div>Admin</div>
                 <div>
-                    coucou
                 </div>
             </div>
         </header>
 
         <nav>
-            <h3>Navigation</h3>
+            <h2>Navigation</h2>
             
             <ul>
                 <li>
@@ -25,17 +23,31 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="{name:'users'}">
+                    <h3>
                         <i class="ion-person-stalker"></i>
-                        <span>Users</span>
-                    </router-link>
+                        Persons
+                    </h3>
+                    <ul>
+                        <li>
+                            <router-link :to="{name:'admins'}">
+                                <i class="ion-arrow-right-b"></i>
+                                <span>Administrators</span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link :to="{name:'users'}">
+                                <i class="ion-arrow-right-b"></i>
+                                <span>Users</span>
+                            </router-link>
+                        </li>
+                    </ul>
                 </li>
 
                 <li>
-                    <router-link :to="{name: 'pages'}">
+                    <h3>
                         <i class="ion-android-folder"></i>
-                        <span>Pages</span>
-                    </router-link>
+                        Pages
+                    </h3>
 
                     <ul>
                         <li>
