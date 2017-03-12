@@ -11,9 +11,13 @@
 
         <!-- If no errors after fetching datas -->
         <div v-if="!error">
+        
+            <div class="cc-txt-right">
+                <router-link class="btn cc-bg-primary fa-plus" :to="{name:'user-add'}">Add a user</router-link>
+            </div>
 
             <h1 class="cc-txt-center">
-                Administrators<br />
+                Registered Users<br />
                 <small>• {{maxUsers|pluralize}} •</small>
             </h1>
 
@@ -38,7 +42,9 @@
                                 <option value="50">50 lignes</option>
                             </select>
                         </div>
-                    </div>                    
+                    </div>
+
+                    
 
                     <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
                         <div class="form-ps">
@@ -121,7 +127,7 @@
                                 {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
                             </td>
                             <td>
-                                <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: user.id.value}}">Edit</router-link>
+                                <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: user.id.value}}">Edit</router-link>
 
                                 <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                             </td>
@@ -149,11 +155,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-info">
-                            Do you really want to delete the admin <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                            Do you really want to delete the user <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS ADMIN</button>
+                        <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS USER</button>
                     </div>
                 </div>
             </div>
@@ -175,7 +181,7 @@
     import Pagination from '../utils/pagination.vue'
 
     // Set const api url to get users
-    const api = 'https://randomuser.me/api/?results=5&nat=fr';
+    const api = 'https://randomuser.me/api/?results=50&nat=fr';
 
 
     export default {
@@ -245,7 +251,7 @@
         head: {
             title() {
                 return {
-                    inner: 'Admins panel',
+                    inner: 'Users panel',
                     separator: '-',
                     complement: 'Made by ALPIXEL agency'
                 }
@@ -259,7 +265,7 @@
         // Computed datas : Here the total nb of users
         computed: {
             maxUsers () {
-                console.log('admins - computed maxUsers')
+                console.log('users - computed maxUsers')
 
                 return this.usersFiltered.length
             }
@@ -273,7 +279,7 @@
 
             // When select pagination changes
             nbPerPageSelect () {
-                console.log('admins - watch nbPerPageSelect')
+                console.log('users - watch nbPerPageSelect')
 
 
                 // Nb of user per page is set to the select value
@@ -288,7 +294,7 @@
 
             // When search input change, launch request
             searchQuery () {
-                console.log('admins - watch searchQuery')
+                console.log('users - watch searchQuery')
 
                 // Launch search
                 this.searchInTable()
@@ -296,7 +302,7 @@
 
             // When the table pagiantion section shows 0 user (by deleting the last user on the table for example)
             userShown () {
-                console.log('admins - watch userShown')
+                console.log('users - watch userShown')
 
                 if(this.userShown.length < 1 && this.usersFiltered.length > 0 && this.users.length > 0) {
                     this.currentPage = 1
@@ -306,7 +312,7 @@
 
             // Input "Go to page" binding value
             currentPage() {
-                console.log('admins - watch currentPage')
+                console.log('users - watch currentPage')
 
                 this.changePage(this.currentPage);
             }
@@ -318,7 +324,7 @@
 
         // When view is created, launch ajax fetchData
         created () {
-            console.log('admins - created')
+            console.log('users - created')
             this.fetchData()
         },
 
@@ -327,7 +333,7 @@
 
             // Ajax to get users
             fetchData () {
-                console.log('admins - methods fetchData')
+                console.log('users - methods fetchData')
 
                 // Reset error msg
                 this.error = ''
@@ -373,7 +379,7 @@
 
             // Bind when the page changes
             changePage(index) {
-                console.log('admins - methods changePage')
+                console.log('users - methods changePage')
                 // Active class to the current number
                 this.currentPage = index
 
@@ -384,7 +390,7 @@
 
             // Refresh page
             refreshPage() {
-                console.log('admins - methods refreshPage')
+                console.log('users - methods refreshPage')
 
                 // Set start to the first user of the current line
                 let start = this.getStartPagination()
@@ -395,14 +401,14 @@
 
             // Return the start of the current pagination
             getStartPagination() {
-                console.log('admins - methods getStartPagination')
+                console.log('users - methods getStartPagination')
 
                 return (this.currentPage - 1) * this.nbPerPage
             },
 
             // Ordering datas into table
             sortBy(key) {
-                console.log('admins - methods sortBy')
+                console.log('users - methods sortBy')
 
                 // Order users tabs with lodash _.orderBy method
                 this.usersFiltered = _.orderBy(this.usersFiltered, key, [this.sortType[0]])
@@ -419,7 +425,7 @@
 
             // Search in table
             searchInTable() {
-                console.log('admins - methods searchInTable')
+                console.log('users - methods searchInTable')
 
                 // Refer to the instance
                 let that = this
@@ -441,7 +447,7 @@
 
             // Open Modal before deleting user
             openModal(id_user,index) {
-                console.log('admins - methods openModal')
+                console.log('users - methods openModal')
 
                 let user = this.userShown[index]
 
@@ -458,7 +464,7 @@
 
             // Delete a user
             deleteUser() {
-                console.log('admins - methods deleteUser')
+                console.log('users - methods deleteUser')
 
                 let
                     idSearch = this.userToDelete.id,
@@ -488,7 +494,36 @@
 
                 // Reset userToDelete array
                 this.userToDelete = {}
-            }
+            },
+
+            // Sort datas by gender
+            // sortByGender() {
+
+            //     // Refer to instance
+            //     let that = this
+
+            //     if(_.isEmpty(that.genders) || that.genders.length > 1) {
+            //         console.log('empty genders')
+
+            //     } else {
+            //         console.log(_.head(that.genders))
+
+            //         let cloneArray = _.map(this.usersFiltered, _.clone);
+
+            //         console.log(cloneArray)
+
+            //         // Order users tabs with lodash _.orderBy method
+            //         this.usersFiltered = _.filter(cloneArray, {'gender': _.head(that.genders)})
+
+            //         // Refresh, always refresh :)
+            //         this.refreshPage()
+
+
+
+            //     }
+
+
+            // }
         },
 
         // Filters
@@ -496,7 +531,9 @@
 
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
-                return (value > 1) ? value+' admins found' : value+ ' admin found'
+                console.log('users - filters pluralize')
+
+                return (value > 1) ? value+' users found' : value+ ' user found'
             }
         },
 

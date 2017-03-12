@@ -15,3 +15,4 @@
 * Routing : [Vue-router](https://github.com/vuejs/vue-router)
 * Fetch Datas : [Vue-axios](https://github.com/imcvampire/vue-axios)
 * Metatags management : [Vue-head](https://github.com/ktquez/vue-head)
+* Form validation : [Vuelidate](https://github.com/monterail/vuelidate)

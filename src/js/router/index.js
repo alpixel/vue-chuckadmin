@@ -6,11 +6,15 @@ import VueRouter from 'vue-router'
 // Homepage - General Dashboard
 import home from '../components/home.vue'
 
+// Admins
+import admins from '../components/admins/admins.vue'
+import adminprofile from '../components/admins/admin-profile.vue'
+import adminadd from '../components/admins/admin-add.vue'
+
 // Users
-import admins from '../components/user/admins.vue'
-import adminprofile from '../components/user/admin-profile.vue'
-import user from '../components/user/users.vue'
-import userprofile from '../components/user/user-profile.vue'
+import users from '../components/users/users.vue'
+import userprofile from '../components/users/user-profile.vue'
+import useradd from '../components/users/user-add.vue'
 
 // Pages
 import news from '../components/pages/news.vue'
@@ -30,8 +34,7 @@ var routes = [
     },
 
 
-    // Users Dashboard
-    // Users Dashboard
+    // Admins
     {
         path: '/admins',
         component: admins,
@@ -43,8 +46,15 @@ var routes = [
         name: 'admin-profile'
     },
     {
+        path: '/admins/add',
+        component: adminadd,
+        name: 'admin-add'
+    },
+
+    // Users
+    {
         path: '/users',
-        component: user,
+        component: users,
         name: 'users'
     },
     {
@@ -52,9 +62,14 @@ var routes = [
         component: userprofile,
         name: 'user-profile'
     },
+    {
+        path: '/users/add',
+        component: useradd,
+        name: 'user-add'
+    },
 
 
-    // Pages Dashboard
+    // Pages
     {
         path: '/pages/news',
         name: 'news',

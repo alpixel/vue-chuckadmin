@@ -7,8 +7,8 @@
     <div v-else>
 
         <div v-if="!error">
-            <p class="cc-txt-center">
-                <router-link class="btn cc-bg-primary" :to="{name : 'users'}">Back to users</router-link>
+            <p>
+                <router-link class="btn cc-bg-primary fa-angle-left" :to="{name : 'users'}">Back to users</router-link>
             </p>
 
             <pre>{{user}}</pre>
