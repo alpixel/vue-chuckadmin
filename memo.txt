@@ -1,1 +1,4 @@
 NPM Permissions : https://docs.npmjs.com/getting-started/fixing-npm-permissions
+
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH && source ~/.profile

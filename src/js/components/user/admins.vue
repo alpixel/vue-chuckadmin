@@ -141,17 +141,19 @@
                 <!-- Close button -->
                 <button class="modal-close" @click="showModal = false"></button>
                 <!-- Overlay -->
-                <div class="modal-overlay"></div>
+                <div class="modal-overlay" @click="showModal = false"></div>
                 <!-- Modal content -->
                 <div class="modal-content">
                     <div class="modal-header">
-                        Confirmer la suppression ?
+                        Confirm action
                     </div>
                     <div class="modal-body">
-                        Confirmer la suppression de l'utilisateur <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                        <div class="alert alert-info">
+                            Do you really want to delete the admin <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                            </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="cc-bg-primary" @click.prevent="deleteUser">Confirmer</button>
+                        <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS ADMIN</button>
                     </div>
                 </div>
             </div>
