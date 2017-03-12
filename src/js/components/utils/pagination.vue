@@ -2,12 +2,12 @@
     <ul id="pagination" v-if="this.records > this.numberPerPage" class="tabs cc-pills">
 
         <!-- First -->
-        <li v-show="showLeft" @click="goFirst">
+        <li :class="[{disabled: !showLeft}]" @click="goFirst">
             <a>&lt;&lt;</a>
         </li>
 
         <!-- Previous -->
-        <li v-show="showLeft" @click="goPrev">
+        <li :class="[{disabled: !showLeft}]" @click="goPrev">
             <a>&lt;</a>
         </li>
 
@@ -21,12 +21,12 @@
 
 
         <!-- Next -->
-        <li v-show="showRight" @click="goNext">
+        <li :class="[{disabled: !showRight}]" @click="goNext">
             <a>&gt;</a>
         </li>
 
         <!-- Last -->
-        <li v-show="showRight" @click="goLast">
+        <li :class="[{disabled: !showRight}]" @click="goLast">
             <a>&gt;&gt;</a>
         </li>
     </ul>

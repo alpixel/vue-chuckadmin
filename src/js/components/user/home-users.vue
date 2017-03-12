@@ -18,9 +18,16 @@
             </h1>
 
             <!-- Pagination, pages -->
-            <div class="columns cc-align-center filters boxed">
-                <form>
-                    <div class="form-item cc-inline">
+            <div class="filters boxed">
+                <form class="columns">
+                    <div class="form-item cc-txt-center cc-w-auto">
+                        <div class="form-ps">
+                            <span>Search</span>
+                            <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
+                        </div>
+                    </div>
+
+                    <div class="form-item  cc-txt-center cc-w-auto cc-right">
                         <div class="form-ps">
                             <span>Nb per page</span>
                             <select v-model="nbPerPageSelect">
@@ -33,38 +40,20 @@
                         </div>
                     </div>
 
-                    <div class="form-item cc-inline">
-                        <div class="form-ps">
-                            <span>Search</span>
-                            <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
-                        </div>
-                    </div>
+                    
 
-                    <div class="form-item cc-inline" v-if="maxUsers > nbPerPage">
+                    <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
                         <div class="form-ps">
                             <span>Go to page</span>
                             <input type="number" class="small" v-model.number="currentPage" min="1" />
                         </div>
                     </div>
-
-                    <!-- <div class="form-item cc-inline">
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="gender" value="male" v-model="genders" />
-                                Male
-                            </label>
-                        </div>
-                        <div class="form-checkbox">
-                            <label>
-                                <input type="checkbox" name="gender" value="female" v-model="genders" />
-                                Female
-                            </label>
-                        </div>
-                    </div> -->
                 </form>
 
-                <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+                
             </div>
+
+            <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
 
 
             <!-- Results table datas -->
@@ -91,20 +80,6 @@
                                 Action
                             </th>
                         </tr>
-                        <!-- <tr>
-                            <th
-                                v-for="(column, index) in tableColumns"
-                                :class="column.sort ? [
-                                    {'active' : sortKey == column.key},
-                                    {'asc': sortKey == column.key && sortType[0] == 'asc'},
-                                    {'desc': sortKey == column.key && sortType[0] == 'desc'},
-                                    'sort'
-                                ] : ''"
-                                @click="(column.sort ? sortBy(column.key) : null)"
-                            >
-                                {{column.label}}
-                            </th>
-                        </tr> -->
                     </thead>
 
                     <tfoot>
@@ -128,20 +103,6 @@
                                 Action
                             </th>
                         </tr>
-                        <!-- <tr>
-                            <th
-                                v-for="(column, index) in tableColumns"
-                                :class="column.sort ? [
-                                    {'active' : sortKey == column.key},
-                                    {'asc': sortKey == column.key && sortType[0] == 'asc'},
-                                    {'desc': sortKey == column.key && sortType[0] == 'desc'},
-                                    'sort'
-                                ] : ''"
-                                @click="(column.sort ? sortBy(column.key) : null)"
-                            >
-                                {{column.label}}
-                            </th>
-                        </tr> -->
                     </tfoot>
 
                     <tbody>
@@ -175,11 +136,6 @@
             <div class="alert alert-error" v-show="userShown.length < 1">
                 No users found, please change your filters
             </div>
-
-            <!-- Pagination, pages -->
-            <!-- <div class="columns cc-align-center">
-                <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
-            </div> -->
 
 
             <!-- MODAL SHOWN BEFORE DELETING USER -->
@@ -281,44 +237,7 @@
                 nbPerPage: 10,
 
                 // Select list default value
-                nbPerPageSelect: 10,
-
-
-                // ============
-                // Data Table Structure
-                // ============
-                // tableColumns: [
-                //     {
-                //         label: 'ID',
-                //         key: 'id.value',
-                //         sort: true
-                //     },
-                //     {
-                //         label: 'Picture',
-                //         key: 'picture.thumbnail',
-                //         sort: false
-                //     },
-                //     {
-                //         label: 'Firstname',
-                //         key: 'name.first',
-                //         sort: true
-                //     },
-                //     {
-                //         label: 'Lastname',
-                //         key: 'name.last',
-                //         sort: true
-                //     },
-                //     {
-                //         label: 'Registration date',
-                //         key: 'registered',
-                //         sort: true
-                //     },
-                //     {
-                //         label: 'Action',
-                //         key: '',
-                //         sort: false
-                //     }
-                // ]
+                nbPerPageSelect: 10
             }
         },
 

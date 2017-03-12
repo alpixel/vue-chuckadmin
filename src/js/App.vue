@@ -1,15 +1,22 @@
 <template>
     <div id="app">
-        <!-- <header>
-            <p class="cc-txt-center">
+        <header>
+            <!-- <p class="cc-txt-center">
                 <router-link :to="{name : 'home'}" exact>
                     <img src="./assets/logo.png" alt="VueJS logo">
                 </router-link>
-            </p>
-        </header> -->
+            </p> -->
+            <div class="columns">
+                <div>Admin</div>
+                <div>
+                    coucou
+                </div>
+            </div>
+        </header>
 
         <nav>
-            <h3 class="cc-txt-center">Menu</h3>
+            <h3>Navigation</h3>
+            
             <ul>
                 <li>
                     <router-link to="/" exact>
@@ -33,13 +40,13 @@
                     <ul>
                         <li>
                             <router-link :to="{name: 'news'}">
-                                <i class="ion-ios-more"></i>
+                                <i class="ion-arrow-right-b"></i>
                                 <span>News</span>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'cms'}">
-                                <i class="ion-ios-more"></i>
+                                <i class="ion-arrow-right-b"></i>
                                 <span>CMS</span>
                             </router-link>
                         </li>

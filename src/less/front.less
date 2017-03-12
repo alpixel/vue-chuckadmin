@@ -10,6 +10,8 @@
 @import "pages/homepage";
 @import "pages/users";
 
+@gray : #8f939e;
+
 // VueJS hide during loading app
 [v-cloak] {
     display:none;
@@ -33,11 +35,23 @@ body {
         }
     }
 
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #3a3a3a;
+        max-height: 50px;
+        z-index: 11;
+        color:white;
+
+    }
+
     // Left nav
     nav {
         background-color:#3a3a3a;
         position: fixed;
-        top: 0;
+        top: 50px;
         min-height: 100vh;
         left: 0;
         width: 70px;
@@ -58,9 +72,8 @@ body {
 
                 a {
                     display:block;
-                    color:white;
+                    color:@gray;
                     text-align: center;
-                    padding: 10px 0;
                     font-size: 2.2rem;
 
                     i {
@@ -80,6 +93,10 @@ body {
                         vertical-align: middle;
                         display: none
                     }
+                
+                    ul {
+                        display:none
+                    }
                 }
             }
         }
@@ -90,7 +107,9 @@ body {
 
             h3 {
                 display:block;
-                color: white
+                color: darken(@gray,15%);
+                font-weight: 700;
+                font-size: 1.5rem;
             }
 
             ul {
@@ -101,8 +120,9 @@ body {
 
                     a {
                         text-align: left;
-                        padding-left: 10px;
-                        font-size: 1.6rem;
+                        padding: 10px 0 10px 10px;
+                        font-size: 1.4rem;
+                        color: @gray;
 
                         i {
                             &:before {
@@ -117,15 +137,18 @@ body {
 
                 ul {
                     margin: 0;
-                    margin-left: 40px;
+                    display:block;
+                    margin-left: 37px;
 
                     li {
                         border: 0;
 
                         a {
-                            padding: 5px 0;
-                            color: #bbbbbb;
-                            font-size: 0.9em;
+                            padding:0;   
+                        }
+
+                        &:last-of-type {
+                            padding-bottom: 5px
                         }
                     }
                 }
@@ -136,10 +159,10 @@ body {
 
     // Main container
     main {
-        padding: 1em 20px 1em 90px;
+        padding: 70px 20px 1em 90px;
 
         ._media-m-up({
-            padding:1em 2% 1em 17%;
+            padding:70px 2% 1em 17%;
         });
     }
 

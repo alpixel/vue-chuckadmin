@@ -2,22 +2,15 @@
 .users-home {
 
     .filters {
-        .form-item {
-            margin: 0 0.8em
-        }
+        form {
+            padding: 0;
+            .form-item {
+                margin-top: 0;
+                margin-bottom: 0;
+                padding: 0;
 
-        // Pagination
-        #pagination {
-            margin-right: 0.8em;
-
-            li {
-                background-color: white;
-
-                &:not(.disabled) {
-                    a {
-                        cursor:pointer;
-
-                    }
+                &:last-of-type {
+                    padding-left: 15px;
                 }
             }
         }
@@ -28,6 +21,31 @@
         }
     }
 
+    // Pagination
+    #pagination {
+        margin: 1.2em 0;
+        display: flex;
+        justify-content:flex-end;
+
+
+        li {
+            background-color: white;
+
+            &.disabled {
+                pointer-events: none;
+                color:#cccccc;
+                background-color: #eeeeee;
+                opacity:0.5
+            }
+
+            &:not(.disabled) {
+                a {
+                    cursor:pointer;
+                }
+            }
+        }
+    }
+
 
     table {
         background-color: white;
@@ -35,7 +53,7 @@
 
         th {
             position: relative;
-            background-color: #fefefe;
+            background-color: #f5f5f5;
             padding: 15px 8px;
 
             &.sort {
