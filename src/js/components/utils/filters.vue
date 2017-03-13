@@ -3,7 +3,7 @@
     import moment from 'moment'
 
     /*
-        {{ "2013-02-19 03:59:52 | frenchDate }} => "19.02.2013"
+        Use case : {{ "2013-02-19 03:59:52 | frenchDate }} => "19.02.2013"
     */
     Vue.filter('formatDate',function(date, locale, format){
         if (!format) {
@@ -14,14 +14,14 @@
     })
 
     /*
-        {{ "coucou" | upper }} => "COUCOU"
+        Use case : {{ "hello" | upper }} => "HELLO"
     */
     Vue.filter('upper',function(str){
         return str.toUpperCase()
     })
 
     /*
-        {{ "coucou" | capitalize }} => "Coucou"
+        Use case : {{ "hello" | capitalize }} => "Hello"
     */
     Vue.filter('capitalize',function(str){
         return str.charAt(0).toUpperCase() + str.slice(1)

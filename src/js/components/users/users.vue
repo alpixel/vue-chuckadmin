@@ -143,7 +143,7 @@
 
 
             <!-- MODAL SHOWN BEFORE DELETING USER -->
-            <div id="modal-id" :class="[{'active' : showModal}, 'modal']">
+            <div :class="[{'active' : showModal}, 'modal']">
                 <!-- Close button -->
                 <button class="modal-close" @click="showModal = false"></button>
                 <!-- Overlay -->
@@ -164,14 +164,14 @@
                 </div>
             </div>
 
-        </div>
+        </div> <!-- /end v-if="!error" -->
 
         <!-- else, show errors logs -->
         <div v-else class="alert alert-error">
             {{error}}
         </div>
 
-    </div>
+    </div> <!-- /end v-else not loading-->
 
   </div>
 </template>
@@ -186,7 +186,7 @@
 
     export default {
         // Name of the component
-        name: 'user',
+        name: 'users',
 
         // Datas : model
         data () {
@@ -316,10 +316,6 @@
 
                 this.changePage(this.currentPage);
             }
-
-            // genders () {
-            //     this.sortByGender();
-            // }
         },
 
         // When view is created, launch ajax fetchData
@@ -431,7 +427,7 @@
                 let that = this
 
                 // Make an array with matching search
-                var filtered_users = _.filter(that.users, function(p){
+                let filtered_users = _.filter(that.users, function(p){
                   return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.id.value,that.searchQuery.toLowerCase())
                 })
 
@@ -471,7 +467,7 @@
                     indexSearch = this.userToDelete.index
 
                 // I. this.users
-                var user = _.findIndex(this.users,function(o) {
+                let user = _.findIndex(this.users,function(o) {
                     return o.id.value == idSearch
                 })
                 this.users.splice(user,1)
@@ -482,10 +478,10 @@
 
 
                 // III. this.usersFiltered
-                var user = _.findIndex(this.usersFiltered,function(o) {
+                let userfilter = _.findIndex(this.usersFiltered,function(o) {
                     return o.id.value == idSearch
                 })
-                this.usersFiltered.splice(user,1)
+                this.usersFiltered.splice(userfilter,1)
 
 
 
@@ -494,36 +490,7 @@
 
                 // Reset userToDelete array
                 this.userToDelete = {}
-            },
-
-            // Sort datas by gender
-            // sortByGender() {
-
-            //     // Refer to instance
-            //     let that = this
-
-            //     if(_.isEmpty(that.genders) || that.genders.length > 1) {
-            //         console.log('empty genders')
-
-            //     } else {
-            //         console.log(_.head(that.genders))
-
-            //         let cloneArray = _.map(this.usersFiltered, _.clone);
-
-            //         console.log(cloneArray)
-
-            //         // Order users tabs with lodash _.orderBy method
-            //         this.usersFiltered = _.filter(cloneArray, {'gender': _.head(that.genders)})
-
-            //         // Refresh, always refresh :)
-            //         this.refreshPage()
-
-
-
-            //     }
-
-
-            // }
+            }
         },
 
         // Filters

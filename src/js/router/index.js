@@ -45,11 +45,11 @@ var routes = [
         component: adminprofile,
         name: 'admin-profile'
     },
-    {
-        path: '/admins/add',
-        component: adminadd,
-        name: 'admin-add'
-    },
+    // {
+    //     path: '/admins/add',
+    //     component: adminadd,
+    //     name: 'admin-add'
+    // },
 
     // Users
     {
