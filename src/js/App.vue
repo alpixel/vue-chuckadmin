@@ -10,6 +10,16 @@
                     </div>
 
                     <div class="cc-w-auto cc-right">
+                        <router-link :to="{name : 'home'}"  class="notifications">
+                            <span v-if="notif > 0">
+                                {{notif}}
+                            </span>
+
+                            <i class="ion-ios-bell-outline" :class="{'shake': notif > 0}"></i>
+                        </router-link>
+                    </div>
+
+                    <div class="cc-w-auto">
 
                         <router-link :to="{name : 'home'}"  class="user-box">
                             <!-- User img -->
@@ -22,7 +32,7 @@
 
                     <div class="cc-w-auto">
                         <router-link :to="{name : 'home'}"  class="logout" title="Logout">
-                            <i class="ionicons ion-ios-unlocked-outline"></i>
+                            <i class="ion-ios-unlocked-outline"></i>
                         </router-link>
 
                     </div>
@@ -31,9 +41,7 @@
         </header>
 
         <nav>
-
             <div class="cc-inside">
-            
                 <ul>
                     <li>
                         <router-link to="/" exact>
@@ -117,6 +125,7 @@
         name: 'app',
         data () {
             return {
+                notif: 5
             }
         }
     }

@@ -6,6 +6,7 @@ header {
         font-size: 1.7rem;
     }
 
+    // User picture + name
     .user-box {
         display: block;
 
@@ -32,12 +33,58 @@ header {
         }
     }
 
+    // Logout
     .logout {
-        color:#c1ccd1;
-        font-size: 2.2rem;
-        ._transition;
+        display: block;
+        padding: 0 10px;
 
-        &:hover {
+        i {
+            color:#c1ccd1;
+            font-size: 2.2rem;
+            ._transition;
+
+            &:before {
+                margin-right: 0;
+            }
+        }
+
+        &:hover i {
+            color:@red;
+        }
+    }
+
+    // Notifications
+    .notifications {
+        position: relative;
+        display: block;
+
+        i {
+            display: block;
+            color:#c1ccd1;
+            font-size: 2.2rem;
+            ._transition;
+
+            &:before {
+                margin-right: 0;
+            }
+        }
+
+        span {
+            position: absolute;
+            z-index: 11;
+            right: 9px;
+            top: 0;
+            background-color: @red;
+            color:white;
+            display: block;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            padding:0px 6px;
+            text-align: center;
+            line-height: 1.7rem;            
+        }
+
+        &:hover i {
             color:@red;
         }
     }
