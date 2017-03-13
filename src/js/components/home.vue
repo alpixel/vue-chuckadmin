@@ -1,11 +1,17 @@
 <template>
   <div class="home">
-    <h1 class="cc-txt-center">
-      {{msg}}
-    </h1>
+    <div class="top-page">
+        <div class="cc-inside">
+            <h1>
+              {{msg}}
+            </h1>
+        </div>
+    </div>
 
-    <div class="alert alert-success">
-      <i class="fa fa-thumbs-up"></i> Install success :) Good work dude!
+    <div class="cc-inside">
+        <div class="alert alert-success">
+            <i class="fa fa-thumbs-up"></i> Install success :) Good work dude!
+        </div>
     </div>
   </div>
 </template>
@@ -15,7 +21,7 @@
         name: 'home',
         data () {
             return {
-                msg: 'VueJS & ChuckCSS administration'
+                msg: 'Dashboard'
             }
         },
 

@@ -6,21 +6,30 @@
 
     <div v-else>
 
-        <div v-if="!error">
-            <h1 class="cc-txt-center">
-                NEWS
-            </h1>
-
-            <div class="boxed">
-                <div class="alert alert-success">
-                  <i class="fa fa-thumbs-up"></i> Welcome on News dashboard
-                </div>
+        <!-- Page title -->
+        <div class="top-page">
+            <div class="cc-inside">
+                <h1>
+                    News
+                </h1>
             </div>
-
         </div>
 
-        <div v-else class="alert alert-error">
-            {{error}}
+        <div class="cc-inside">
+
+            <div v-if="!error">
+
+                <div class="boxed">
+                    <div class="alert alert-success">
+                      <i class="fa fa-thumbs-up"></i> Welcome on News Pages
+                    </div>
+                </div>
+
+            </div>
+
+            <div v-else class="alert alert-error">
+                {{error}}
+            </div>
         </div>
     </div>
 
@@ -31,7 +40,7 @@
     import Vue from 'vue'
 
     export default {
-        name: 'pages',
+        name: 'news-pages',
         data () {
             return {
                 loading:false,
@@ -42,7 +51,7 @@
         head: {
             title() {
                 return {
-                    inner: 'News panel',
+                    inner: 'News Pages panel',
                     separator: '-',
                     complement: 'Made by ALPIXEL agency'
                 }

@@ -1,179 +1,188 @@
 <template>
-  <div class="users-home">
+    <div class="users-home">
 
-    <!-- If loading -->
-    <div class="cc-loader" v-if="loading">
-      <div class="spinner"></div>
-    </div>
+        <!-- If loading -->
+        <div class="cc-loader" v-if="loading">
+          <div class="spinner"></div>
+        </div>
 
-    <!-- else -->
-    <div v-else>
+        <!-- else -->
+        <div v-else>
 
-        <!-- If no errors after fetching datas -->
-        <div v-if="!error">
-        
-            <div class="cc-txt-right">
-                <router-link class="btn cc-bg-primary fa-plus" :to="{name:'user-add'}">Add a user</router-link>
-            </div>
+            <!-- If no errors after fetching datas -->
+            <div v-if="!error">
 
-            <h1 class="cc-txt-center">
-                Registered Users<br />
-                <small>• {{maxUsers|pluralize}} •</small>
-            </h1>
-
-            <!-- Pagination, pages -->
-            <div class="filters boxed">
-                <form class="columns">
-                    <div class="form-item cc-txt-center cc-w-auto">
-                        <div class="form-ps">
-                            <span>Search</span>
-                            <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
-                        </div>
-                    </div>
-
-                    <div class="form-item  cc-txt-center cc-w-auto cc-right">
-                        <div class="form-ps">
-                            <span>Nb per page</span>
-                            <select v-model="nbPerPageSelect">
-                                <option value="1">1 ligne</option>
-                                <option value="5">5 lignes</option>
-                                <option value="10">10 lignes</option>
-                                <option value="20">20 lignes</option>
-                                <option value="50">50 lignes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
-                        <div class="form-ps">
-                            <span>Go to page</span>
-                            <input type="number" class="small" v-model.number="currentPage" min="1" />
-                        </div>
-                    </div>
-                </form>
-
-                
-            </div>
-
-            <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
-
-
-            <!-- Results table datas -->
-            <div class="boxed cc-ma-0" v-show="userShown.length >= 1">
-                <table class="cc-equal-cols">
-                    <thead>
-                        <tr>
-                            <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
-                                ID
-                            </th>
-                            <th>
-                                Picture
-                            </th>
-                            <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
-                                Firstname
-                            </th>
-                            <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
-                                Lastname
-                            </th>
-                            <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
-                                Date inscription
-                            </th>
-                            <th>
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tfoot>
-                        <tr>
-                            <th>
-                                ID
-                            </th>
-                            <th>
-                                Picture
-                            </th>
-                            <th>
-                                Firstname
-                            </th>
-                            <th>
-                                Lastname
-                            </th>
-                            <th>
-                                Date inscription
-                            </th>
-                            <th>
-                                Action
-                            </th>
-                        </tr>
-                    </tfoot>
-
-                    <tbody>
-                        <tr v-for="(user, index) in userShown">
-                            <td>
-                                {{user.id.value}}
-                            </td>
-                            <td>
-                                <img :src="user.picture.thumbnail" :alt="user.name.first" />
-                            </td>
-                            <td>
-                                {{user.name.first|capitalize}}
-                            </td>
-                            <td>
-                                {{user.name.last|upper}}
-                            </td>
-                            <td>
-                                {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
-                            </td>
-                            <td>
-                                <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: user.id.value}}">Edit</router-link>
-
-                                <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="alert alert-error" v-show="userShown.length < 1">
-                No users found, please change your filters
-            </div>
-
-
-            <!-- MODAL SHOWN BEFORE DELETING USER -->
-            <div :class="[{'active' : showModal}, 'modal']">
-                <!-- Close button -->
-                <button class="modal-close" @click="showModal = false"></button>
-                <!-- Overlay -->
-                <div class="modal-overlay" @click="showModal = false"></div>
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        Confirm action
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info">
-                            Do you really want to delete the user <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                <div class="top-page">
+                    <div class="cc-inside">
+                        <div class="columns">
+                            <h1>
+                                Users 
+                                <small>• {{maxUsers|pluralize}} •</small>
+                            </h1>
+                            <div class="cc-w-auto cc-right">
+                                <router-link class="btn cc-bg-purple fa-plus" :to="{name:'user-add'}">Add a user</router-link>
                             </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS USER</button>
+                </div>
+
+                <div class="cc-inside">
+
+                    <!-- Pagination, pages -->
+                    <div class="filters boxed">
+                        <form class="columns">
+                            <div class="form-item cc-txt-center cc-w-auto">
+                                <div class="form-ps">
+                                    <span>Search</span>
+                                    <input type="text" v-model="searchQuery" placeholder="Search by names, ID" />
+                                </div>
+                            </div>
+
+                            <div class="form-item  cc-txt-center cc-w-auto cc-right">
+                                <div class="form-ps">
+                                    <span>Nb per page</span>
+                                    <select v-model="nbPerPageSelect">
+                                        <option value="1">1 ligne</option>
+                                        <option value="5">5 lignes</option>
+                                        <option value="10">10 lignes</option>
+                                        <option value="20">20 lignes</option>
+                                        <option value="50">50 lignes</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
+                                <div class="form-ps">
+                                    <span>Go to page</span>
+                                    <input type="number" class="small" v-model.number="currentPage" min="1" />
+                                </div>
+                            </div>
+                        </form>   
+                    </div>
+
+                    <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+
+
+                    <!-- Results table datas -->
+                    <div class="boxed cc-ma-0" v-show="userShown.length >= 1">
+                        <table class="cc-equal-cols">
+                            <thead>
+                                <tr>
+                                    <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
+                                        ID
+                                    </th>
+                                    <th>
+                                        Picture
+                                    </th>
+                                    <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
+                                        Firstname
+                                    </th>
+                                    <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
+                                        Lastname
+                                    </th>
+                                    <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
+                                        Date inscription
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Picture
+                                    </th>
+                                    <th>
+                                        Firstname
+                                    </th>
+                                    <th>
+                                        Lastname
+                                    </th>
+                                    <th>
+                                        Date inscription
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </tfoot>
+
+                            <tbody>
+                                <tr v-for="(user, index) in userShown">
+                                    <td>
+                                        {{user.id.value}}
+                                    </td>
+                                    <td>
+                                        <img :src="user.picture.thumbnail" :alt="user.name.first" />
+                                    </td>
+                                    <td>
+                                        {{user.name.first|capitalize}}
+                                    </td>
+                                    <td>
+                                        {{user.name.last|upper}}
+                                    </td>
+                                    <td>
+                                        {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
+                                    </td>
+                                    <td>
+                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: user.id.value}}">Edit</router-link>
+
+                                        <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="alert alert-error" v-show="userShown.length < 1">
+                        No users found, please change your filters
+                    </div>
+
+
+                    <!-- MODAL SHOWN BEFORE DELETING USER -->
+                    <div :class="[{'active' : showModal}, 'modal']">
+                        <!-- Close button -->
+                        <button class="modal-close" @click="showModal = false"></button>
+                        <!-- Overlay -->
+                        <div class="modal-overlay" @click="showModal = false"></div>
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Confirm action
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-info">
+                                    Do you really want to delete the user <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS USER</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /end cc-inside -->
+
+            </div> <!-- /end v-if="!error" -->
+
+            <!-- else, show errors logs -->
+            <div v-else>
+                <div class="cc-inside">
+                    <div class="alert alert-error">
+                        {{error}}
                     </div>
                 </div>
             </div>
-
-        </div> <!-- /end v-if="!error" -->
-
-        <!-- else, show errors logs -->
-        <div v-else class="alert alert-error">
-            {{error}}
-        </div>
-
-    </div> <!-- /end v-else not loading-->
-
-  </div>
+        </div> <!-- /end v-else not loading-->
+    </div>
 </template>
 
 <script>

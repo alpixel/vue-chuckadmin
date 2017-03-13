@@ -1,80 +1,98 @@
 <template>
     <div id="app">
-        <header>
-            <!-- <p class="cc-txt-center">
-                <router-link :to="{name : 'home'}" exact>
-                    <img src="./assets/logo.png" alt="VueJS logo">
-                </router-link>
-            </p> -->
-            <div class="columns">
-                <div>
+        <header id="main-header">
+            <div class="cc-inside">
+                <div class="columns cc-align-center">
+                    <div>
+                        <router-link :to="{name : 'home'}" exact class="logo cc-primary">
+                            ChuckCSS & VueJS Admin
+                        </router-link>
+                    </div>
+
+                    <div class="cc-w-auto cc-right">
+
+                        <router-link :to="{name : 'home'}"  class="user-box">
+                            <!-- User img -->
+                            <img src="http://lorempixel.com/40/40/animals" />
+
+                            <!-- User name -->
+                            <span>Jean-Jacques</span>
+                        </router-link>
+                    </div>
+
+                    <div class="cc-w-auto">
+                        <router-link :to="{name : 'home'}"  class="logout" title="Logout">
+                            <i class="ionicons ion-ios-unlocked-outline"></i>
+                        </router-link>
+
+                    </div>
                 </div>
             </div>
         </header>
 
         <nav>
-            <h2>Navigation</h2>
+
+            <div class="cc-inside">
             
-            <ul>
-                <li>
-                    <router-link to="/" exact>
-                        <i class="ion-android-home"></i>
-                        <span>Dashboard</span>
-                    </router-link>
-                </li>
-                <li>
-                    <h3>
-                        <i class="ion-person-stalker"></i>
-                        Persons
-                    </h3>
-                    <ul>
-                        <li>
-                            <router-link :to="{name:'admins'}">
-                                <i class="ion-arrow-right-b"></i>
-                                <span>Administrators</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{name:'users'}">
-                                <i class="ion-arrow-right-b"></i>
-                                <span>Users</span>
-                            </router-link>
-                        </li>
-                    </ul>
-                </li>
+                <ul>
+                    <li>
+                        <router-link to="/" exact>
+                            <i class="ion-android-home"></i>
+                            <span>Dashboard</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <h3>
+                            <i class="ion-person-stalker"></i>
+                            Persons
+                        </h3>
+                        <ul>
+                            <li>
+                                <router-link :to="{name:'admins'}">
+                                    <i class="ion-arrow-right-b"></i>
+                                    <span>Administrators</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name:'users'}">
+                                    <i class="ion-arrow-right-b"></i>
+                                    <span>Users</span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <h3>
-                        <i class="ion-android-folder"></i>
-                        Pages
-                    </h3>
+                    <li>
+                        <h3>
+                            <i class="ion-android-folder"></i>
+                            Pages
+                        </h3>
 
-                    <ul>
-                        <li>
-                            <router-link :to="{name: 'news'}">
-                                <i class="ion-arrow-right-b"></i>
-                                <span>News</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{name: 'cms'}">
-                                <i class="ion-arrow-right-b"></i>
-                                <span>CMS</span>
-                            </router-link>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        <ul>
+                            <li>
+                                <router-link :to="{name: 'news'}">
+                                    <i class="ion-arrow-right-b"></i>
+                                    <span>News</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'cms'}">
+                                    <i class="ion-arrow-right-b"></i>
+                                    <span>CMS</span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </nav>
 
         <main>
             <!-- General transition effect when changing page -->
             <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-
                 <!-- Page container -->
                 <router-view></router-view>
-
-            </transition>
+            </transition>            
         </main>
     </div>
 </template>

@@ -1,0 +1,45 @@
+// Header
+header {
+    background-color: white;
+
+    .logo {
+        font-size: 1.7rem;
+    }
+
+    .user-box {
+        display: block;
+
+        img {
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 100%;
+            margin-right: 5px;
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color:#7089a2;
+            ._transition;
+        }
+
+        &:hover {
+            span {
+                color:@primary
+            }
+        }
+    }
+
+    .logout {
+        color:#c1ccd1;
+        font-size: 2.2rem;
+        ._transition;
+
+        &:hover {
+            color:@red;
+        }
+    }
+}
+// end/ -> Header

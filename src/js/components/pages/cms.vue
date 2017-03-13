@@ -6,21 +6,30 @@
 
     <div v-else>
 
-        <div v-if="!error">
-            <h1 class="cc-txt-center">
-                CMS
-            </h1>
-
-            <div class="boxed">
-                <div class="alert alert-success">
-                  <i class="fa fa-thumbs-up"></i> Welcome on CMS dashboard
-                </div>
+        <!-- Page title -->
+        <div class="top-page">
+            <div class="cc-inside">
+                <h1>
+                    CMS pages
+                </h1>
             </div>
-
         </div>
 
-        <div v-else class="alert alert-error">
-            {{error}}
+        <div class="cc-inside">
+
+            <div v-if="!error">
+
+                <div class="boxed">
+                    <div class="alert alert-success">
+                      <i class="fa fa-thumbs-up"></i> Welcome on CMS Pages
+                    </div>
+                </div>
+
+            </div>
+
+            <div v-else class="alert alert-error">
+                {{error}}
+            </div>
         </div>
     </div>
 
@@ -31,7 +40,7 @@
     import Vue from 'vue'
 
     export default {
-        name: 'pages',
+        name: 'cms-pages',
         data () {
             return {
                 loading:false,

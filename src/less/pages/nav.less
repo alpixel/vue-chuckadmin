@@ -1,0 +1,95 @@
+// Left nav
+nav {
+    background-color:#444d58;
+
+    h3 {
+        font-size: 1.4rem;
+        color: #BCC2CB;
+        padding: 12px 20px;
+
+        &:hover {
+            color:@primary;
+            background-color:lighten(#444d58,5%);
+        }
+    }
+
+    ul {
+        ._reset;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+
+
+        li {
+            ._reset;
+            list-style:none;
+            position: relative;
+
+            &:hover > a,
+            &:hover h3 {
+                color: white;
+                background-color:lighten(#444d58,5%);
+            }
+
+            &:hover {
+                &>ul {
+                    display:block;
+                }
+            }
+
+            &>a {
+                display:block;
+                padding: 12px 20px;
+                color:#BCC2CB;
+                font-size: 1.4rem;
+                
+
+                i {
+                    vertical-align: middle;
+                }
+
+                &:hover,
+                &.router-link-active {
+                    color:white;
+                    background-color:lighten(#444d58,5%);
+                }
+
+                span {
+                    vertical-align: middle;
+                    display: inline-block;
+                }
+            }
+            
+            ul {
+                ._reset;
+                position: absolute; 
+                left: 0%;
+                top: 100%;
+                background-color:#444d58;
+                width: 170px;
+                z-index: 11;
+                display: none;
+                box-shadow: 5px 5px rgba(85,97,111,.2);
+
+                & > li {
+                    position: relative;
+
+                    ul {
+                        ._reset;
+                        position: absolute; 
+                        left: 100%;
+                        top: 0%;
+                        background-color:#444d58;
+                        width: 170px;
+                        z-index: 11;
+                        display: none;
+                        box-shadow: 5px 5px rgba(85,97,111,.2);
+                    }
+
+                }
+            }
+            
+        }
+    }
+} // end/ -> Left nav

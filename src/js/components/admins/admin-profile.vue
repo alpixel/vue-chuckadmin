@@ -1,25 +1,41 @@
 <template>
-  <div class="user-profil">
-    <div class="cc-loader" v-if="loading">
-      <div class="spinner"></div>
-    </div>
-
-    <div v-else>
-
-        <div v-if="!error">
-            <p class="cc-txt-center">
-                <router-link class="btn cc-bg-primary" :to="{name : 'admins'}">Back to admins</router-link>
-            </p>
-
-            <pre>{{user}}</pre>
+    <div class="user-profil">
+        <div class="cc-loader" v-if="loading">
+            <div class="spinner"></div>
         </div>
 
-        <div v-else class="alert alert-error">
-            {{error}}
-        </div>
-    </div>
+        <div v-else>
 
-  </div>
+            <div v-if="!error">
+            
+                <div class="top-page">
+                    <div class="cc-inside">
+                        <div class="columns">
+                            <h1>
+                                Administrator 
+                                <small>• #{{user.id.value}} </small>
+                            </h1>
+                            <div class="cc-w-auto cc-right">
+                                <router-link class="btn cc-bg-green fa-angle-left" :to="{name : 'admins'}">Back to admins</router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cc-inside">
+                    <div class="boxed">
+                        <pre>{{user}}</pre>
+                    </div>
+                </div><!-- /end cc-inside -->       
+
+            </div><!-- /end v-if="!error" -->
+
+            <div v-else class="alert alert-error">
+                {{error}}
+            </div>
+        </div>
+
+    </div>
 </template>
 
 <script>
