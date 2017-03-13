@@ -58,6 +58,21 @@
                                     <i class="ion-arrow-right-b"></i>
                                     <span>Users</span>
                                 </router-link>
+
+                                <ul>
+                                    <li>
+                                        <router-link :to="{name:'users'}">
+                                            <i class="ion-arrow-right-b"></i>
+                                            <span>Users list</span>
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link :to="{name:'user-add'}">
+                                            <i class="ion-arrow-right-b"></i>
+                                            <span>Add a user</span>
+                                        </router-link>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
