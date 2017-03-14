@@ -16,11 +16,11 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Users 
+                                Administrators 
                                 <small>• {{maxUsers|pluralize}} •</small>
                             </h1>
                             <div class="cc-w-auto cc-right">
-                                <router-link class="btn cc-bg-purple fa-plus" :to="{name:'user-add'}">Add a user</router-link>
+                                <a href="javascript:void(0)" @click="modalAddAdmin = true" class="btn cc-bg-purple fa-plus">Add a new admin (into a modal)</a>
                             </div>
                         </div>
                     </div>
@@ -49,9 +49,7 @@
                                         <option value="50">50 lignes</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            
+                            </div>                    
 
                             <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
                                 <div class="form-ps">
@@ -59,7 +57,7 @@
                                     <input type="number" class="small" v-model.number="currentPage" min="1" />
                                 </div>
                             </div>
-                        </form>   
+                        </form>
                     </div>
 
                     <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
@@ -132,7 +130,7 @@
                                         {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
                                     </td>
                                     <td>
-                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: user.id.value}}">Edit</router-link>
+                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: user.id.value}}">Edit</router-link>
 
                                         <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                                     </td>
@@ -147,12 +145,12 @@
                     </div>
 
 
-                    <!-- MODAL SHOWN BEFORE DELETING USER -->
-                    <div :class="[{'active' : showModal}, 'modal']">
+                    <!-- MODAL SHOWN BEFORE DELETING ADMIN -->
+                    <div :class="[{'active' : modalDeleteAdmin}, 'modal']">
                         <!-- Close button -->
-                        <button class="modal-close" @click="showModal = false"></button>
+                        <button class="modal-close" @click="modalDeleteAdmin = false"></button>
                         <!-- Overlay -->
-                        <div class="modal-overlay" @click="showModal = false"></div>
+                        <div class="modal-overlay" @click="modalDeleteAdmin = false"></div>
                         <!-- Modal content -->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -160,42 +158,79 @@
                             </div>
                             <div class="modal-body">
                                 <div class="alert alert-info">
-                                    Do you really want to delete the user <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                                    Do you really want to delete the admin <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS USER</button>
+                                <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS ADMIN</button>
                             </div>
                         </div>
                     </div>
 
+
+                    <!-- MODAL ADD NEW ADMIN -->
+                    <div :class="[{'active' : modalAddAdmin}, 'modal']" data-fixed-hf data-disabled-overlay>
+                        <!-- Close button -->
+                        <button class="modal-close" @click="modalAddAdmin = false"></button>
+                        <!-- Overlay -->
+                        <div class="modal-overlay"></div>
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Add a new administrator
+                            </div>
+                            <div class="wrap-modal-body">
+                                <div class="modal-body">
+                                    <adminadd @addAdminSuccess="addAdminSuccess"></adminadd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODAL SHOWN WHEN ADMIN IS CREATED -->
+                    <div :class="[{'active' : modalAddSuccess}, 'modal']">
+                        <!-- Close button -->
+                        <button class="modal-close" @click="modalAddSuccess = false"></button>
+                        <!-- Overlay -->
+                        <div class="modal-overlay" @click="modalAddSuccess = false"></div>
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Registration success
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-info fa-thumbs-up">
+                                    Admin registered with success
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div><!-- /end cc-inside -->
 
-            </div> <!-- /end v-if="!error" -->
+            </div><!-- /end v-if="!error" -->
 
             <!-- else, show errors logs -->
-            <div v-else>
-                <div class="cc-inside">
-                    <div class="alert alert-error">
-                        {{error}}
-                    </div>
-                </div>
+            <div v-else class="alert alert-error">
+                {{error}}
             </div>
-        </div> <!-- /end v-else not loading-->
+        </div> <!-- /end - v-else not loading -->
+
     </div>
 </template>
 
 <script>
     import Vue from 'vue'
-    import Pagination from '../utils/pagination.vue'
+    import Pagination from '../../../components/pagination.vue'
+    import adminadd from './admin-add.vue'
 
-    // Set const api url to get users
-    const api = 'https://randomuser.me/api/?results=50&nat=fr';
+    // Set const api url to get admins
+    const api = 'https://randomuser.me/api/?results=5&nat=fr'
 
 
     export default {
         // Name of the component
-        name: 'users',
+        name: 'admins',
 
         // Datas : model
         data () {
@@ -209,8 +244,14 @@
                 // If fetchData() returns an error, will be filled with error detail
                 error : '',
 
-                // Set to true for modal appearance
-                showModal : false,
+                // Modal delete admin : Set to true for modal appearance
+                modalDeleteAdmin : false,
+
+                // Modal add new admin : Set to true for modal appearance
+                modalAddAdmin : false,
+
+                // Modal when new admin is created with success
+                modalAddSuccess : false,
 
 
                 // ============
@@ -227,15 +268,15 @@
 
 
                 // ============
-                // Users datas
+                // admins datas
                 // ============
-                // Tab contains all users - used for back-up users (when searching users)
+                // Tab contains all admins - used for back-up admins (when searching admins)
                 users: [],
 
-                // Tab contains users when searching in names
+                // Tab contains admins when searching in names
                 usersFiltered: [],
 
-                // Tab contains shown users
+                // Tab contains shown admins
                 userShown: [],
 
                 // Array with infos about user to delete
@@ -260,7 +301,7 @@
         head: {
             title() {
                 return {
-                    inner: 'Users panel',
+                    inner: 'Admins panel',
                     separator: '-',
                     complement: 'Made by ALPIXEL agency'
                 }
@@ -271,10 +312,10 @@
             }
         },
 
-        // Computed datas : Here the total nb of users
+        // Computed datas : Here the total nb of admins
         computed: {
             maxUsers () {
-                console.log('users - computed maxUsers')
+                console.log('admins - computed maxUsers')
 
                 return this.usersFiltered.length
             }
@@ -288,7 +329,7 @@
 
             // When select pagination changes
             nbPerPageSelect () {
-                console.log('users - watch nbPerPageSelect')
+                console.log('admins - watch nbPerPageSelect')
 
 
                 // Nb of user per page is set to the select value
@@ -303,7 +344,7 @@
 
             // When search input change, launch request
             searchQuery () {
-                console.log('users - watch searchQuery')
+                console.log('admins - watch searchQuery')
 
                 // Launch search
                 this.searchInTable()
@@ -311,7 +352,7 @@
 
             // When the table pagiantion section shows 0 user (by deleting the last user on the table for example)
             userShown () {
-                console.log('users - watch userShown')
+                console.log('admins - watch userShown')
 
                 if(this.userShown.length < 1 && this.usersFiltered.length > 0 && this.users.length > 0) {
                     this.currentPage = 1
@@ -321,7 +362,7 @@
 
             // Input "Go to page" binding value
             currentPage() {
-                console.log('users - watch currentPage')
+                console.log('admins - watch currentPage')
 
                 this.changePage(this.currentPage);
             }
@@ -329,16 +370,16 @@
 
         // When view is created, launch ajax fetchData
         created () {
-            console.log('users - created')
+            console.log('admins - created')
             this.fetchData()
         },
 
         // Methods
         methods: {
 
-            // Ajax to get users
+            // Ajax to get admins
             fetchData () {
-                console.log('users - methods fetchData')
+                console.log('admins - methods fetchData')
 
                 // Reset error msg
                 this.error = ''
@@ -357,11 +398,11 @@
                     // Loading is finished :)
                     this.loading = false
 
-                    // Contains all users (100)
+                    // Contains all admins
                     this.users = response.data.results
                     this.usersFiltered = response.data.results
 
-                    // Slice users to show the `this.nbPerPage` first users
+                    // Slice admins to show the `this.nbPerPage` first admins
                     this.userShown = this.usersFiltered.slice(0, this.nbPerPage)
 
                     // Sort table by default sortKey
@@ -370,7 +411,7 @@
                 }).catch(error => {
 
                     // Set the error msg
-                    this.error = 'Users not found'
+                    this.error = 'admins not found'
 
                     // Loading is finished :)
                     this.loading = false
@@ -384,18 +425,17 @@
 
             // Bind when the page changes
             changePage(index) {
-                console.log('users - methods changePage')
+                console.log('admins - methods changePage')
                 // Active class to the current number
                 this.currentPage = index
 
                 // Refresh page
                 this.refreshPage()
-
             },
 
             // Refresh page
             refreshPage() {
-                console.log('users - methods refreshPage')
+                console.log('admins - methods refreshPage')
 
                 // Set start to the first user of the current line
                 let start = this.getStartPagination()
@@ -406,16 +446,16 @@
 
             // Return the start of the current pagination
             getStartPagination() {
-                console.log('users - methods getStartPagination')
+                console.log('admins - methods getStartPagination')
 
                 return (this.currentPage - 1) * this.nbPerPage
             },
 
             // Ordering datas into table
             sortBy(key) {
-                console.log('users - methods sortBy')
+                console.log('admins - methods sortBy')
 
-                // Order users tabs with lodash _.orderBy method
+                // Order admins tabs with lodash _.orderBy method
                 this.usersFiltered = _.orderBy(this.usersFiltered, key, [this.sortType[0]])
 
                 // Reverse sortType for next click (reverse order)
@@ -430,7 +470,7 @@
 
             // Search in table
             searchInTable() {
-                console.log('users - methods searchInTable')
+                console.log('admins - methods searchInTable')
 
                 // Refer to the instance
                 let that = this
@@ -452,7 +492,7 @@
 
             // Open Modal before deleting user
             openModal(id_user,index) {
-                console.log('users - methods openModal')
+                console.log('admins - methods openModal')
 
                 let user = this.userShown[index]
 
@@ -464,12 +504,12 @@
                     'lastname' : user.name.last
                 }
 
-                this.showModal = true
+                this.modalDeleteAdmin = true
             },
 
             // Delete a user
             deleteUser() {
-                console.log('users - methods deleteUser')
+                console.log('admins - methods deleteUser')
 
                 let
                     idSearch = this.userToDelete.id,
@@ -495,10 +535,22 @@
 
 
                 // Hide modal
-                this.showModal = false
+                this.modalDeleteAdmin = false
 
                 // Reset userToDelete array
                 this.userToDelete = {}
+            },
+
+            // When admin is created with success, show modal and close others
+            addAdminSuccess() {
+                console.log('admins - methods addAdminSuccess, emited by child admin-add.vue')
+
+                this.modalDeleteAdmin = false;
+                this.modalAddAdmin = false;
+                this.modalAddSuccess = true;
+
+                // Reload table data
+                this.fetchData()
             }
         },
 
@@ -507,15 +559,14 @@
 
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
-                console.log('users - filters pluralize')
-
-                return (value > 1) ? value+' users found' : value+ ' user found'
+                return (value > 1) ? value+' admins found' : value+ ' admin found'
             }
         },
 
         // Components
         components: {
-            Pagination
+            Pagination,
+            adminadd
         }
     }
 </script>

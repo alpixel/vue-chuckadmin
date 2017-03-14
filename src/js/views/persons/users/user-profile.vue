@@ -12,11 +12,11 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Administrator 
+                                User 
                                 <small>• #{{user.id.value}} </small>
                             </h1>
                             <div class="cc-w-auto cc-right">
-                                <router-link class="btn cc-bg-green fa-angle-left" :to="{name : 'admins'}">Back to admins</router-link>
+                                <router-link class="btn cc-bg-green fa-angle-left" :to="{name : 'users'}">Back to users</router-link>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="boxed">
                         <pre>{{user}}</pre>
                     </div>
-                </div><!-- /end cc-inside -->       
+                </div><!-- /end cc-inside -->
 
             </div><!-- /end v-if="!error" -->
 
@@ -41,11 +41,10 @@
 <script>
     import Vue from 'vue'
 
-    // Admin info - call Rest API
-    const api = 'https://randomuser.me/api/?id='+this.id+'&nat=fr';
+    const api = 'https://randomuser.me/api/?id='+this.id+'&nat=fr'
 
     export default {
-        name: 'admin-profile',
+        name: 'user-profile',
         data () {
             return {
                 loading:false,
@@ -67,11 +66,9 @@
         methods: {
             fetchData () {
 
-                // Set var before fetching datas
                 this.error = null;
                 this.loading = true;
 
-                // API call with Axios
                 Vue.axios.get(api, {
                     // params
                 }).then(response => {

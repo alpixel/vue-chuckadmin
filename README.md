@@ -16,3 +16,4 @@
 * Fetch Datas : [Vue-axios](https://github.com/imcvampire/vue-axios)
 * Metatags management : [Vue-head](https://github.com/ktquez/vue-head)
 * Form validation : [Vuelidate](https://github.com/monterail/vuelidate)
+* Cookies : [Vue-cookie](https://github.com/alfhen/vue-cookie)

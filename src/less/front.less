@@ -12,6 +12,7 @@
 }
 
 // App Pages
+@import "pages/login";
 @import "pages/header";
 @import "pages/nav";
 @import "pages/forms";
@@ -28,18 +29,18 @@
     display:none;
 }
 
+
 // Admin app
 body {
     background-color: @bg-body;
     ._droid;
 
-
-    // COMMON ELEMENTS
-
     main {
         padding-bottom: 30px;
     }
 
+
+    // COMMON ELEMENTS    
     // Boxed elements
     .boxed {
         padding: 1em;
@@ -51,7 +52,6 @@ body {
             margin: 0;
         }
     }
-
     // Top of pages, containing <h1> title
     .top-page {
         background-color:white;
@@ -68,3 +68,20 @@ body {
         }
     }
 }
+
+// .cc-inside {
+//     ._inside(90%);
+// }
+
+// ._media-m-up({
+    .cc-inside {
+        ._inside(@m-media-mw)
+    }
+// });
+
+._media-l-up({
+    .cc-inside {
+        ._inside(@l-media-mw)
+    }
+});
+

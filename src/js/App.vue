@@ -1,132 +1,196 @@
 <template>
     <div id="app">
-        <header id="main-header">
-            <div class="cc-inside">
-                <div class="columns cc-align-center">
-                    <div>
-                        <router-link :to="{name : 'home'}" exact class="logo cc-primary">
-                            ChuckCSS & VueJS Admin
-                        </router-link>
-                    </div>
+        <div class="cc-loader" v-if="loading">
+            <div class="spinner"></div>
+        </div>
 
-                    <div class="cc-w-auto cc-right">
-                        <router-link :to="{name : 'home'}"  class="notifications">
-                            <span v-if="notif > 0">
-                                {{notif}}
-                            </span>
+        <div v-else>
 
-                            <i class="ion-ios-bell-outline" :class="{'shake': notif > 0}"></i>
-                        </router-link>
-                    </div>
+            <div v-if="isLogged">
 
-                    <div class="cc-w-auto">
+                <!-- App MAIN HEADER -->
+                <app-header :loggedUser="loggedUser" @logout="logout"></app-header>
 
-                        <router-link :to="{name : 'home'}"  class="user-box">
-                            <!-- User img -->
-                            <img src="http://lorempixel.com/40/40/animals" />
-
-                            <!-- User name -->
-                            <span>Jean-Jacques</span>
-                        </router-link>
-                    </div>
-
-                    <div class="cc-w-auto">
-                        <router-link :to="{name : 'home'}"  class="logout" title="Logout">
-                            <i class="ion-ios-unlocked-outline"></i>
-                        </router-link>
-
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <nav>
-            <div class="cc-inside">
-                <ul>
-                    <li>
-                        <router-link to="/" exact>
-                            <i class="ion-android-home"></i>
-                            <span>Dashboard</span>
-                        </router-link>
-                    </li>
-                    <li>
-                        <h3>
-                            <i class="ion-person-stalker"></i>
-                            Persons
-                        </h3>
+                <!-- App MAIN NAV -->
+                <nav>
+                    <div class="cc-inside">
                         <ul>
                             <li>
-                                <router-link :to="{name:'admins'}">
-                                    <i class="ion-arrow-right-b"></i>
-                                    <span>Administrators</span>
+                                <router-link to="/" exact>
+                                    <i class="ion-android-home"></i>
+                                    <span>Dashboard</span>
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name:'users'}">
-                                    <i class="ion-arrow-right-b"></i>
-                                    <span>Users</span>
-                                </router-link>
-
+                                <h3>
+                                    <i class="ion-person-stalker"></i>
+                                    Persons
+                                </h3>
                                 <ul>
                                     <li>
-                                        <router-link :to="{name:'users'}">
+                                        <router-link :to="{name:'admins'}">
                                             <i class="ion-arrow-right-b"></i>
-                                            <span>Users list</span>
+                                            <span>Administrators</span>
                                         </router-link>
                                     </li>
                                     <li>
-                                        <router-link :to="{name:'user-add'}">
+                                        <router-link :to="{name:'users'}">
                                             <i class="ion-arrow-right-b"></i>
-                                            <span>Add a user</span>
+                                            <span>Users</span>
+                                        </router-link>
+
+                                        <ul>
+                                            <li>
+                                                <router-link :to="{name:'users'}">
+                                                    <i class="ion-arrow-right-b"></i>
+                                                    <span>Users list</span>
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link :to="{name:'user-add'}">
+                                                    <i class="ion-arrow-right-b"></i>
+                                                    <span>Add a user</span>
+                                                </router-link>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <h3>
+                                    <i class="ion-android-folder"></i>
+                                    Pages
+                                </h3>
+
+                                <ul>
+                                    <li>
+                                        <router-link :to="{name: 'news'}">
+                                            <i class="ion-arrow-right-b"></i>
+                                            <span>News</span>
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link :to="{name: 'cms'}">
+                                            <i class="ion-arrow-right-b"></i>
+                                            <span>CMS</span>
                                         </router-link>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </div>
+                </nav>
 
-                    <li>
-                        <h3>
-                            <i class="ion-android-folder"></i>
-                            Pages
-                        </h3>
+                <!-- App MAIN CONTENT -->
+                <main>
+                    <!-- General transition effect when changing page -->
+                    <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                        <!-- Page container -->
+                        <router-view></router-view>
+                    </transition>            
+                </main>
 
-                        <ul>
-                            <li>
-                                <router-link :to="{name: 'news'}">
-                                    <i class="ion-arrow-right-b"></i>
-                                    <span>News</span>
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link :to="{name: 'cms'}">
-                                    <i class="ion-arrow-right-b"></i>
-                                    <span>CMS</span>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            </div><!-- end/ v-if logged -->
 
-        <main>
-            <!-- General transition effect when changing page -->
-            <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                <!-- Page container -->
-                <router-view></router-view>
-            </transition>            
-        </main>
+
+            <div v-else class="login-form">
+                <login-form @login="login"></login-form>
+            </div><!-- end/ v-if not logged -->
+
+        </div><!-- end/ v-if not loading -->
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
+    import appHeader from './components/header.vue'
+    import loginForm from './components/login-form.vue'
+
+
+    const api = 'https://randomuser.me/api/?results=1&nat=fr'
+
     export default {
         name: 'app',
         data () {
             return {
-                notif: 5
+                loggedUser: {},
+                isLogged: null,
+                loading: true
             }
+        },
+        created () {
+            this.checkCookie()
+        },
+        methods: {
+            // Logout method
+            logout() {
+                this.loggedUser = {}
+                this.isLogged = false
+
+                // Go to Dashboard
+                this.$router.push('/')
+
+                // Delete Cookie
+                this.$cookie.delete('appLogged');
+            },
+
+            // Login method
+            login(user) {
+                this.loggedUser = user
+                _.assign(this.loggedUser,{'notif':_.random(15)})
+
+
+                this.isLogged = true
+            },
+
+            // Check id logged cookie exists
+            checkCookie() {
+                
+                // If cookie exists with right value, Ajax call to get user datas
+                if(this.$cookie.get('appLogged') && this.$cookie.get('appLogged') == 'ef9d0f5b727e98e187a225c4e4e67d1f')  {
+
+                    Vue.axios.get(api, {
+                            // params
+                        }).then(response => {
+
+                            // Fill this.loggedUser with user datas
+                            this.loggedUser = response.data.results[0]
+                            _.assign(this.loggedUser,{'notif':_.random(15)})
+
+
+                            // Remove loading
+                            this.loading = false
+
+                            // Set this.isLogged to true
+                            this.isLogged = true
+
+
+                        }).catch(error => {
+                            
+                            // Remove loading
+                            this.loading = false
+
+                            // Set this.isLogged to false
+                            this.isLogged = false
+                            
+                            // Delete Cookie
+                            this.$cookie.delete('appLogged');
+                        })
+
+
+                } else {
+                    // Remove loading
+                    this.loading = false
+
+                    // Set this.isLogged to false
+                    this.isLogged = false
+                }                
+            }
+        },
+        components: {
+            appHeader,
+            loginForm
         }
     }
 </script>

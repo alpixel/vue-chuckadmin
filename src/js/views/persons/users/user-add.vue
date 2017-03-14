@@ -204,7 +204,7 @@
                 // touch form validators
                 this.$v.user.$touch();
 
-                // If errors
+                // If no errors
                 if(!this.$v.user.$error) {
 
                     // show loading button

@@ -4,19 +4,16 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueHead from 'vue-head'
 import Vuelidate from 'vuelidate'
+import VueCookie from 'vue-cookie'
 import less from '../less/front.less'
 import App from './App.vue'
-import router from './router'
-import filters from './components/utils/filters.vue'
+import router from './router.js'
+import filters from './components/filters.vue'
 
-
-
-
-// Use plugin axios
 Vue.use(VueHead)
 Vue.use(VueAxios, axios)
 Vue.use(Vuelidate)
-
+Vue.use(VueCookie)
 
 
 // ================

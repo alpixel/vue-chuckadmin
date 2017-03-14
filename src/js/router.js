@@ -4,21 +4,21 @@ import VueRouter from 'vue-router'
 // Import components
 
 // Homepage - General Dashboard
-import home from '../components/home.vue'
+import home from './views/dashboard/dashboard.vue'
 
 // Admins
-import admins from '../components/admins/admins.vue'
-import adminprofile from '../components/admins/admin-profile.vue'
-import adminadd from '../components/admins/admin-add.vue'
+import admins from './views/persons/admins/admins.vue'
+import adminprofile from './views/persons/admins/admin-profile.vue'
+import adminadd from './views/persons/admins/admin-add.vue'
 
 // Users
-import users from '../components/users/users.vue'
-import userprofile from '../components/users/user-profile.vue'
-import useradd from '../components/users/user-add.vue'
+import users from './views/persons/users/users.vue'
+import userprofile from './views/persons/users/user-profile.vue'
+import useradd from './views/persons/users/user-add.vue'
 
 // Pages
-import news from '../components/pages/news.vue'
-import cms from '../components/pages/cms.vue'
+import news from './views/pages/news.vue'
+import cms from './views/pages/cms.vue'
 
 
 Vue.use(VueRouter)
