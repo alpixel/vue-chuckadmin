@@ -9,8 +9,69 @@
     </div>
 
     <div class="cc-inside">
-        <div class="alert alert-success">
-            <i class="fa fa-thumbs-up"></i> Install success :) Good work dude!
+        <div class="columns">
+
+            <!-- Widgets -->
+            <div class="cc-8 columns">
+                <div class="cc-8">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-green">Widget 1</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-4">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-orange">Widget 2</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-4">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-red">Widget 3</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-8">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-primary">Widget 4</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-4">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-yellow">Widget 5</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-4">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-blue">Widget 6</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cc-4">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-pruple">Widget 7</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Widget Timeline -->
+            <div class="cc-4 widget-timeline">
+                <div class="widget boxed">
+                    <div class="widget-title">
+                        <h2 class="cc-purple">Timeline</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
   </div>
