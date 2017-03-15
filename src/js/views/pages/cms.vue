@@ -43,7 +43,7 @@
         name: 'cms-pages',
         data () {
             return {
-                loading:false,
+                loading:true,
                 error : ''
             }
         },
@@ -75,7 +75,8 @@
         methods: {
             fetchData () {
 
-                this.loading = false;
+                // It's loading dude :)
+                this.loading = true
 
                 // this.error = null;
                 // this.loading = true;
@@ -86,13 +87,13 @@
                 //     // params
                 // }).then(response => {
 
-                //     this.loading = false;
+                    this.loading = false;
                 //     this.user = response.data.results[0];
 
                 // }).catch(error => {
 
                 //     this.error = 'User not found';
-                //     this.loading = false;
+                    this.loading = false;
                 //     this.user = [];
 
                 // });

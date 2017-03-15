@@ -108,7 +108,8 @@
     import loginForm from './components/login-form.vue'
 
 
-    const api = 'https://randomuser.me/api/?results=1&nat=fr'
+    // const api = 'https://randomuser.me/api/?results=1&nat=fr'
+    const api = 'src/js/fakeapi/login.json'
 
     export default {
         name: 'app',
@@ -120,72 +121,87 @@
             }
         },
         created () {
+            // check cookie for auto-login user
             this.checkCookie()
         },
         methods: {
             // Logout method
             logout() {
+                // Empty this.loggedUser object
                 this.loggedUser = {}
+
+                // Set this.isLogged to false
                 this.isLogged = false
 
                 // Go to Dashboard
                 this.$router.push('/')
 
                 // Delete Cookie
-                this.$cookie.delete('appLogged');
+                this.$cookie.delete('appLogged')
             },
 
             // Login method
             login(user) {
-                this.loggedUser = user
-                _.assign(this.loggedUser,{'notif':_.random(15)})
 
+                if(!_.isEmpty(user)) {
 
-                this.isLogged = true
+                    // Fill this.loggedUser
+                    this.loggedUser = user
+                    _.assign(this.loggedUser,{'notif':_.random(15)})
+
+                    // Set this.logged to true
+                    this.isLogged = true
+
+                } else {
+
+                    // Set this.isLogged to false
+                    this.isLogged = false
+
+                    // Empty this.loggedUser
+                    this.loggedUser = {}
+
+                }
             },
 
             // Check id logged cookie exists
             checkCookie() {
                 
-                // If cookie exists with right value, Ajax call to get user datas
+                // If cookie exists, get user datas
                 if(this.$cookie.get('appLogged') && this.$cookie.get('appLogged') == 'ef9d0f5b727e98e187a225c4e4e67d1f')  {
 
                     Vue.axios.get(api, {
-                            // params
-                        }).then(response => {
+                        // params
+                    }).then(response => {
+
+                        if(response.data.error) {
+
+                            // Error during login, logout the user
+                            this.logout()
+
+                        } else {
 
                             // Fill this.loggedUser with user datas
-                            this.loggedUser = response.data.results[0]
-                            _.assign(this.loggedUser,{'notif':_.random(15)})
-
-
-                            // Remove loading
-                            this.loading = false
+                            this.loggedUser = response.data
 
                             // Set this.isLogged to true
                             this.isLogged = true
+                        }
 
 
-                        }).catch(error => {
-                            
-                            // Remove loading
-                            this.loading = false
-
-                            // Set this.isLogged to false
-                            this.isLogged = false
-                            
-                            // Delete Cookie
-                            this.$cookie.delete('appLogged');
-                        })
+                    }).catch(error => {
+                        
+                        // Error when parsing json file, logout the user
+                        this.logout()
+                    })
 
 
                 } else {
-                    // Remove loading
-                    this.loading = false
+                    this.logout()
+                }
 
-                    // Set this.isLogged to false
-                    this.isLogged = false
-                }                
+                // Remove loading
+                this.loading = false
+                
             }
         },
         components: {

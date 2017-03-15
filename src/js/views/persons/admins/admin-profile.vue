@@ -48,7 +48,7 @@
         name: 'admin-profile',
         data () {
             return {
-                loading:false,
+                loading:true,
                 error : '',
                 user: []
             }
@@ -67,9 +67,11 @@
         methods: {
             fetchData () {
 
+                // It's loading dude :)
+                this.loading = true
+
                 // Set var before fetching datas
                 this.error = null;
-                this.loading = true;
 
                 // API call with Axios
                 Vue.axios.get(api, {

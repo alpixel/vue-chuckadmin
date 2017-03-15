@@ -54,7 +54,8 @@
 	import Vue from 'vue'
     import { minLength,required } from 'vuelidate/lib/validators'
 
-    const api = 'https://randomuser.me/api/?results=1&nat=fr'
+    // const api = 'https://randomuser.me/api/?results=1&nat=fr'
+    const api = 'src/js/fakeapi/login.json'
 
 	export default {
 		name: 'header',
@@ -101,16 +102,26 @@
                             // params
                         }).then(response => {
 
-                            // Si case rememberme is checked
-                            if(this.login.loginRemember) {
-                                this.$cookie.set('appLogged', 'ef9d0f5b727e98e187a225c4e4e67d1f', 1);
+                            // If data.error == true
+                            if(response.data.error) {
+
+                                // Show error message
+                                this.showError()
+
+                            } else {
+
+                                // If "Remember me" is checked
+                                if(this.login.loginRemember) {
+                                    this.$cookie.set('appLogged', 'ef9d0f5b727e98e187a225c4e4e67d1f', 1);
+                                }
+
+                                // ...emit login event...
+                                this.$emit('login', response.data)
+
                             }
 
                             // ...remove loading button...
                             this.$refs.submitButton.classList.remove('cc-loading')
-
-                            // ...emit login event...
-                            this.$emit('login', response.data.results[0])
 
                             // ...reset this.login inputs values...
                             this.login = {
@@ -121,26 +132,29 @@
 
                         }).catch(error => {
 
-                            // ...remove loading button...
-                            this.$refs.submitButton.classList.remove('cc-loading')
-
-                            // ...show error message...
-                            this.error = true
-
-                            // ...reset this.login inputs values...
-                            this.login = {
-                                loginInput: null,
-                                loginPass: null,
-                                loginRemember: null
-                            }
+                            // Error during json parsing, show error message
+                            this.showError()
 
                         })
                     },
                     500)
                     
                 }
+            },
 
-                
+            showError() {
+                // ...remove loading button...
+                this.$refs.submitButton.classList.remove('cc-loading')
+
+                // ...show error message...
+                this.error = true
+
+                // ...reset this.login inputs values...
+                this.login = {
+                    loginInput: null,
+                    loginPass: null,
+                    loginRemember: null
+                }
             }
         }
 	}

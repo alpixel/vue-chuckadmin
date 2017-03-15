@@ -14,6 +14,19 @@
     })
 
     /*
+        Use case : {{"2004-06-05 10:25:13"|fromnow('fr')}} => "il y a 13 ans"
+    */
+    Vue.filter('fromnow',function(date, locale){
+        if (!locale) {
+            return moment(date).fromNow()
+        } else {
+            return moment(date).locale(locale).fromNow()
+        }
+
+        
+    })
+
+    /*
         Use case : {{ "hello" | upper }} => "HELLO"
     */
     Vue.filter('upper',function(str){

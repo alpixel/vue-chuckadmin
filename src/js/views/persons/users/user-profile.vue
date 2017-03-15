@@ -47,7 +47,7 @@
         name: 'user-profile',
         data () {
             return {
-                loading:false,
+                loading:true,
                 error : '',
                 user: []
             }

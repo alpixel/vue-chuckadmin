@@ -1,0 +1,30 @@
+{
+	"error": false,
+	"id": 1,
+	"name": "Jean-Jacques",
+	"token": 5649843218254,
+	"picture": "https://randomuser.me/api/portraits/thumb/men/3.jpg",
+	"notifications": [
+		{
+			"id": 1,
+			"type": "action",
+			"user": "alexis",
+			"action": "vient de lancer la ligne de commande \"$ create docker:container && restart apache && npm run docker\"",
+			"date": "2017-03-15 10:25:13"
+		},
+		{
+			"id": 2,
+			"type": "risque",
+			"user": "benkamin",
+			"action": "vient de faire couler le café. L'utilisation d'un couteau pour se servir est recommandé !",
+			"date": "2017-03-15 10:00:13"
+		},
+		{
+			"id": 3,
+			"type": "bullshit",
+			"user": "prestashop",
+			"action": "nouvelle RC de la version 1.7.0.1.5.78.5698.22569",
+			"date": "2017-03-14 19:25:13"
+		}
+	]
+}
