@@ -17,46 +17,46 @@
                         <i class="ion-ios-bell-outline" :class="{'shake': nbNotif > 0 && !showNotifs}"></i>
                     </a>
 
+                    
+                    <ul class="notifs-dropdown" :class="{shown:showNotifs}" @mouseenter="isHoverNotifs = true" @mouseleave="delayClosePanel">
+                    <li class="cc-clearfix">
+                        <a href="javascript:void(0)" @click.prevent="closeNotifsPanel" class="cc-red">
+                            <i class="ion-close-round"></i>
+                        </a>
 
-                    <ul class="notifs-dropdown" v-show="showNotifs">
-                        <li class="cc-clearfix">
-                            <a href="javascript:void(0)" @click.prevent="closeNotifsPanel" class="cc-red">
+                        <p>
+                            Notifications
+                            <span class="badge">{{nbNotif}}</span>
+                        </p>
+                    </li>
+                    <li v-for="(notif, index) in loggedUser.notifications">
+                        <h4 class="cc-clearfix">
+                            <span class="notif-date">
+                                <i class="ion-ios-clock-outline"></i> {{notif.date|fromnow('fr')}}
+                            </span>
+
+                            {{ notif.user | capitalize }}
+                        </h4>
+                        
+                        <div class="notif-detail cc-clearfix">
+                            <a href="javascript:void(0)" @click.prevent="deleteNotif(index)">
                                 <i class="ion-close-round"></i>
                             </a>
 
                             <p>
-                                Notifications
-                                <span class="badge">{{nbNotif}}</span>
+                                {{ notif.action | capitalize }}
                             </p>
-                        </li>
-                        <li v-for="(notif, index) in loggedUser.notifications">
-                            <h4 class="cc-clearfix">
-                                <span class="notif-date">
-                                    <i class="ion-ios-clock-outline"></i> {{notif.date|fromnow('fr')}}
-                                </span>
+                        </div>
+                        
+                    </li>
 
-                                {{ notif.user | capitalize }}
-                            </h4>
-                            
-                            <div class="notif-detail cc-clearfix">
-                                <a href="javascript:void(0)" @click.prevent="deleteNotif(index)">
-                                    <i class="ion-close-round"></i>
-                                </a>
-
-                                <p>
-                                    {{ notif.action | capitalize }}
-                                </p>
-                            </div>
-                            
-                        </li>
-
-                        <li v-if="nbNotif < 1">
-                            <div class="notif-detail cc-clearfix">
-                                <p>
-                                    Aucune notification !
-                                </p>
-                            </div>
-                        </li>
+                    <li v-if="nbNotif < 1">
+                        <div class="notif-detail cc-clearfix">
+                            <p>
+                                Aucune notification !
+                            </p>
+                        </div>
+                    </li>
                     </ul>
 
                 </div>
@@ -88,7 +88,8 @@
 		name: 'header',
         data() {
             return {
-                showNotifs : false
+                showNotifs : false,
+                isHoverNotifs: false
             }
         },
 		props: {
@@ -110,17 +111,32 @@
         },
         methods: {
             logout() {
+
                 this.$emit('logout')
             },
 
             // Open Notifs panel
             openNotifsPanel() {
-                this.showNotifs = (this.showNotifs == true) ? false : true
+
+                this.showNotifs = !this.showNotifs
             },
 
             // Close Notifs panel
             closeNotifsPanel() {
-                this.showNotifs = false;
+
+                this.showNotifs = false
+            },
+
+            delayClosePanel() {
+
+                let that = this
+
+                that.isHoverNotifs = false
+
+                _.delay(function() {
+                    if (!that.isHoverNotifs)
+                        that.closeNotifsPanel()
+                }, 450);
             },
 
             // Delete a notification

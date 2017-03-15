@@ -201,7 +201,6 @@
 
                 // Remove loading
                 this.loading = false
-                
             }
         },
         components: {
