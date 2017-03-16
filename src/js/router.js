@@ -1,25 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// Import components
-
-// Homepage - General Dashboard
-import home from './views/dashboard/dashboard.vue'
-
-// Admins
-import admins from './views/persons/admins/admins.vue'
-import adminprofile from './views/persons/admins/admin-profile.vue'
-import adminadd from './views/persons/admins/admin-add.vue'
-
-// Users
-import users from './views/persons/users/users.vue'
-import userprofile from './views/persons/users/user-profile.vue'
-import useradd from './views/persons/users/user-add.vue'
-
-// Pages
-import news from './views/pages/news.vue'
-import cms from './views/pages/cms.vue'
-
 
 Vue.use(VueRouter)
 
@@ -30,41 +11,49 @@ var routes = [
     {
         path: '/',
         name: 'home',
-        component: home
+
+        // Chargement synchrone du composant de webpack
+        component: require('./views/dashboard/dashboard.vue')
+
+        // ... OU ...
+        
+        // Chargement asynchrone du composant de webpack
+        // component: resole => require(['./views/dashboard/dashboard.vue'], resolve)
     },
 
 
     // Admins
     {
         path: '/admins',
-        component: admins,
+        component: resolve => require(['./views/persons/admins/admins.vue'], resolve),
         name: 'admins'
     },
     {
         path: '/admins/edit/:id',
-        component: adminprofile,
+        component: resolve => require(['./views/persons/admins/admin-profile.vue'], resolve),
         name: 'admin-profile'
     },
     // {
     //     path: '/admins/add',
-    //     component: adminadd,
+    //     component: require('./views/persons/admins/admin-add.vue'),
     //     name: 'admin-add'
     // },
+
 
     // Users
     {
         path: '/users',
-        component: users,
+        component: resolve => require(['./views/persons/users/users.vue'], resolve),
         name: 'users'
     },
     {
         path: '/users/edit/:id',
-        component: userprofile,
+        component: resolve => require(['./views/persons/users/user-profile.vue'], resolve),
         name: 'user-profile'
     },
     {
         path: '/users/add',
-        component: useradd,
+        component: resolve => require(['./views/persons/users/user-add.vue'], resolve),
         name: 'user-add'
     },
 
@@ -73,13 +62,20 @@ var routes = [
     {
         path: '/pages/news',
         name: 'news',
-        component: news
+        component: resolve => require(['./views/pages/news.vue'], resolve)
     },
     {
         path: '/pages/cms',
         name: 'cms',
-        component: cms
+        component: resolve => require(['./views/pages/cms.vue'], resolve)
     },
+
+
+    // 404 -> redirect to Dashboard
+    {
+        path: '*',
+        redirect: '/'
+    }
 ];
 
 

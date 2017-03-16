@@ -6,7 +6,6 @@ import VueHead from 'vue-head'
 import Vuelidate from 'vuelidate'
 import VueCookie from 'vue-cookie'
 import less from '../less/front.less'
-import App from './App.vue'
 import router from './router.js'
 import filters from './components/filters.vue'
 
@@ -23,5 +22,5 @@ Vue.use(VueCookie)
 // ================
 const app = new Vue({
     router,
-    render: h => h(App)
+    render: h => h(require('./App.vue'))
 }).$mount('#app');
