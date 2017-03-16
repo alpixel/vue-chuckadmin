@@ -58,7 +58,7 @@
     const api = 'src/js/fakeapi/login.json'
 
 	export default {
-		name: 'header',
+		name: 'login-form',
         data() {
             return {
                 login: {

@@ -147,7 +147,6 @@
 
                     // Fill this.loggedUser
                     this.loggedUser = user
-                    _.assign(this.loggedUser,{'notif':_.random(15)})
 
                     // Set this.logged to true
                     this.isLogged = true
