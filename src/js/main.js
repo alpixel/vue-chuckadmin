@@ -10,6 +10,8 @@ import App from './App.vue'
 import router from './router.js'
 import filters from './components/filters.vue'
 
+
+
 Vue.use(VueHead)
 Vue.use(VueAxios, axios)
 Vue.use(Vuelidate)

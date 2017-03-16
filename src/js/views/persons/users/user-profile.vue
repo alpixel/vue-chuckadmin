@@ -6,7 +6,7 @@
 
         <div v-else>
 
-            <div v-if="!error">
+            <div v-if="!fetchError">
             
                 <div class="top-page">
                     <div class="cc-inside">
@@ -26,12 +26,12 @@
                     <div class="boxed">
                         <pre>{{user}}</pre>
                     </div>
-                </div><!-- /end cc-inside -->
+                </div><!-- /end cc-inside -->       
 
-            </div><!-- /end v-if="!error" -->
+            </div><!-- /end v-if="!fetchError" -->
 
             <div v-else class="alert alert-error">
-                {{error}}
+                {{fetchError}}
             </div>
         </div>
 
@@ -41,19 +41,34 @@
 <script>
     import Vue from 'vue'
 
+    // Admin info - call Rest API
     const api = 'https://randomuser.me/api/?id='+this.id+'&nat=fr'
 
     export default {
-        name: 'user-profile',
+        name: 'admin-profile',
         data () {
             return {
                 loading:true,
-                error : '',
+                fetchError : '',
                 user: []
             }
         },
         props : {
             id : null
+        },
+        // Meta tags in <head> section
+        head: {
+            title() {
+                return {
+                    inner: 'User profil',
+                    separator: '-',
+                    complement: 'Made by ALPIXEL agency'
+                }
+            },
+            meta() {
+                return [
+                ]
+            }
         },
         watch: {
             // When route change but same component is called, launch "fetchData" method
@@ -61,28 +76,46 @@
             '$route' : 'fetchData'
         },
         created () {
-            this.fetchData();
+            this.fetchData()
         },
         methods: {
             fetchData () {
 
-                this.error = null;
-                this.loading = true;
+                // It's loading dude :)
+                this.loading = true
 
+                // Set var before fetching datas
+                this.fetchError = null
+
+                // API call with Axios
                 Vue.axios.get(api, {
                     // params
                 }).then(response => {
 
-                    this.loading = false;
-                    this.user = response.data.results[0];
+                    if(response.data.error) {
+
+                        this.showError('data.error : JSON file return an error value')
+
+                    } else {
+
+                        this.loading = false
+                        this.user = response.data.results[0]
+
+                    }
 
                 }).catch(error => {
 
-                    this.error = 'User not found';
-                    this.loading = false;
-                    this.user = [];
+                    this.showError('JSON file not found')
 
-                });
+                })
+            },
+
+            showError(msg) {
+
+                this.fetchError = msg
+                this.loading = false
+                this.user = []
+
             }
         }
     }

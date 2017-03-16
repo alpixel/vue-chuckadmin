@@ -61,8 +61,6 @@
 </template>
 
 <script>
-	import Vue from 'vue'
-
 	export default {
 		name: 'notifications',
         data() {
@@ -111,14 +109,14 @@
                 _.delay(function() {
                     if (!that.isHoverNotifs)
                         that.closeNotifsPanel()
-                }, 450);
+                }, 450)
             },
 
             // Delete a notification
             deleteNotif(index) {
 
                 // Splice notif
-                this.loggedUser.notifications.splice(index,1);
+                this.loggedUser.notifications.splice(index,1)
             },
 
             // Delete all notifications

@@ -33,7 +33,6 @@
 </template>
 
 <script>
-	import Vue from 'vue'
     import notifications from './notifications.vue'
 
 	export default {

@@ -17,7 +17,7 @@
 
         <div class="cc-inside">
 
-            <div v-if="!error">
+            <div v-if="!fetchError">
 
                 <div class="boxed">
                     <div class="alert alert-success">
@@ -28,7 +28,7 @@
             </div>
 
             <div v-else class="alert alert-error">
-                {{error}}
+                {{fetchError}}
             </div>
         </div>
     </div>
@@ -39,12 +39,15 @@
 <script>
     import Vue from 'vue'
 
+    const api = 'src/js/fakeapi/cms.json'
+
     export default {
         name: 'cms-pages',
         data () {
             return {
                 loading:true,
-                error : ''
+                fetchError : null,
+                cms: []
             }
         },
         // Meta tags in <head> section
@@ -70,33 +73,43 @@
             '$route' : 'fetchData'
         },
         created () {
-            this.fetchData();
+            this.fetchData()
         },
         methods: {
             fetchData () {
 
                 // It's loading dude :)
                 this.loading = true
+                this.fetchError = null
 
-                // this.error = null;
-                // this.loading = true;
+                Vue.axios.get(api, {
+                    // params
+                }).then(response => {
 
-                // const api = 'https://randomuser.me/api/?id='+this.id+'&nat=fr';
+                    if(response.data.error) {
 
-                // Vue.axios.get(api, {
-                //     // params
-                // }).then(response => {
+                        this.showError('data.error : JSON file return an error value')
 
-                    this.loading = false;
-                //     this.user = response.data.results[0];
+                    } else {
 
-                // }).catch(error => {
+                        this.cms = response.data.results
+                        this.loading = false
 
-                //     this.error = 'User not found';
-                    this.loading = false;
-                //     this.user = [];
+                    }
 
-                // });
+                }).catch(error => {
+
+                    this.showError('JSON file not found')
+                    
+                })
+            },
+
+            showError(msg) {
+
+                this.fetchError = msg
+                this.loading = false
+                this.cms = []
+
             }
         }
     }

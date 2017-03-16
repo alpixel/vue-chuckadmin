@@ -163,7 +163,21 @@
             }
         },
         created () {
-            this.loading = false;
+            this.loading = false
+        },
+        // Meta tags in <head> section
+        head: {
+            title() {
+                return {
+                    inner: 'Add a new User',
+                    separator: '-',
+                    complement: 'Made by ALPIXEL agency'
+                }
+            },
+            meta() {
+                return [
+                ]
+            }
         },
         validations: {
             user: {
@@ -202,16 +216,16 @@
             submitForm(){
 
                 // touch form validators
-                this.$v.user.$touch();
+                this.$v.user.$touch()
 
                 // If no errors
                 if(!this.$v.user.$error) {
 
                     // show loading button
-                    this.$refs.submitButton.classList.add('cc-loading');
+                    this.$refs.submitButton.classList.add('cc-loading')
 
                     // Stringify user datas
-                    let userToSave = JSON.stringify(this.user);
+                    let userToSave = JSON.stringify(this.user)
                     alert(userToSave)
 
 
@@ -219,10 +233,10 @@
                     // when registration is done...
                     setTimeout(() => {
                         // ...remove loading button...
-                        this.$refs.submitButton.classList.remove('cc-loading');
+                        this.$refs.submitButton.classList.remove('cc-loading')
 
                         // ...show modal...
-                        this.modalUserSuccess = true;
+                        this.modalUserSuccess = true
 
                         // ...reset this.user values...
                         this.user = {

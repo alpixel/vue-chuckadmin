@@ -6,7 +6,7 @@
 
         <div v-else>
 
-            <div v-if="!error">
+            <div v-if="!fetchError">
             
                 <div class="top-page">
                     <div class="cc-inside">
@@ -28,10 +28,10 @@
                     </div>
                 </div><!-- /end cc-inside -->       
 
-            </div><!-- /end v-if="!error" -->
+            </div><!-- /end v-if="!fetchError" -->
 
             <div v-else class="alert alert-error">
-                {{error}}
+                {{fetchError}}
             </div>
         </div>
 
@@ -49,12 +49,26 @@
         data () {
             return {
                 loading:true,
-                error : '',
+                fetchError : '',
                 user: []
             }
         },
         props : {
             id : null
+        },
+        // Meta tags in <head> section
+        head: {
+            title() {
+                return {
+                    inner: 'Administrator profil',
+                    separator: '-',
+                    complement: 'Made by ALPIXEL agency'
+                }
+            },
+            meta() {
+                return [
+                ]
+            }
         },
         watch: {
             // When route change but same component is called, launch "fetchData" method
@@ -62,7 +76,7 @@
             '$route' : 'fetchData'
         },
         created () {
-            this.fetchData();
+            this.fetchData()
         },
         methods: {
             fetchData () {
@@ -71,23 +85,37 @@
                 this.loading = true
 
                 // Set var before fetching datas
-                this.error = null;
+                this.fetchError = null
 
                 // API call with Axios
                 Vue.axios.get(api, {
                     // params
                 }).then(response => {
 
-                    this.loading = false;
-                    this.user = response.data.results[0];
+                    if(response.data.error) {
+
+                        this.showError('data.error : JSON file return an error value')
+
+                    } else {
+
+                        this.loading = false
+                        this.user = response.data.results[0]
+
+                    }
 
                 }).catch(error => {
 
-                    this.error = 'User not found';
-                    this.loading = false;
-                    this.user = [];
+                    this.showError('JSON file not found')
 
-                });
+                })
+            },
+
+            showError(msg) {
+
+                this.fetchError = msg
+                this.loading = false
+                this.user = []
+
             }
         }
     }

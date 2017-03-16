@@ -3,8 +3,8 @@
         
         <h1 class="cc-txt-center">Sign In</h1>
 
-        <div class="alert alert-error" v-if="error">
-            Error in login or password!
+        <div class="alert alert-error" v-if="fetchError">
+            {{fetchError}}
         </div>
 
         <div class="form-item" :class="{ 'error': $v.login.loginInput.$error }">
@@ -66,7 +66,7 @@
                     loginPass: null,
                     loginRemember: null
                 },
-                error : false
+                fetchError : null
             }
         },
         validations: {
@@ -106,14 +106,17 @@
                             if(response.data.error) {
 
                                 // Show error message
-                                this.showError()
+                                this.showError('Wrong login or password')
 
                             } else {
 
                                 // If "Remember me" is checked
                                 if(this.login.loginRemember) {
-                                    this.$cookie.set('appLogged', 'ef9d0f5b727e98e187a225c4e4e67d1f', 1);
+                                    this.$cookie.set('appLogged', 'ef9d0f5b727e98e187a225c4e4e67d1f', 1)
                                 }
+
+                                // ...reset fetchError data...
+                                this.fetchError = null
 
                                 // ...emit login event...
                                 this.$emit('login', response.data)
@@ -133,7 +136,7 @@
                         }).catch(error => {
 
                             // Error during json parsing, show error message
-                            this.showError()
+                            this.showError('JSON file not found')
 
                         })
                     },
@@ -142,12 +145,12 @@
                 }
             },
 
-            showError() {
+            showError(msg) {
                 // ...remove loading button...
                 this.$refs.submitButton.classList.remove('cc-loading')
 
                 // ...show error message...
-                this.error = true
+                this.fetchError = msg
 
                 // ...reset this.login inputs values...
                 this.login = {

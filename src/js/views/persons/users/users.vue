@@ -10,7 +10,7 @@
         <div v-else>
 
             <!-- If no errors after fetching datas -->
-            <div v-if="!error">
+            <div v-if="!fetchError">
 
                 <div class="top-page">
                     <div class="cc-inside">
@@ -174,10 +174,19 @@
             </div> <!-- /end v-if="!error" -->
 
             <!-- else, show errors logs -->
-            <div v-else>
+             <div v-else>
+                <div class="top-page">
+                    <div class="cc-inside">
+                        <div class="columns">
+                            <h1>
+                                Users 
+                            </h1>
+                        </div>
+                    </div>
+                </div>
                 <div class="cc-inside">
                     <div class="alert alert-error">
-                        {{error}}
+                        {{fetchError}}
                     </div>
                 </div>
             </div>
@@ -207,7 +216,7 @@
                 loading:true,
 
                 // If fetchData() returns an error, will be filled with error detail
-                error : '',
+                fetchError : '',
 
                 // Set to true for modal appearance
                 showModal : false,
@@ -318,7 +327,7 @@
             // Input "Go to page" binding value
             currentPage() {
 
-                this.changePage(this.currentPage);
+                this.changePage(this.currentPage)
             }
         },
 
@@ -334,7 +343,7 @@
             fetchData () {
 
                 // Reset error msg
-                this.error = ''
+                this.fetchError = ''
 
                 // It's loading dude :)
                 this.loading = true
@@ -347,32 +356,40 @@
 
                 }).then(response => {
 
-                    // Loading is finished :)
-                    this.loading = false
+                    if(response.data.error) {
 
-                    // Contains all users (100)
-                    this.users = response.data.results
-                    this.usersFiltered = response.data.results
+                        this.showError('data.error : JSON file return an error value')
 
-                    // Slice users to show the `this.nbPerPage` first users
-                    this.userShown = this.usersFiltered.slice(0, this.nbPerPage)
+                    } else {
 
-                    // Sort table by default sortKey
-                    this.sortBy(this.sortKey)
+                        // Loading is finished :)
+                        this.loading = false
+
+                        // Contains all admins
+                        this.users = response.data.results
+                        this.usersFiltered = response.data.results
+
+                        // Slice admins to show the `this.nbPerPage` first admins
+                        this.userShown = this.usersFiltered.slice(0, this.nbPerPage)
+
+                        // Sort table by default sortKey
+                        this.sortBy(this.sortKey)
+                    }
 
                 }).catch(error => {
 
                     // Set the error msg
-                    this.error = 'Users not found'
-
-                    // Loading is finished :)
-                    this.loading = false
-
-                    // Clear users tab
-                    this.users = []
-                    this.usersFiltered = []
+                    this.showError('JSON file not found')
 
                 })
+            },
+
+            // Show Error message if fetching data return an error
+            showError(msg) {
+                this.fetchError = msg
+                this.loading = false
+                this.users = []
+                this.usersFiltered = []
             },
 
             // Bind when the page changes

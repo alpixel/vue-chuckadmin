@@ -2,7 +2,7 @@
   <div class="home">
 
     <div class="cc-loader" v-if="loading">
-      <div class="spinner"></div>
+        <div class="spinner"></div>
     </div>
 
     <div v-else>
@@ -19,13 +19,18 @@
 
                 <!-- Widgets -->
                 <div class="cc-8 columns">
-                    <div class="cc-8">
+
+                    <!-- HighCharts -->
+                    <div class="cc-12">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-green">Widget 1</h2>
                             </div>
+
+                            <widget-highcharts></widget-highcharts>
                         </div>
                     </div>
+
                     <div class="cc-4">
                         <div class="boxed widget">
                             <div class="widget-title">
@@ -33,13 +38,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cc-4">
+
+                    <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-red">Widget 3</h2>
                             </div>
                         </div>
                     </div>
+
                     <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
@@ -47,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="cc-4">
                         <div class="boxed widget">
                             <div class="widget-title">
@@ -54,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="cc-4">
                         <div class="boxed widget">
                             <div class="widget-title">
@@ -61,13 +70,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cc-4">
+
+                    <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-pruple">Widget 7</h2>
+                                <h2 class="cc-purple">Widget 7</h2>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Widget Timeline -->
@@ -85,6 +96,9 @@
 </template>
 
 <script>
+    // Import Widgets
+    import widgetHighcharts from '../../components/widget-highcharts.vue'
+
     export default {
         name: 'home',
         data () {
@@ -126,8 +140,14 @@
             }
         },
 
+        // Created : remove loader
         created () {
             this.loading = false
         },
+
+        // Components : Widgets
+        components: {
+            widgetHighcharts
+        }
     }
 </script>

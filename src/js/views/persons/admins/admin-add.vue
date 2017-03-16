@@ -126,7 +126,7 @@
         watch: {
             // When route change but same component is called, launch "fetchData" method
             // for exemple : from "user/25" -> to -> "user/52"
-            '$route' : 'fetchData'
+            // '$route' : 'fetchData'
         },
         methods: {
 
@@ -134,22 +134,22 @@
             submitForm(){
 
                 // touch ALL form validators
-                this.$v.user.$touch();
+                this.$v.user.$touch()
 
                 // If no errors
                 if(!this.$v.user.$error) {
 
                     // show loading button
-                    this.$refs.submitButton.classList.add('cc-loading');
+                    this.$refs.submitButton.classList.add('cc-loading')
 
                     // Stringify user datas
-                    let userToSave = JSON.stringify(this.user);
+                    let userToSave = JSON.stringify(this.user)
                     alert(userToSave)
 
                     // Send ajax request to save user
                     setTimeout( () => {
                         // when registration is done, remove loading button && show modal
-                        this.$refs.submitButton.classList.remove('cc-loading');
+                        this.$refs.submitButton.classList.remove('cc-loading')
                         
                         // Reset form inputs
                         this.user = {
@@ -162,9 +162,9 @@
                         }
 
                         // Emit succes to parent for showing success modal
-                        this.$emit('addAdminSuccess', true);
+                        this.$emit('addAdminSuccess', true)
 
-                    },2500);
+                    },2500)
                 }
             }
         }
