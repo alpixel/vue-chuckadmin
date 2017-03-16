@@ -25,12 +25,14 @@ var routes = [
     // Admins
     {
         path: '/admins',
-        component: resolve => require(['./views/persons/admins/admins.vue'], resolve),
+        component: require('./views/persons/admins/admins.vue'),
+        // component: resolve => require(['./views/persons/admins/admins.vue'], resolve),
         name: 'admins'
     },
     {
         path: '/admins/edit/:id',
-        component: resolve => require(['./views/persons/admins/admin-profile.vue'], resolve),
+        component: require('./views/persons/admins/admin-profile.vue'),
+        // component: resolve => require(['./views/persons/admins/admin-profile.vue'], resolve),
         name: 'admin-profile'
     },
     // {
@@ -43,17 +45,20 @@ var routes = [
     // Users
     {
         path: '/users',
-        component: resolve => require(['./views/persons/users/users.vue'], resolve),
+        component: require('./views/persons/users/users.vue'),
+        // component: resolve => require(['./views/persons/users/users.vue'], resolve),
         name: 'users'
     },
     {
         path: '/users/edit/:id',
-        component: resolve => require(['./views/persons/users/user-profile.vue'], resolve),
+        component: require('./views/persons/users/user-profile.vue'),
+        // component: resolve => require(['./views/persons/users/user-profile.vue'], resolve),
         name: 'user-profile'
     },
     {
         path: '/users/add',
-        component: resolve => require(['./views/persons/users/user-add.vue'], resolve),
+        component: require('./views/persons/users/user-add.vue'),
+        // component: resolve => require(['./views/persons/users/user-add.vue'], resolve),
         name: 'user-add'
     },
 
@@ -62,12 +67,14 @@ var routes = [
     {
         path: '/pages/news',
         name: 'news',
-        component: resolve => require(['./views/pages/news.vue'], resolve)
+        component: require('./views/pages/news.vue')
+        // component: resolve => require(['./views/pages/news.vue'], resolve)
     },
     {
         path: '/pages/cms',
         name: 'cms',
-        component: resolve => require(['./views/pages/cms.vue'], resolve)
+        component: require('./views/pages/cms.vue')
+        // component: resolve => require(['./views/pages/cms.vue'], resolve)
     },
 
 
