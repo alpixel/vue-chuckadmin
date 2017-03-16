@@ -16,6 +16,27 @@
 
         <div class="cc-inside">
             <div class="columns">
+                <div class="cc-12">
+                    <div class="boxed widget">
+                        <div class="widget-title">
+                            <h2 class="cc-green">Todos</h2>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>Timeline</li>
+                                <li>Statistiques</li>
+                                <li>Logs</li>
+                                <li>Tests with :
+                                    <ul>
+                                        <li><a href="https://github.com/avajs/ava">Ava.js</a></li>
+                                        <li><a href="https://karma-runner.github.io/1.0/index.html">Karma</a></li>
+                                        <li><a href="https://jasmine.github.io/">Jasmine</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Widgets -->
                 <div class="cc-8 columns">
