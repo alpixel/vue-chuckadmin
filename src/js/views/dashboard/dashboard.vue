@@ -15,17 +15,17 @@
         </div>
 
         <div class="cc-inside">
-            <div class="columns">
+            <div class="columns cc-align-start">
                 <div class="cc-12">
                     <div class="boxed widget">
                         <div class="widget-title">
                             <h2 class="cc-green">Todos</h2>
                         </div>
                         <div>
-                            <ul>
-                                <li>Timeline</li>
+                            <ul>                                
                                 <li>Statistiques</li>
                                 <li>Logs</li>
+                                <li>Socket pour timeline dynamique</li>
                                 <li>Tests with :
                                     <ul>
                                         <li><a href="https://github.com/avajs/ava">Ava.js</a></li>
@@ -45,7 +45,7 @@
                     <div class="cc-12">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-green">Widget 1</h2>
+                                <h2 class="cc-purple">Widget 1</h2>
                             </div>
 
                             <widget-highcharts></widget-highcharts>
@@ -106,8 +106,15 @@
                 <div class="cc-4 widget-timeline">
                     <div class="widget boxed">
                         <div class="widget-title">
-                            <h2 class="cc-purple">Timeline</h2>
+                            <h2 class="cc-green">
+                                Timeline
+                                <small>
+                                • 5 last events •
+                                </small>
+                            </h2>
                         </div>
+
+                        <widget-timeline :nbItemToShow="nbEventToShow"></widget-timeline>
                     </div>
                 </div>
             </div>
@@ -119,13 +126,17 @@
 <script>
     // Import Widgets
     import widgetHighcharts from '../../components/widget-highcharts.vue'
+    import widgetTimeline from '../../components/widget-timeline.vue'
 
     export default {
         name: 'home',
         data () {
             return {
                 msg: 'Dashboard',
-                loading:true
+                loading:true,
+
+                // Timeline Widget
+                nbEventToShow: 7
             }
         },
 
@@ -168,7 +179,8 @@
 
         // Components : Widgets
         components: {
-            widgetHighcharts
+            widgetHighcharts,
+            widgetTimeline
         }
     }
 </script>

@@ -1,11 +1,7 @@
 // Dashboard
 .dashboard {
 
-	.widget-timeline {
-		display: flex;
-		align-items:stretch
-	}
-
+	// Common to all widgets
 	.widget {
 		padding: 12px 20px;
 		min-height: 200px;
@@ -21,10 +17,166 @@
 			h2 {
 				._uppercase;
 				font-size: 1.6rem;
-				font-weight: 700
+				font-weight: 700;
+
+				small {
+					display: inline-block;
+					vertical-align: middle;
+					margin-left: 5px;
+				}
 			}
 		}
-		
+	}
+
+	// TIMELINE
+	.widget-timeline {
+
+		.timeline-legend {
+			margin-bottom: 15px;
+			border-bottom: 1px solid #eeeeee;
+			padding-bottom: 15px;
+
+			&> div {
+				._reset;
+				font-size: 1.3rem;
+				font-style: italic;
+
+				&:before {
+					content:' ';
+					display:inline-block;
+					vertical-align: middle;
+					width: 20px;
+					height: 20px;
+					border-radius: 100%;
+					border:3px solid @dark;
+					background-color: white;
+					margin-right: 3px;
+				}
+
+				&.user {
+					@color: @primary;
+
+					&:before {
+						border-color:@color
+					}
+				}
+				&.admin {
+					@color: @green;
+
+					&:before {
+						border-color:@color
+					}
+				}
+			}
+		}
+
+		ul {
+			margin: 0;
+
+			li {
+				list-style: none;
+				border-left: 3px solid darken(@bg-body,10%);
+				padding: 35px 0 0 20px;
+				position: relative;
+
+				&:last-of-type {
+					padding-bottom: 35px;
+				}
+
+				// Circles
+				&:before {
+					content:' ';
+					display:block;
+					position: absolute;
+					top: 38px;
+					left: -12px;
+					width: 20px;
+					height: 20px;
+					border-radius: 100%;
+					border:3px solid @dark;
+					background-color: white;
+				}
+			
+				.timeline {
+					&-date {
+						position: relative;
+						background-color: darken(@bg-body, 10%);
+                        font-size: 1.1rem;
+                        line-height: 2.4rem;
+                        padding:0px 6px;
+                        border-radius: 5px 5px 0 0;
+                        color: white;
+
+                        i {
+                            vertical-align: middle;
+                            font-size: 1.7rem;
+                        }
+
+                        &:before {
+							content:' ';
+							display:block;
+							position: absolute;
+							top: 11px;
+							left: -13px;
+							width: 14px;
+							height: 4px;
+							background-color: darken(@bg-body,10%)
+						}
+					}
+
+					&-action {
+						padding:8px;
+						background-color:@bg-body;
+						font-size: 1.3rem;
+                    	line-height: 1.8rem;
+                    	font-style:italic;
+                    	border-radius: 0 0 5px 5px;
+
+                    	strong {
+
+                    	}
+					}
+				}
+
+				// Colorized timeline item depending user role
+				&.user {
+					@color: @primary;
+
+					&:before {
+						border-color: @color
+					}
+
+					.timeline {
+						&-date {
+							background-color:@color;
+
+							&:before {
+								background-color:@color;
+							}
+						}
+					}
+				}
+
+				&.admin {
+					@color: @green;
+
+					&:before {
+						border-color: @color
+					}
+
+					.timeline {
+						&-date {
+							background-color:@color;
+
+							&:before {
+								background-color:@color;
+							}
+						}
+					}
+				}
+			}
+
+		}
 	}
 
 } // end/ -> Dashboard
