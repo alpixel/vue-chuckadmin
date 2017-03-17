@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="dashboard">
 
     <div class="cc-loader" v-if="loading">
         <div class="spinner"></div>

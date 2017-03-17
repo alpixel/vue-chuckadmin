@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="vue-chuckadmin" v-cloak>
         <div class="cc-loader" v-if="loading">
             <div class="spinner"></div>
         </div>
