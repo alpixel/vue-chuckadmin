@@ -2,12 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
+
+
 Vue.use(VueRouter)
 
 var routes = [
 
 
-    // Homepage
+    // Homepage + login
     {
         path: '/',
         name: 'home',
@@ -35,11 +37,6 @@ var routes = [
         // component: resolve => require(['./views/persons/admins/admin-profile.vue'], resolve),
         name: 'admin-profile'
     },
-    // {
-    //     path: '/admins/add',
-    //     component: require('./views/persons/admins/admin-add.vue'),
-    //     name: 'admin-add'
-    // },
 
 
     // Users
@@ -85,8 +82,7 @@ var routes = [
     }
 ];
 
-
-export default new VueRouter({
+var router = new VueRouter({
     mode: 'hash',
     routes: routes,
     scrollBehavior (to, from, savedPosition) {
@@ -106,4 +102,12 @@ export default new VueRouter({
         }
 
     }
-});
+})
+
+router.beforeEach((to,from,next) => {
+
+    next()
+
+})
+
+export default router

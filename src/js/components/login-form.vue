@@ -112,7 +112,7 @@
 
                                 // If "Remember me" is checked
                                 if(this.login.loginRemember) {
-                                    this.$cookie.set('appLogged', 'ef9d0f5b727e98e187a225c4e4e67d1f', 1)
+                                    this.$cookie.set('appLogged', response.data.token, 1)
                                 }
 
                                 // ...reset fetchError data...

@@ -34,6 +34,7 @@
 
 <script>
     import notifications from './notifications.vue'
+    
 
 	export default {
 		name: 'header',
@@ -49,7 +50,6 @@
 	    },
         methods: {
             logout() {
-
                 this.$emit('logout')
             }
         },

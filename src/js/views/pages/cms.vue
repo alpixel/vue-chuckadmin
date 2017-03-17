@@ -72,31 +72,6 @@
             // for exemple : from "user/25" -> to -> "user/52"
             '$route' : 'fetchData'
         },
-        // beforeRouteEnter (to, from, next) {
-
-        //     Vue.axios.get(api, {
-        //         // params
-        //     }).then(response => {
-
-        //         if(response.data.error) {
-
-        //             next(false)
-
-        //         } else {
-
-        //             next(vm => {
-        //                 vm.cms = response.data.results
-        //                 vm.loading = false
-        //             })
-
-        //         }
-
-        //     }).catch(error => {
-
-        //         next(false)
-                
-        //     })
-        // },
         created () {
             this.fetchData()
         },

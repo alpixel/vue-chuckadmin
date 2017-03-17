@@ -86,8 +86,10 @@
                 <main>
                     <!-- General transition effect when changing page -->
                     <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                        
                         <!-- Page container -->
                         <router-view></router-view>
+                        
                     </transition>            
                 </main>
 
@@ -116,7 +118,7 @@
         data () {
             return {
                 loggedUser: {},
-                isLogged: null,
+                isLogged: false,
                 loading: true
             }
         },
@@ -133,11 +135,11 @@
                 // Set this.isLogged to false
                 this.isLogged = false
 
-                // Go to Dashboard
-                this.$router.push('/')
-
                 // Delete Cookie
                 this.$cookie.delete('appLogged')
+
+                // Go to Login page
+                this.$router.push('/')
             },
 
             // Login method
@@ -162,17 +164,17 @@
                 }
             },
 
-            // Check id logged cookie exists
+            // Check if cookie exists
             checkCookie() {
                 
                 // If cookie exists, get user datas
-                if(this.$cookie.get('appLogged') && this.$cookie.get('appLogged') == 'ef9d0f5b727e98e187a225c4e4e67d1f')  {
+                if(this.$cookie.get('appLogged'))  {
 
                     Vue.axios.get(api, {
                         // params
                     }).then(response => {
 
-                        if(response.data.error) {
+                        if(response.data.error || this.$cookie.get('appLogged') != response.data.token) {
 
                             // Error during login, logout the user
                             this.logout()

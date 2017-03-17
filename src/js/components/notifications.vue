@@ -101,7 +101,6 @@
             },
 
             delayClosePanel() {
-
                 let that = this
 
                 that.isHoverNotifs = false
@@ -122,6 +121,9 @@
             // Delete all notifications
             deleteAll() {
                 this.loggedUser.notifications = []
+
+                // close Notifications Panel
+                this.delayClosePanel()
             }
         }
 	}
