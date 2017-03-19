@@ -109,8 +109,6 @@
     import appHeader from './components/header.vue'
     import loginForm from './components/login-form.vue'
 
-
-    // const api = 'https://randomuser.me/api/?results=1&nat=fr'
     const api = 'src/js/fakeapi/login.json'
 
     export default {

@@ -14,12 +14,12 @@ import router from './router.js'
 import filters from './components/filters.vue'
 
 
+
 // Vue.use(Vuex)
 Vue.use(VueHead)
 Vue.use(VueAxios, axios)
 Vue.use(Vuelidate)
 Vue.use(VueCookie)
-
 
 // ================
 // VUE INSTANCE

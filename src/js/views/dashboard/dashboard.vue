@@ -109,7 +109,7 @@
                             <h2 class="cc-green">
                                 Timeline
                                 <small>
-                                • 5 last events •
+                                • {{nbEventToShow}} last events •
                                 </small>
                             </h2>
                         </div>

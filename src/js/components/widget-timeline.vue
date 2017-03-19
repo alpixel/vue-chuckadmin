@@ -16,12 +16,11 @@
                     </div>
                 </div>
 
-
-                <ul class="timeline-list">
-                    <li v-for="(event, index) in timeline" v-if="index < nbItemToShow" :class="event.role.toLowerCase()">
+                <ul>
+                    <li v-for="(event, index) in timeline" v-if="index < nbItemToShow" class="list-complete-item" :class="event.role.toLowerCase()" :key="event">
 
                         <p class="timeline-date">
-                            <i class="ion-ios-clock-outline"></i> {{event.date|fromnow('fr')}}
+                            <i class="ion-ios-clock-outline"></i> {{event.date|fromnow('fr')}} {{event.date|formatDate('fr', '[le] DD.MM.YYYY [à] HH:mm')}}
                         </p>
 
                         <div class="timeline-action">
@@ -31,6 +30,7 @@
 
                     </li>
                 </ul>
+                
             </div>
 
             <div v-else class="alert alert-error">
@@ -51,7 +51,8 @@
             return {
                 loading:true,
                 timeline: {},
-                fetchError: null
+                fetchError: null,
+                interval: null
             }
         },
         props: {
@@ -65,6 +66,10 @@
         },
         created() {
             this.fetchTimeline()
+
+            // this.interval = setInterval(function () {
+            //     this.fetchTimeline();
+            // }.bind(this), 3000); 
         },
         methods: {
             fetchTimeline() {
@@ -81,8 +86,13 @@
 
                     } else {
 
+                        let toCompare = _.reverse(_.sortBy(response.data.timeline, 'date'))
+
+                        if(!_.isEqual(this.timeline, toCompare)) {
+                            this.timeline = _.reverse(_.sortBy(response.data.timeline, 'date'));
+                        }
+
                         this.loading = false
-                        this.timeline = _.reverse(_.sortBy(response.data.timeline, 'date'));
 
                     }
 
