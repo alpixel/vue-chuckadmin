@@ -8,7 +8,7 @@ import VueHead from 'vue-head'
 import Vuelidate from 'vuelidate'
 import VueCookie from 'vue-cookie'
 
-// App spacific features
+// App specific features
 import less from '../less/front.less'
 import router from './router.js'
 import filters from './components/filters.vue'

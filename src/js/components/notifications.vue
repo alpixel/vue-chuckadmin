@@ -20,7 +20,7 @@
                     <span class="badge">{{nbNotif}}</span>
                 </p>
             </li>
-            <li v-for="(notif, index) in loggedUser.notifications">
+            <li v-for="(notif, index) in loggedUser.notifications" v-if="index < maxNotifShown">
                 <h4 class="cc-clearfix">
                     <span class="notif-date">
                         <i class="ion-ios-clock-outline"></i> {{notif.date|fromnow('fr')}}
@@ -28,7 +28,7 @@
 
                     {{ notif.user | capitalize }}
                 </h4>
-                
+
                 <div class="notif-detail cc-clearfix">
                     <a href="javascript:void(0)" @click.prevent="deleteNotif(index)">
                         <i class="ion-close-round"></i>
@@ -38,7 +38,12 @@
                         {{ notif.action | capitalize }}
                     </p>
                 </div>
-                
+            </li>
+
+            <li class="show-more" v-if="loggedUser.notifications.length > maxNotifShown">
+                <a href="javascript:void(0)" @click.prevent="maxNotifShown += 2">
+                    ...
+                </a>
             </li>
 
             <li class="cc-txt-center" v-if="nbNotif > 0">
@@ -57,17 +62,24 @@
         </ul>
 
     </div>
-	
+
 </template>
 
 <script>
+    import { EventBus } from './bus.js'
+
 	export default {
 		name: 'notifications',
         data() {
             return {
                 showNotifs : false,
-                isHoverNotifs: false
+                isHoverNotifs: false,
+                maxNotifShown: 2
             }
+        },
+        created() {
+            // Orber Notif by date desc
+            this.loggedUser.notifications = _.reverse(_.sortBy(this.loggedUser.notifications, 'date'))
         },
 		props: {
 	        'loggedUser': {
@@ -116,6 +128,15 @@
 
                 // Splice notif
                 this.loggedUser.notifications.splice(index,1)
+
+
+
+                /*
+                    * EventBus Emiter *
+                    @listener file: dashboard.vue
+                    @listener method: created()
+                */
+                // EventBus.$emit('deleteNotif', this.loggedUser.notifications.length);
             },
 
             // Delete all notifications

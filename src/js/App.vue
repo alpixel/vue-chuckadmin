@@ -86,11 +86,11 @@
                 <main>
                     <!-- General transition effect when changing page -->
                     <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                        
+
                         <!-- Page container -->
                         <router-view></router-view>
-                        
-                    </transition>            
+
+                    </transition>
                 </main>
 
             </div><!-- end/ v-if logged -->
@@ -164,7 +164,7 @@
 
             // Check if cookie exists
             checkCookie() {
-                
+
                 // If cookie exists, get user datas
                 if(this.$cookie.get('appLogged'))  {
 
@@ -188,7 +188,7 @@
 
 
                     }).catch(error => {
-                        
+
                         // Error when parsing json file, logout the user
                         this.logout()
                     })

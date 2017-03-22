@@ -31,30 +31,35 @@
 			"action": "a acheté des jetons sur SeasonPros",
 			"date": "2017-03-01 19:25:13"
 		}
-		, {
-			"user": "Robert",
-			"role": "user",
-			"action": "a manger un reblochon",
-			"date": "2017-03-16 19:25:13"
-		}
-		, {
-			"user": "Martine",
-			"role": "user",
-			"action": "est allé à la plage",
-			"date": "2017-03-10 19:25:13"
-		}
-		, {
-			"user": "Didier",
-			"role": "admin",
-			"action": "a supprimé le compte de Maurice",
-			"date": "2017-03-08 19:25:13"
-		}
-		, {
-			"user": "Nicoletta",
-			"role": "user",
-			"action": "a acheté des jetons sur SeasonPros",
-			"date": "2017-03-01 19:25:13"
-		}
-
+        , {
+            "user": "Didier",
+            "role": "user",
+            "action": "a supprimé le compte de Maurice",
+            "date": "2017-03-08 19:25:13"
+        }
+        , {
+            "user": "Nicoletta",
+            "role": "user",
+            "action": "a acheté des jetons sur SeasonPros",
+            "date": "2017-03-01 19:25:13"
+        }
+        , {
+            "user": "Didier",
+            "role": "user",
+            "action": "a supprimé le compte de Maurice",
+            "date": "2017-03-08 19:25:13"
+        }
+        , {
+            "user": "Nicoletta",
+            "role": "user",
+            "action": "a acheté des jetons sur SeasonPros",
+            "date": "2017-03-01 19:25:13"
+        }
+        , {
+            "user": "Moa",
+            "role": "user",
+            "action": "a acheté des jetons sur SeasonPros",
+            "date": "2017-03-22 19:25:13"
+        }
 	]
 }

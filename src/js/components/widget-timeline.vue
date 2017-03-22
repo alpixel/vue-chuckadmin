@@ -17,7 +17,7 @@
                 </div>
 
                 <ul>
-                    <li v-for="(event, index) in timeline" v-if="index < nbItemToShow" class="list-complete-item" :class="event.role.toLowerCase()" :key="event">
+                    <li v-for="(event, index) in timeline" v-if="index < nbItemToShow" :class="event.role.toLowerCase()" :key="event">
 
                         <p class="timeline-date">
                             <i class="ion-ios-clock-outline"></i> {{event.date|fromnow('fr')}} {{event.date|formatDate('fr', '[le] DD.MM.YYYY [à] HH:mm')}}
@@ -30,7 +30,7 @@
 
                     </li>
                 </ul>
-                
+
             </div>
 
             <div v-else class="alert alert-error">
@@ -67,9 +67,11 @@
         created() {
             this.fetchTimeline()
 
-            // this.interval = setInterval(function () {
-            //     this.fetchTimeline();
-            // }.bind(this), 3000); 
+
+            // Launch interval for notifications
+            this.interval = setInterval(function () {
+                this.fetchTimeline();
+            }.bind(this), 60000)
         },
         methods: {
             fetchTimeline() {
@@ -89,8 +91,9 @@
                         let toCompare = _.reverse(_.sortBy(response.data.timeline, 'date'))
 
                         if(!_.isEqual(this.timeline, toCompare)) {
-                            this.timeline = _.reverse(_.sortBy(response.data.timeline, 'date'));
+                            this.timeline = _.reverse(_.sortBy(response.data.timeline, 'date'))
                         }
+
 
                         this.loading = false
 
@@ -98,7 +101,7 @@
 
                 }).catch(error => {
 
-                    this.showError('JSON not found')
+                    this.showError('Error when fetching datas or JSON file not found.')
 
                 })
 

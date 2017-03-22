@@ -22,10 +22,10 @@
                             <h2 class="cc-green">Todos</h2>
                         </div>
                         <div>
-                            <ul>                                
+                            <ul>
                                 <li>Statistiques</li>
                                 <li>Logs</li>
-                                <li>Socket pour timeline dynamique</li>
+                                <li>Notify</li>
                                 <li>Tests with :
                                     <ul>
                                         <li><a href="https://github.com/avajs/ava">Ava.js</a></li>
@@ -124,9 +124,13 @@
 </template>
 
 <script>
+
+    import { EventBus } from '../../components/bus.js'
+
     // Import Widgets
     import widgetHighcharts from '../../components/widget-highcharts.vue'
     import widgetTimeline from '../../components/widget-timeline.vue'
+
 
     export default {
         name: 'home',
@@ -175,6 +179,16 @@
         // Created : remove loader
         created () {
             this.loading = false
+
+
+            /*
+                * EventBus Listener *
+                @emiter file: notifications.vue
+                @emiter method: deleteNotif()
+            */
+            // EventBus.$on('deleteNotif', payload => {
+            //     this.nbEventToShow = payload
+            // })
         },
 
         // Components : Widgets

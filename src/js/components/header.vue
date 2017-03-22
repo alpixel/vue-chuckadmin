@@ -34,13 +34,13 @@
 
 <script>
     import notifications from './notifications.vue'
-    
+
 
 	export default {
 		name: 'header',
         data() {
             return {
-                
+
             }
         },
 		props: {
