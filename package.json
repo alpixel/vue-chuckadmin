@@ -9,10 +9,11 @@
   },
   "dependencies": {
     "ChuckCSS": "^3",
+    "cross-env": "^3.2.4",
     "lodash": "^4.17.4",
     "vue": "^2.2",
-    "webpack": "^2.2",
-    "webpack-dev-server": "^2.2"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",
