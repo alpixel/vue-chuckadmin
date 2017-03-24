@@ -9,6 +9,9 @@
 * JS Framework : [VueJS](https://github.com/vuejs/vue)
 * JS Library : [Lodash](https://lodash.com/)
 * Compilation : [Webpack](https://webpack.github.io/docs/)
+* Unit tests runner : [Karma](https://github.com/karma-runner/karma/) 
+* Javascript testing framework : [Jasmine](https://github.com/jasmine/jasmine)
+
 
 ### VueJS Plugins/Resources
 * Components format : [Vue-loader](https://github.com/vuejs/vue-loader/)
