@@ -3,3 +3,4 @@ node_modules/
 .vagrant
 npm-debug.*
 *.sublime-*
+test/unit/coverage/

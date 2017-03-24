@@ -26,13 +26,6 @@
                                 <li>Statistiques</li>
                                 <li>Logs</li>
                                 <li>Notify</li>
-                                <li>Tests with :
-                                    <ul>
-                                        <li><a href="https://github.com/avajs/ava">Ava.js</a></li>
-                                        <li><a href="https://karma-runner.github.io/1.0/index.html">Karma</a></li>
-                                        <li><a href="https://jasmine.github.io/">Jasmine</a></li>
-                                    </ul>
-                                </li>
                             </ul>
                         </div>
                     </div>

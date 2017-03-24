@@ -5,14 +5,17 @@
   "author": "Mickael SURREL",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
   },
   "dependencies": {
     "ChuckCSS": "^3",
     "cross-env": "^3.2.4",
+    "karma-cli": "^1.0.1",
     "lodash": "^4.17.4",
+    "phantomjs": "^2.1.7",
     "vue": "^2.2",
-    "webpack": "^2.2.1",
+    "webpack": "^2.3.1",
     "webpack-dev-server": "^2.4.2"
   },
   "devDependencies": {
@@ -20,12 +23,22 @@
     "axios": "^0.15.3",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.0.0",
     "cross-env": "^3.2.3",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "highcharts": "^5",
+    "jasmine-core": "^2.5.2",
     "json-loader": "^0.5.4",
+    "karma": "^1.5.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.30",
+    "karma-webpack": "^2.0.3",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "moment": "^2.17.1",
@@ -38,7 +51,6 @@
     "vue-loader": "^10.0.0",
     "vue-router": "^2.2.1",
     "vue-template-compiler": "^2.2",
-    "vuelidate": "^0.4",
-    "vuex": "^2.2.1"
+    "vuelidate": "^0.4"
   }
 }

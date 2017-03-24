@@ -1,7 +1,8 @@
 === NPM Permissions : https://docs.npmjs.com/getting-started/fixing-npm-permissions ===
 
 1.
-sudo nano /etc/apache2/sites-available/000_default.conf (remove /public on DocumentRoot)
+sudo nano /etc/apache2/sites-available/000-default.conf
+(remove /public on DocumentRoot)
 
 
 2.
@@ -13,16 +14,7 @@ mkdir ~/.npm-global && npm config set prefix '~/.npm-global' && export PATH=~/.n
 
 
 4.
-mkdir ~/.npm-global/lib
-
-4.1.
-mkdir ~/.npm-global/lib/node_modules
-
-4.2.
-mkdir ~/.npm-global/bin
-
-4.3.
-mkdir ~/.npm-global/share
+mkdir ~/.npm-global/lib && mkdir ~/.npm-global/lib/node_modules && mkdir ~/.npm-global/bin && mkdir ~/.npm-global/share
 
 
 5.
@@ -40,3 +32,17 @@ sudo npm install cross-env webpack webpack-dev-server --save
 8.
 npm run dev
 
+
+
+=== KARMA ===
+
+1.
+npm i -g karma-cli --save
+
+2.
+export PHANTOMJS_BIN=/home/vagrant/.npm-global/bin/phantomjs
+
+
+
+3.
+npm run test
