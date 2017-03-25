@@ -16,7 +16,8 @@
 
         <div class="cc-inside">
             <div class="columns cc-align-start">
-                <div class="cc-12">
+                <!-- TODOS -->
+                <div class="cc-12" style="display:none">
                     <div class="boxed widget">
                         <div class="widget-title">
                             <h2 class="cc-green">Todos</h2>
@@ -41,23 +42,27 @@
                                 <h2 class="cc-purple">Widget 1</h2>
                             </div>
 
-                            <widget-highcharts></widget-highcharts>
-                        </div>
-                    </div>
-
-                    <div class="cc-4">
-                        <div class="boxed widget">
-                            <div class="widget-title">
-                                <h2 class="cc-orange">Widget 2</h2>
-                            </div>
+                            <widget-highcharts-one></widget-highcharts-one>
                         </div>
                     </div>
 
                     <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
+                                <h2 class="cc-orange">Widget 2</h2>
+                            </div>
+
+                            <widget-highcharts-two></widget-highcharts-two>
+                        </div>
+                    </div>
+
+                    <div class="cc-4">
+                        <div class="boxed widget">
+                            <div class="widget-title">
                                 <h2 class="cc-red">Widget 3</h2>
                             </div>
+
+                            <widget-highcharts-three></widget-highcharts-three>
                         </div>
                     </div>
 
@@ -121,7 +126,9 @@
     import { EventBus } from '../../components/bus.js'
 
     // Import Widgets
-    import widgetHighcharts from '../../components/widget-highcharts.vue'
+    import widgetHighchartsOne from '../../components/widget-highcharts-1.vue'
+    import widgetHighchartsTwo from '../../components/widget-highcharts-2.vue'
+    import widgetHighchartsThree from '../../components/widget-highcharts-3.vue'
     import widgetTimeline from '../../components/widget-timeline.vue'
 
 
@@ -186,7 +193,9 @@
 
         // Components : Widgets
         components: {
-            widgetHighcharts,
+            widgetHighchartsOne,
+            widgetHighchartsTwo,
+            widgetHighchartsThree,
             widgetTimeline
         }
     }

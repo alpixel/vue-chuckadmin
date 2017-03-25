@@ -85,7 +85,7 @@
                 <!-- App MAIN CONTENT -->
                 <main>
                     <!-- General transition effect when changing page -->
-                    <transition :duration="{ enter: 600, leave: 300 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                    <transition :duration="{ enter: 600, leave: 30 }" name="fade" mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
 
                         <!-- Page container -->
                         <router-view></router-view>

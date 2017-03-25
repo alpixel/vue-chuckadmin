@@ -1,0 +1,41 @@
+{
+	"error": false,
+	"chart": {
+        "type": "column"
+    },
+    "title": {
+        "text": "Users Vs Admins"
+    },
+    "xAxis": {
+        "categories": [
+            "Registered Users"
+        ],
+        "visible": false
+    },
+    "yAxis": {
+        "min": 0,
+        "visible": false
+    },
+    "tooltip": {
+        "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y} %</b><br/>",
+        "shared": true
+    },
+    "plotOptions": {
+        "series": {
+            "stacking": "normal",
+            "dataLabels": {
+                "enabled": true
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "Users",
+            "data": [85.5]
+        }, 
+        {
+            "name": "Admins",
+            "data": [14.5]
+        }
+    ]
+}
