@@ -26,7 +26,7 @@
     const api = 'src/js/fakeapi/widget-highcharts-2.json'
 
 	export default {
-		name: 'widget-highcharts',
+		name: 'widget-highcharts-2',
         data() {
             return {
                 loading:true,

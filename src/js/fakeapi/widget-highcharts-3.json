@@ -4,7 +4,7 @@
         "type": "column"
     },
     "title": {
-        "text": "Users Vs Admins"
+        "text": ""
     },
     "xAxis": {
         "categories": [

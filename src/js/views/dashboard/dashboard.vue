@@ -39,7 +39,7 @@
                     <div class="cc-12">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-purple">Widget 1</h2>
+                                <h2 class="cc-purple">Monthly Average Temperature</h2>
                             </div>
 
                             <widget-highcharts-one></widget-highcharts-one>
@@ -49,7 +49,7 @@
                     <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-orange">Widget 2</h2>
+                                <h2 class="cc-orange">Browsers statistics</h2>
                             </div>
 
                             <widget-highcharts-two></widget-highcharts-two>
@@ -59,18 +59,20 @@
                     <div class="cc-4">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-red">Widget 3</h2>
+                                <h2 class="cc-red">Users & Admins</h2>
                             </div>
 
                             <widget-highcharts-three></widget-highcharts-three>
                         </div>
                     </div>
 
-                    <div class="cc-8">
+                    <div class="cc-12">
                         <div class="boxed widget">
                             <div class="widget-title">
-                                <h2 class="cc-primary">Widget 4</h2>
+                                <h2 class="cc-primary">Last registered users</h2>
                             </div>
+
+                            <widget-last-users></widget-last-users>
                         </div>
                     </div>
 
@@ -82,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="cc-4">
+                    <div class="cc-8">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-blue">Widget 6</h2>
@@ -90,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="cc-8">
+                    <div class="cc-12">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-purple">Widget 7</h2>
@@ -130,6 +132,7 @@
     import widgetHighchartsTwo from '../../components/widget-highcharts-2.vue'
     import widgetHighchartsThree from '../../components/widget-highcharts-3.vue'
     import widgetTimeline from '../../components/widget-timeline.vue'
+    import widgetLastUsers from '../../components/widget-lastusers.vue'
 
 
     export default {
@@ -196,7 +199,8 @@
             widgetHighchartsOne,
             widgetHighchartsTwo,
             widgetHighchartsThree,
-            widgetTimeline
+            widgetTimeline,
+            widgetLastUsers
         }
     }
 </script>

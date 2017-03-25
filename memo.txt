@@ -11,7 +11,8 @@ sudo service apahce2 restart
 
 
 3.
-mkdir ~/.npm-global && npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH && source ~/.profile
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH && source ~/.profile
 
 
 4.
