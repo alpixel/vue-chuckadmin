@@ -84,7 +84,6 @@
                                 <li>Statistiques</li>
                                 <li>Logs</li>
                                 <li>Notify</li>
-                                <li>vue-ua</li>
                             </ul>
                         </div>
                     </div>
@@ -129,7 +128,7 @@
                     <!-- Last registered users -->
                     <div class="cc-12-m">
                         <div class="boxed widget">
-                            <div class="widget-title has-btn">
+                            <div class="widget-title">
                                 <h2 class="cc-primary">Last registered users</h2>
                                 <router-link :to="{name:'users'}" class="btn cc-bg-primary">
                                     <i class="ion-arrow-right-b"></i>
