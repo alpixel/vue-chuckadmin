@@ -25,16 +25,9 @@ Vue.use(VueCookie)
 Vue.use(VueAnalytics, {
     appName: 'Vue-ChuckAdmin',
     appVersion: '1.0.0',
-    trackingId: 'UA-60250932-1', // Compte Maiki.fr
-
-    // Whether or not display console logs debugs (optional)
+    trackingId: 'UA-9271946-13',
     debug: false, 
-
-    // Pass the router instance to automatically sync with router (optional)
     vueRouter: router
-
-    // If router, you can exclude some routes name (case insensitive) (optional)
-    // ignoredViews: ['home']
 })
 
 // ================

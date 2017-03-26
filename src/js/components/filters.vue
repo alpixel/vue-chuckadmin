@@ -1,42 +1,75 @@
 <script>
     import Vue from 'vue'
     import moment from 'moment'
+    import accounting from 'accounting'
 
+
+    /*
+        === === === === === === ===
+        ** ACCOUNTING.JS Library **
+        === === === === === === ===
+    */
+    /*
+        Use Case : {{ 1234567.89 | formatMoney('€', 2, ' ', ',', '%v%s') }} => 1 234 567.89 €
+        %v => value
+        %s => symbol
+    */
+    Vue.filter('formatMoney', (number, symbol = "$", precision = 2, thousand = ",", decimal = ".", format = "%s%v") => {
+        return accounting.formatMoney(number, symbol, precision, thousand, decimal, format)
+    })
+    /*
+        Use Case : {{ 123456 | formatNumber(0, ' ') }} => 123 456
+    */
+    Vue.filter('formatNumber', (number, precision = 0, thousand = ",", decimal = ".") => {
+        return accounting.formatNumber(number, precision, thousand, decimal)
+    })
+
+
+    /*
+        === === === === === ===
+        ** MOMENT.JS Library **
+        === === === === === ===
+    */
     /*
         Use case : {{ "2013-02-19 03:59:52 | frenchDate }} => "19.02.2013"
     */
-    Vue.filter('formatDate',function(date, locale, format){
+    Vue.filter('formatDate', (date, locale, format) => {
         if (!format) {
             return moment(date).format('MMMM Do YYYY')
         } else {
             return moment(date).locale(locale).format(format)
         }
     })
-
     /*
         Use case : {{"2004-06-05 10:25:13"|fromnow('fr')}} => "il y a 13 ans"
     */
-    Vue.filter('fromnow',function(date, locale){
+    Vue.filter('fromnow', (date, locale) => {
         if (!locale) {
             return moment(date).fromNow()
         } else {
             return moment(date).locale(locale).fromNow()
-        }
-
-        
+        }        
     })
 
+
+    /*
+        === === ===
+        ** TEXTS **
+        === === ===
+    */
     /*
         Use case : {{ "hello" | upper }} => "HELLO"
     */
-    Vue.filter('upper',function(str){
+    Vue.filter('upper', (str) => {
         return str.toUpperCase()
     })
-
     /*
         Use case : {{ "hello" | capitalize }} => "Hello"
     */
-    Vue.filter('capitalize',function(str){
+    Vue.filter('capitalize', (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     })
+
+
+    
 </script>

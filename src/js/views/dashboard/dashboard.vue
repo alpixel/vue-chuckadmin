@@ -29,7 +29,7 @@
                                 Users
                             </p>
                             <p class="push-number cc-primary">
-                                1930
+                                {{pushes.users | formatNumber(0, ' ') }}
                             </p>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                 Sales
                             </p>
                             <p class="push-number cc-green">
-                                $ 25,000.60
+                                {{pushes.total | formatMoney('€', 2, ' ', ',', '%v%s') }}
                             </p>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 Other
                             </p>
                             <p class="push-number cc-purple">
-                                25.58 %
+                                {{ pushes.other | formatNumber(2, ' ', ',') }} %
                             </p>
                         </div>
                     </div>
@@ -209,7 +209,14 @@
                 loading:true,
 
                 // Timeline Widget
-                nbEventToShow: 7
+                nbEventToShow: 7,
+
+                // Pushes
+                pushes: {
+                    users : 2589,
+                    total: 1234567.89,
+                    other: 48.7
+                }
             }
         },
 

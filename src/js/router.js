@@ -74,7 +74,7 @@ var routes = [
 ]
 
 var router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes: routes,
     scrollBehavior (to, from, savedPosition) {
 
