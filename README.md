@@ -11,9 +11,9 @@
 * Unit tests runner : [Karma](https://github.com/karma-runner/karma/) 
 * Javascript testing framework : [Jasmine](https://github.com/jasmine/jasmine)
 * JS Libraries : 
-** [Lodash](https://lodash.com/)
-** [Accounting.js](http://openexchangerates.github.io/accounting.js/)
-** [Moment.js](https://momentjs.com/)
+	* [Lodash](https://lodash.com/)
+	* [Accounting.js](http://openexchangerates.github.io/accounting.js/)
+	* [Moment.js](https://momentjs.com/)
 
 
 ### VueJS Plugins/Resources
