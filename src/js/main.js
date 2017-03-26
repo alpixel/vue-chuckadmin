@@ -25,7 +25,7 @@ Vue.use(VueCookie)
 Vue.use(VueAnalytics, {
     appName: 'Vue-ChuckAdmin',
     appVersion: '1.0.0',
-    trackingId: 'UA-9271946-13', // Compte Test ALPIXEL
+    trackingId: 'UA-60250932-1', // Compte Maiki.fr
 
     // Whether or not display console logs debugs (optional)
     debug: false, 
