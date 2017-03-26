@@ -15,6 +15,63 @@
         </div>
 
         <div class="cc-inside">
+
+            <!-- PUSHES STATISTICS -->
+            <div class="columns">
+                <!-- Users -->
+                <div>
+                    <div class="push-item">
+                        <span class="push-icon cc-bg-primary">
+                            <i class="ion-android-contacts"></i>
+                        </span>
+                        <div class="push-infos">
+                            <p class="push-title">
+                                Users
+                            </p>
+                            <p class="push-number cc-primary">
+                                1930
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales -->
+                <div>
+                    <div class="push-item">
+                        <span class="push-icon cc-bg-green">
+                            <i class="ion-android-cart"></i>
+                        </span>
+                        <div class="push-infos">
+                            <p class="push-title">
+                                Sales
+                            </p>
+                            <p class="push-number cc-green">
+                                $ 25,000.60
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other -->
+                <div>
+                    <div class="push-item">
+                        <span class="push-icon cc-bg-purple">
+                            <i class="ion-android-globe"></i>
+                        </span>
+                        <div class="push-infos">
+                            <p class="push-title">
+                                Other
+                            </p>
+                            <p class="push-number cc-purple">
+                                25.58 %
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- WIDGETS -->
             <div class="columns cc-align-start">
                 <!-- TODOS -->
                 <div class="cc-12" style="display:none">
@@ -27,16 +84,17 @@
                                 <li>Statistiques</li>
                                 <li>Logs</li>
                                 <li>Notify</li>
+                                <li>vue-ua</li>li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Widgets -->
-                <div class="cc-8 columns">
+                <div class="cc-8-m columns">
 
                     <!-- HighCharts -->
-                    <div class="cc-12">
+                    <div class="cc-12-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-purple">Monthly Average Temperature</h2>
@@ -46,7 +104,8 @@
                         </div>
                     </div>
 
-                    <div class="cc-8">
+                    <!-- HighCharts -->
+                    <div class="cc-8-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-orange">Browsers statistics</h2>
@@ -56,7 +115,8 @@
                         </div>
                     </div>
 
-                    <div class="cc-4">
+                    <!-- HighCharts -->
+                    <div class="cc-4-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-red">Users & Admins</h2>
@@ -66,7 +126,8 @@
                         </div>
                     </div>
 
-                    <div class="cc-12">
+                    <!-- Last registered users -->
+                    <div class="cc-12-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-primary">Last registered users</h2>
@@ -76,7 +137,8 @@
                         </div>
                     </div>
 
-                    <div class="cc-4">
+
+                    <div class="cc-4-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-yellow">Widget 5</h2>
@@ -84,7 +146,7 @@
                         </div>
                     </div>
 
-                    <div class="cc-8">
+                    <div class="cc-8-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-blue">Widget 6</h2>
@@ -92,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="cc-12">
+                    <div class="cc-12-m">
                         <div class="boxed widget">
                             <div class="widget-title">
                                 <h2 class="cc-purple">Widget 7</h2>
@@ -103,7 +165,7 @@
                 </div>
 
                 <!-- Widget Timeline -->
-                <div class="cc-4 widget-timeline">
+                <div class="cc-4-m widget-timeline">
                     <div class="widget boxed">
                         <div class="widget-title">
                             <h2 class="cc-green">
