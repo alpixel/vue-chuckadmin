@@ -84,7 +84,7 @@
                                 <li>Statistiques</li>
                                 <li>Logs</li>
                                 <li>Notify</li>
-                                <li>vue-ua</li>li>
+                                <li>vue-ua</li>
                             </ul>
                         </div>
                     </div>
@@ -129,8 +129,12 @@
                     <!-- Last registered users -->
                     <div class="cc-12-m">
                         <div class="boxed widget">
-                            <div class="widget-title">
+                            <div class="widget-title has-btn">
                                 <h2 class="cc-primary">Last registered users</h2>
+                                <router-link :to="{name:'users'}" class="btn cc-bg-primary">
+                                    <i class="ion-arrow-right-b"></i>
+                                    <span>Users list</span>
+                                </router-link>
                             </div>
 
                             <widget-last-users></widget-last-users>
@@ -244,16 +248,6 @@
         // Created : remove loader
         created () {
             this.loading = false
-
-
-            /*
-                * EventBus Listener *
-                @emiter file: notifications.vue
-                @emiter method: deleteNotif()
-            */
-            // EventBus.$on('deleteNotif', payload => {
-            //     this.nbEventToShow = payload
-            // })
         },
 
         // Components : Widgets

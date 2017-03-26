@@ -129,14 +129,8 @@
                 // Splice notif
                 this.loggedUser.notifications.splice(index,1)
 
-
-
-                /*
-                    * EventBus Emiter *
-                    @listener file: dashboard.vue
-                    @listener method: created()
-                */
-                // EventBus.$emit('deleteNotif', this.loggedUser.notifications.length);
+                // Emit GG Analytics Event :)
+                // this.$ua.trackEvent('Banner', 'Click', 'I won money!')
             },
 
             // Delete all notifications

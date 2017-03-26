@@ -21,3 +21,4 @@
 * Form validation : [Vuelidate](https://github.com/monterail/vuelidate)
 * Cookies : [Vue-cookie](https://github.com/alfhen/vue-cookie)
 * HighCharts : [Vue-HighCharts](https://github.com/weizhenye/vue-highcharts)
+* Vue Analytics : [Vue-ua](https://github.com/ScreamZ/vue-analytics)

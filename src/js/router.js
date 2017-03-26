@@ -1,14 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
-
-
 Vue.use(VueRouter)
 
 var routes = [
-
-
     // Homepage + login
     {
         path: '/',
@@ -23,7 +18,6 @@ var routes = [
         // component: resole => require(['./views/dashboard/dashboard.vue'], resolve)
     },
 
-
     // Admins
     {
         path: '/admins',
@@ -37,7 +31,6 @@ var routes = [
         // component: resolve => require(['./views/persons/admins/admin-profile.vue'], resolve),
         name: 'admin-profile'
     },
-
 
     // Users
     {
@@ -59,7 +52,6 @@ var routes = [
         name: 'user-add'
     },
 
-
     // Pages
     {
         path: '/pages/news',
@@ -74,13 +66,12 @@ var routes = [
         // component: resolve => require(['./views/pages/cms.vue'], resolve)
     },
 
-
     // 404 -> redirect to Dashboard
     {
         path: '*',
         redirect: '/'
     }
-];
+]
 
 var router = new VueRouter({
     mode: 'hash',
@@ -102,12 +93,6 @@ var router = new VueRouter({
         }
 
     }
-})
-
-router.beforeEach((to,from,next) => {
-
-    next()
-
 })
 
 export default router
