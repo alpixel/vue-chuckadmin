@@ -77,9 +77,6 @@
                                     <th @click="sortBy('title')" :class="[{ active: sortKey == 'title' },sortType[0], 'sort']">
                                         Title
                                     </th>
-                                    <th @click="sortBy('type')" :class="[{ active: sortKey == 'type' },sortType[0], 'sort']">
-                                        Type
-                                    </th>
                                     <th @click="sortBy('dateCreated')" :class="[{ active: sortKey == 'dateCreated' },sortType[0], 'sort']">
                                         Date de création
                                     </th>
@@ -107,9 +104,6 @@
                                         Title
                                     </th>
                                     <th>
-                                        Type
-                                    </th>
-                                    <th>
                                         Date de création
                                     </th>
                                     <th>
@@ -132,21 +126,17 @@
                                     <td>
                                         {{ data.lang }}
                                     </td>
-                                    <td>
+                                    <td :title="data.title">
                                         {{ data.title | truncate }}
-
                                     </td>
-                                    <td>
-                                        {{ data.type }}
-                                    </td>
-                                    <td>
+                                    <td class="data-date">
                                         {{ data.dateCreated | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
-                                    <td>
+                                    <td class="data-date">
                                         {{ data.dateUpdated | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
                                     <td>
-                                        {{ data.status }}
+                                        <span class="badge" :class="data.status | sanitize">{{ data.status | capitalize }}</span>
                                     </td>
                                     <td>
                                         <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: data.id}}">@TODO : Edit</router-link>
@@ -458,7 +448,7 @@
 
                 // Make an array with matching search
                 let filtered_datas = _.filter(that.datas, function(p){
-                  return _.includes(p.id,that.searchQuery.toLowerCase()) || _.includes(p.title.toLowerCase(),that.searchQuery.toLowerCase())
+                  return _.includes(p.id,that.searchQuery.toLowerCase()) || _.includes(p.title.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.status.toLowerCase(),that.searchQuery.toLowerCase())
                 })
 
                 // set datasFiltered with filtered results

@@ -126,7 +126,7 @@
                                     <td>
                                         {{ data.name.last | upper }}
                                     </td>
-                                    <td>
+                                    <td class="data-date">
                                         {{ data.registered | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
                                     <td>

@@ -77,6 +77,10 @@
         return _.truncate(str, {'length':length})
     })
 
+    Vue.filter('sanitize',(str) => {
+        return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-')
+    })
+
 
 
 </script>
