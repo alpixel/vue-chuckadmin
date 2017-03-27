@@ -1,5 +1,6 @@
 <script>
     import Vue from 'vue'
+    import lodash from 'lodash'
     import moment from 'moment'
     import accounting from 'accounting'
 
@@ -48,7 +49,7 @@
             return moment(date).fromNow()
         } else {
             return moment(date).locale(locale).fromNow()
-        }        
+        }
     })
 
 
@@ -61,15 +62,21 @@
         Use case : {{ "hello" | upper }} => "HELLO"
     */
     Vue.filter('upper', (str) => {
-        return str.toUpperCase()
+        return _.upperCase(str)
     })
     /*
         Use case : {{ "hello" | capitalize }} => "Hello"
     */
     Vue.filter('capitalize', (str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
+        return _.upperFirst(str)
+    })
+    /*
+        Use Case : {{ "very long string to truncate" | truncate (7) }} ==> "very..."
+    */
+    Vue.filter('truncate', (str, length = 30) => {
+        return _.truncate(str, {'length':length})
     })
 
 
-    
+
 </script>

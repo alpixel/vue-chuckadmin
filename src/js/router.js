@@ -13,7 +13,7 @@ var routes = [
         component: require('./views/dashboard/dashboard.vue')
 
         // ... OU ...
-        
+
         // Chargement asynchrone du composant de webpack
         // component: resole => require(['./views/dashboard/dashboard.vue'], resolve)
     },
@@ -56,13 +56,13 @@ var routes = [
     {
         path: '/pages/news',
         name: 'news',
-        component: require('./views/pages/news.vue')
+        component: require('./views/pages/news/news.vue')
         // component: resolve => require(['./views/pages/news.vue'], resolve)
     },
     {
         path: '/pages/cms',
         name: 'cms',
-        component: require('./views/pages/cms.vue')
+        component: require('./views/pages/cms/cms.vue')
         // component: resolve => require(['./views/pages/cms.vue'], resolve)
     },
 

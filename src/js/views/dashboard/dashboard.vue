@@ -84,6 +84,8 @@
                                 <li>Statistiques</li>
                                 <li>Logs</li>
                                 <li>Notify</li>
+                                <li>File uploader</li>
+                                <li>Tinymce</li>
                             </ul>
                         </div>
                     </div>

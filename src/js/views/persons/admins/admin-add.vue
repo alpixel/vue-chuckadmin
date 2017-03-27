@@ -19,7 +19,7 @@
             <div class="form-item cc-txt-center" :class="{ 'error': $v.user.firstname.$error }">
                 <label class="block">First Name</label>
                 <input type="text" name="firstname" v-model.trim="user.firstname" @input="$v.user.firstname.$touch()" />
-                
+
                 <span class="warning" v-if="!$v.user.firstname.minLength">
                     Name must have at least {{$v.user.firstname.$params.minLength.min}} letters.
                 </span>
@@ -32,7 +32,7 @@
             <div class="form-item cc-txt-center" :class="{ 'error': $v.user.email.$error }">
                 <label class="block">Email</label>
                 <input type="email" name="email" v-model.trim="user.email" @input="$v.user.email.$touch()" />
-                
+
                 <span class="warning" v-if="!$v.user.email.email">
                     Must be an email format "@"
                 </span>
@@ -45,7 +45,7 @@
             <div class="form-item cc-txt-center" :class="{ 'error': $v.user.password.$error }">
                 <label class="block">Password</label>
                 <input type="password" name="password" v-model.trim="user.password" @input="$v.user.password.$touch()" />
-                
+
                 <span class="warning" v-if="!$v.user.password.required">
                     This field is required
                 </span>
@@ -150,7 +150,7 @@
                     setTimeout( () => {
                         // when registration is done, remove loading button && show modal
                         this.$refs.submitButton.classList.remove('cc-loading')
-                        
+
                         // Reset form inputs
                         this.user = {
                             lastname: null,
@@ -162,7 +162,7 @@
                         }
 
                         // Emit succes to parent for showing success modal
-                        this.$emit('addAdminSuccess', true)
+                        this.$emit('addSuccess', true)
 
                     },2500)
                 }

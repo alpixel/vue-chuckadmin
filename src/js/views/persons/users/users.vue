@@ -1,5 +1,5 @@
 <template>
-    <div class="users-home">
+    <div class="datatable-pages">
 
         <!-- If loading -->
         <div class="cc-loader" v-if="loading">
@@ -16,8 +16,8 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Users 
-                                <small>• {{maxUsers|pluralize}} •</small>
+                                Users
+                                <small>• {{maxDatas|pluralize}} •</small>
                             </h1>
                             <div class="cc-w-auto cc-right">
                                 <router-link class="btn cc-bg-purple fa-plus" :to="{name:'user-add'}">Add a user</router-link>
@@ -51,23 +51,21 @@
                                 </div>
                             </div>
 
-                            
-
-                            <div class="form-item cc-txt-center cc-w-auto" v-if="maxUsers > nbPerPage">
+                            <div class="form-item cc-txt-center cc-w-auto" v-if="maxDatas > nbPerPage">
                                 <div class="form-ps">
                                     <span>Go to page</span>
                                     <input type="number" class="small" v-model.number="currentPage" min="1" />
                                 </div>
                             </div>
-                        </form>   
+                        </form>
                     </div>
 
-                    <pagination class="cc-w-auto" :records="maxUsers" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
+                    <pagination class="cc-w-auto" :records="maxDatas" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
 
 
                     <!-- Results table datas -->
-                    <div class="boxed cc-ma-0" v-show="userShown.length >= 1">
-                        <table class="cc-equal-cols">
+                    <div class="boxed cc-ma-0" v-show="datasShown.length >= 1">
+                        <table class="cc-equal-cols cc-hovered">
                             <thead>
                                 <tr>
                                     <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
@@ -115,26 +113,26 @@
                             </tfoot>
 
                             <tbody>
-                                <tr v-for="(user, index) in userShown">
+                                <tr v-for="(data, index) in datasShown">
                                     <td>
-                                        {{user.id.value}}
+                                        {{ data.id.value }}
                                     </td>
                                     <td>
-                                        <img :src="user.picture.thumbnail" :alt="user.name.first" />
+                                        <img :src="data.picture.thumbnail" :alt="data.name.first" />
                                     </td>
                                     <td>
-                                        {{user.name.first|capitalize}}
+                                        {{ data.name.first | capitalize }}
                                     </td>
                                     <td>
-                                        {{user.name.last|upper}}
+                                        {{ data.name.last | upper }}
                                     </td>
                                     <td>
-                                        {{user.registered | formatDate('fr','[Le] DD.MM.YYYY')}}
+                                        {{ data.registered | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
                                     <td>
-                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: user.id.value}}">Edit</router-link>
+                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: data.id.value}}">Edit</router-link>
 
-                                        <a @click.prevent="openModal(user.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
+                                        <a @click.prevent="openModal(data.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -142,17 +140,17 @@
                     </div>
 
 
-                    <div class="alert alert-error" v-show="userShown.length < 1">
-                        No users found, please change your filters
+                    <div class="alert alert-error" v-show="datasShown.length < 1">
+                        No data found, please change your filters
                     </div>
 
 
-                    <!-- MODAL SHOWN BEFORE DELETING USER -->
-                    <div :class="[{'active' : showModal}, 'modal']">
+                    <!-- MODAL SHOWN BEFORE DELETING ROW -->
+                    <div :class="[{'active' : modalDelete}, 'modal']">
                         <!-- Close button -->
-                        <button class="modal-close" @click="showModal = false"></button>
+                        <button class="modal-close" @click="modalDelete = false"></button>
                         <!-- Overlay -->
-                        <div class="modal-overlay" @click="showModal = false"></div>
+                        <div class="modal-overlay" @click="modalDelete = false"></div>
                         <!-- Modal content -->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -160,26 +158,26 @@
                             </div>
                             <div class="modal-body">
                                 <div class="alert alert-info">
-                                    Do you really want to delete the user <strong v-if="userToDelete.firstname">{{userToDelete.firstname|capitalize}} {{userToDelete.lastname|upper}}</strong> ?
+                                    Do you really want to delete the user <strong v-if="dataToDelete.firstname">{{ dataToDelete.firstname | capitalize }} {{ dataToDelete.lastname | upper }}</strong> ?
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="cc-bg-red fa-check" @click.prevent="deleteUser">DELETE THIS USER</button>
+                                <button class="cc-bg-red fa-check" @click.prevent="deleteData">CONFIRM DELETE</button>
                             </div>
                         </div>
                     </div>
 
                 </div><!-- /end cc-inside -->
 
-            </div> <!-- /end v-if="!error" -->
+            </div><!-- /end v-if="!fetchError" -->
 
             <!-- else, show errors logs -->
-             <div v-else>
+            <div v-else>
                 <div class="top-page">
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Users 
+                                Users
                             </h1>
                         </div>
                     </div>
@@ -190,7 +188,8 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- /end v-else not loading-->
+        </div> <!-- /end - v-else not loading -->
+
     </div>
 </template>
 
@@ -198,7 +197,7 @@
     import Vue from 'vue'
     import Pagination from '../../../components/pagination.vue'
 
-    // Set const api url to get users
+    // Set const api url to get datas
     const api = 'https://randomuser.me/api/?results=50&nat=fr'
 
 
@@ -218,8 +217,8 @@
                 // If fetchData() returns an error, will be filled with error detail
                 fetchError : '',
 
-                // Set to true for modal appearance
-                showModal : false,
+                // Modal delete data (row) : Set to true for modal appearance
+                modalDelete : false,
 
 
                 // ============
@@ -236,19 +235,19 @@
 
 
                 // ============
-                // Users datas
+                // Datas
                 // ============
-                // Tab contains all users - used for back-up users (when searching users)
-                users: [],
+                // Tab contains all datas - used for back-up (when searching datas)
+                datas: [],
 
-                // Tab contains users when searching in names
-                usersFiltered: [],
+                // Tab contains datas when searching in input
+                datasFiltered: [],
 
-                // Tab contains shown users
-                userShown: [],
+                // Tab contains shown datas
+                datasShown: [],
 
-                // Array with infos about user to delete
-                userToDelete : {},
+                // Array with infos about data to delete
+                dataToDelete : {},
 
 
                 // ============
@@ -257,7 +256,7 @@
                 // Current active page (1 by default)
                 currentPage: 1,
 
-                // Nb of user per page
+                // Nb of datas per page
                 nbPerPage: 10,
 
                 // Select list default value
@@ -280,11 +279,10 @@
             }
         },
 
-        // Computed datas : Here the total nb of users
+        // Computed datas : Here the total nb of datas
         computed: {
-            maxUsers () {
-
-                return this.usersFiltered.length
+            maxDatas () {
+                return this.datasFiltered.length
             }
         },
 
@@ -298,7 +296,7 @@
             nbPerPageSelect () {
 
 
-                // Nb of user per page is set to the select value
+                // Nb of data per page is set to the select value
                 this.nbPerPage = _.toInteger(this.nbPerPageSelect)
 
                 // Set the first pagination active
@@ -315,10 +313,10 @@
                 this.searchInTable()
             },
 
-            // When the table pagiantion section shows 0 user (by deleting the last user on the table for example)
-            userShown () {
+            // When the table pagination section shows 0 data (by deleting the last data on the table for example)
+            datasShown () {
 
-                if(this.userShown.length < 1 && this.usersFiltered.length > 0 && this.users.length > 0) {
+                if(this.datasShown.length < 1 && this.datasFiltered.length > 0 && this.datas.length > 0) {
                     this.currentPage = 1
                     this.refreshPage()
                 }
@@ -339,7 +337,7 @@
         // Methods
         methods: {
 
-            // Ajax to get users
+            // Ajax to get datas
             fetchData () {
 
                 // Reset error msg
@@ -365,12 +363,12 @@
                         // Loading is finished :)
                         this.loading = false
 
-                        // Contains all admins
-                        this.users = response.data.results
-                        this.usersFiltered = response.data.results
+                        // Contains all datas
+                        this.datas = response.data.results
+                        this.datasFiltered = response.data.results
 
-                        // Slice admins to show the `this.nbPerPage` first admins
-                        this.userShown = this.usersFiltered.slice(0, this.nbPerPage)
+                        // Slice datas to show the `this.nbPerPage` first datas
+                        this.datasShown = this.datasFiltered.slice(0, this.nbPerPage)
 
                         // Sort table by default sortKey
                         this.sortBy(this.sortKey)
@@ -379,7 +377,7 @@
                 }).catch(error => {
 
                     // Set the error msg
-                    this.showError('JSON file not found')
+                    this.showError('Error : JSON file not found OR error during fetching datas')
 
                 })
             },
@@ -388,8 +386,8 @@
             showError(msg) {
                 this.fetchError = msg
                 this.loading = false
-                this.users = []
-                this.usersFiltered = []
+                this.datas = []
+                this.datasFiltered = []
             },
 
             // Bind when the page changes
@@ -399,17 +397,16 @@
 
                 // Refresh page
                 this.refreshPage()
-
             },
 
             // Refresh page
             refreshPage() {
 
-                // Set start to the first user of the current line
+                // Set start to the first 'data' of the current line
                 let start = this.getStartPagination()
 
-                // Set userShown from `start` to `this.nbPerPage`
-                this.userShown = this.usersFiltered.slice(start, start + this.nbPerPage)
+                // Set datasShown from `start` to `this.nbPerPage`
+                this.datasShown = this.datasFiltered.slice(start, start + this.nbPerPage)
             },
 
             // Return the start of the current pagination
@@ -421,8 +418,8 @@
             // Ordering datas into table
             sortBy(key) {
 
-                // Order users tabs with lodash _.orderBy method
-                this.usersFiltered = _.orderBy(this.usersFiltered, key, [this.sortType[0]])
+                // Order datas tabs with lodash _.orderBy method
+                this.datasFiltered = _.orderBy(this.datasFiltered, key, [this.sortType[0]])
 
                 // Reverse sortType for next click (reverse order)
                 this.sortType = _.reverse(this.sortType)
@@ -441,12 +438,12 @@
                 let that = this
 
                 // Make an array with matching search
-                let filtered_users = _.filter(that.users, function(p){
+                let filtered_datas = _.filter(that.datas, function(p){
                   return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.id.value,that.searchQuery.toLowerCase())
                 })
 
-                // set usersFiltered with filtered results
-                that.usersFiltered = filtered_users
+                // set datasFiltered with filtered results
+                that.datasFiltered = filtered_datas
 
                 // Set the first pagination active
                 this.currentPage = 1
@@ -455,53 +452,52 @@
                 that.refreshPage()
             },
 
-            // Open Modal before deleting user
-            openModal(id_user,index) {
+            // Open Modal before deleting data
+            openModal(id_data,index) {
 
-                let user = this.userShown[index]
+                var toDelete = this.datasShown[index]
 
-                // Fill the user to delete
-                this.userToDelete = {
+                // Fill the data to delete
+                this.dataToDelete = {
                     'index' : index,
-                    'id' : id_user,
-                    'firstname' : user.name.first,
-                    'lastname' : user.name.last
+                    'id' : id_data,
+                    'firstname' : toDelete.name.first,
+                    'lastname' : toDelete.name.last
                 }
 
-                this.showModal = true
+                this.modalDelete = true
             },
 
-            // Delete a user
-            deleteUser() {
+            // Delete a data
+            deleteData() {
 
-                let
-                    idSearch = this.userToDelete.id,
-                    indexSearch = this.userToDelete.index
+                var
+                    idSearch = this.dataToDelete.id,
+                    indexSearch = this.dataToDelete.index
 
-                // I. this.users
-                let user = _.findIndex(this.users,function(o) {
+                // I. this.datas
+                var toDelete = _.findIndex(this.datas,function(o) {
                     return o.id.value == idSearch
                 })
-                this.users.splice(user,1)
+                this.datas.splice(toDelete,1)
 
 
-                // II. this.userShown
-                this.userShown.splice(indexSearch,1)
+                // II. this.datasShown
+                this.datasShown.splice(indexSearch,1)
 
 
-                // III. this.usersFiltered
-                let userfilter = _.findIndex(this.usersFiltered,function(o) {
+                // III. this.datasFiltered
+                var dataFiltered = _.findIndex(this.datasFiltered,function(o) {
                     return o.id.value == idSearch
                 })
-                this.usersFiltered.splice(userfilter,1)
-
+                this.datasFiltered.splice(dataFiltered,1)
 
 
                 // Hide modal
-                this.showModal = false
+                this.modalDelete = false
 
-                // Reset userToDelete array
-                this.userToDelete = {}
+                // Reset dataToDelete array
+                this.dataToDelete = {}
             }
         },
 
@@ -510,7 +506,6 @@
 
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
-
                 return (value > 1) ? value+' users found' : value+ ' user found'
             }
         },

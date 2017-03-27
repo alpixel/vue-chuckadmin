@@ -16,11 +16,11 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Administrators
+                                CMS Pages
                                 <small>• {{maxDatas|pluralize}} •</small>
                             </h1>
                             <div class="cc-w-auto cc-right">
-                                <a href="javascript:void(0)" @click="modalAdd = true" class="btn cc-bg-purple fa-plus">Add a new admin (into a modal)</a>
+                                <router-link class="btn cc-bg-purple fa-plus" :to="{name:'user-add'}">@TODO : Add a new page</router-link>
                             </div>
                         </div>
                     </div>
@@ -65,23 +65,29 @@
 
                     <!-- Results table datas -->
                     <div class="boxed cc-ma-0" v-show="datasShown.length >= 1">
-                        <table class="cc-equal-cols cc-hovered">
+                        <table class="cc-hovered">
                             <thead>
                                 <tr>
-                                    <th @click="sortBy('id.value')" :class="[{ active: sortKey == 'id.value' },sortType[0], 'sort']">
+                                    <th @click="sortBy('id')" :class="[{ active: sortKey == 'id' },sortType[0], 'sort']">
                                         ID
                                     </th>
-                                    <th>
-                                        Picture
+                                    <th @click="sortBy('lang')" :class="[{ active: sortKey == 'lang' },sortType[0], 'sort']">
+                                        Lang
                                     </th>
-                                    <th @click="sortBy('name.first')" :class="[{ active: sortKey == 'name.first' },sortType[0], 'sort']">
-                                        Firstname
+                                    <th @click="sortBy('title')" :class="[{ active: sortKey == 'title' },sortType[0], 'sort']">
+                                        Title
                                     </th>
-                                    <th @click="sortBy('name.last')" :class="[{ active: sortKey == 'name.last' },sortType[0], 'sort']">
-                                        Lastname
+                                    <th @click="sortBy('type')" :class="[{ active: sortKey == 'type' },sortType[0], 'sort']">
+                                        Type
                                     </th>
-                                    <th @click="sortBy('registered')" :class="[{ active: sortKey == 'registered' },sortType[0], 'sort']">
-                                        Date inscription
+                                    <th @click="sortBy('dateCreated')" :class="[{ active: sortKey == 'dateCreated' },sortType[0], 'sort']">
+                                        Date de création
+                                    </th>
+                                    <th @click="sortBy('dateUpdated')" :class="[{ active: sortKey == 'dateUpdated' },sortType[0], 'sort']">
+                                        Date de modification
+                                    </th>
+                                    <th @click="sortBy('status')" :class="[{ active: sortKey == 'status' },sortType[0], 'sort']">
+                                        Status
                                     </th>
                                     <th>
                                         Action
@@ -95,16 +101,22 @@
                                         ID
                                     </th>
                                     <th>
-                                        Picture
+                                        Lang
                                     </th>
                                     <th>
-                                        Firstname
+                                        Title
                                     </th>
                                     <th>
-                                        Lastname
+                                        Type
                                     </th>
                                     <th>
-                                        Date inscription
+                                        Date de création
+                                    </th>
+                                    <th>
+                                        Date de modification
+                                    </th>
+                                    <th>
+                                        Status
                                     </th>
                                     <th>
                                         Action
@@ -115,24 +127,31 @@
                             <tbody>
                                 <tr v-for="(data, index) in datasShown">
                                     <td>
-                                        {{ data.id.value }}
+                                        {{ data.id }}
                                     </td>
                                     <td>
-                                        <img :src="data.picture.thumbnail" :alt="data.name.first" />
+                                        {{ data.lang }}
                                     </td>
                                     <td>
-                                        {{ data.name.first | capitalize }}
-                                    </td>
-                                    <td>
-                                        {{ data.name.last | upper }}
-                                    </td>
-                                    <td>
-                                        {{ data.registered | formatDate('fr','[Le] DD.MM.YYYY') }}
-                                    </td>
-                                    <td>
-                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: data.id.value}}">Edit</router-link>
+                                        {{ data.title | truncate }}
 
-                                        <a @click.prevent="openModal(data.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
+                                    </td>
+                                    <td>
+                                        {{ data.type }}
+                                    </td>
+                                    <td>
+                                        {{ data.dateCreated | formatDate('fr','[Le] DD.MM.YYYY') }}
+                                    </td>
+                                    <td>
+                                        {{ data.dateUpdated | formatDate('fr','[Le] DD.MM.YYYY') }}
+                                    </td>
+                                    <td>
+                                        {{ data.status }}
+                                    </td>
+                                    <td>
+                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: data.id}}">@TODO : Edit</router-link>
+
+                                        <a @click.prevent="openModal(data.id,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -158,50 +177,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="alert alert-info">
-                                    Do you really want to delete the admin <strong v-if="dataToDelete.firstname">{{ dataToDelete.firstname | capitalize }} {{ dataToDelete.lastname | upper }}</strong> ?
+                                    Do you really want to delete the page <strong v-if="dataToDelete.title">{{ dataToDelete.title | truncate }}</strong> ?
                                     </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="cc-bg-red fa-check" @click.prevent="deleteData">CONFIRM DELETE</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- MODAL ADD NEW DATA -->
-                    <div :class="[{'active' : modalAdd}, 'modal']" data-fixed-hf data-disabled-overlay>
-                        <!-- Close button -->
-                        <button class="modal-close" @click="modalAdd = false"></button>
-                        <!-- Overlay -->
-                        <div class="modal-overlay"></div>
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                Add a new administrator
-                            </div>
-                            <div class="wrap-modal-body">
-                                <div class="modal-body">
-                                    <adminadd @addSuccess="addSuccess"></adminadd>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MODAL SHOWN WHEN DATA IS CREATED -->
-                    <div :class="[{'active' : modalAddSuccess}, 'modal']">
-                        <!-- Close button -->
-                        <button class="modal-close" @click="modalAddSuccess = false"></button>
-                        <!-- Overlay -->
-                        <div class="modal-overlay" @click="modalAddSuccess = false"></div>
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                Registration success
-                            </div>
-                            <div class="modal-body">
-                                <div class="alert alert-info fa-thumbs-up">
-                                    Admin registered with success
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -216,7 +196,7 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Administrators
+                                CMS Pages
                             </h1>
                         </div>
                     </div>
@@ -235,15 +215,14 @@
 <script>
     import Vue from 'vue'
     import Pagination from '../../../components/pagination.vue'
-    import adminadd from './admin-add.vue'
 
     // Set const api url to get datas
-    const api = 'https://randomuser.me/api/?results=5&nat=fr'
+    const api = 'src/js/fakeapi/cms.json'
 
 
     export default {
         // Name of the component
-        name: 'admins',
+        name: 'cms',
 
         // Datas : model
         data () {
@@ -259,12 +238,6 @@
 
                 // Modal delete data (row) : Set to true for modal appearance
                 modalDelete : false,
-
-                // Modal add new data (row) : Set to true for modal appearance
-                modalAdd : false,
-
-                // Modal when new data is created with success
-                modalAddSuccess : false,
 
 
                 // ============
@@ -314,7 +287,7 @@
         head: {
             title() {
                 return {
-                    inner: 'Admins panel',
+                    inner: 'CMS Pages panel',
                     separator: '-',
                     complement: 'Made by ALPIXEL agency'
                 }
@@ -410,8 +383,8 @@
                         this.loading = false
 
                         // Contains all datas
-                        this.datas = response.data.results
-                        this.datasFiltered = response.data.results
+                        this.datas = response.data.pages
+                        this.datasFiltered = response.data.pages
 
                         // Slice datas to show the `this.nbPerPage` first datas
                         this.datasShown = this.datasFiltered.slice(0, this.nbPerPage)
@@ -485,7 +458,7 @@
 
                 // Make an array with matching search
                 let filtered_datas = _.filter(that.datas, function(p){
-                  return _.includes(p.name.first.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.name.last.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.id.value,that.searchQuery.toLowerCase())
+                  return _.includes(p.id,that.searchQuery.toLowerCase()) || _.includes(p.title.toLowerCase(),that.searchQuery.toLowerCase())
                 })
 
                 // set datasFiltered with filtered results
@@ -507,8 +480,7 @@
                 this.dataToDelete = {
                     'index' : index,
                     'id' : id_data,
-                    'firstname' : toDelete.name.first,
-                    'lastname' : toDelete.name.last
+                    'title' : toDelete.title
                 }
 
                 this.modalDelete = true
@@ -523,7 +495,7 @@
 
                 // I. this.datas
                 var toDelete = _.findIndex(this.datas,function(o) {
-                    return o.id.value == idSearch
+                    return o.id == idSearch
                 })
                 this.datas.splice(toDelete,1)
 
@@ -534,7 +506,7 @@
 
                 // III. this.datasFiltered
                 var dataFiltered = _.findIndex(this.datasFiltered,function(o) {
-                    return o.id.value == idSearch
+                    return o.id == idSearch
                 })
                 this.datasFiltered.splice(dataFiltered,1)
 
@@ -544,17 +516,6 @@
 
                 // Reset dataToDelete array
                 this.dataToDelete = {}
-            },
-
-            // When data is created with success, show modal and close others
-            addSuccess() {
-
-                this.modalDelete = false
-                this.modalAdd = false
-                this.modalAddSuccess = true
-
-                // Reload table data
-                this.fetchData()
             }
         },
 
@@ -563,14 +524,13 @@
 
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
-                return (value > 1) ? value+' admins found' : value+ ' admin found'
+                return (value > 1) ? value+' pages found' : value+ ' page found'
             }
         },
 
         // Components
         components: {
-            Pagination,
-            adminadd
+            Pagination
         }
     }
 </script>
