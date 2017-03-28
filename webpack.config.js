@@ -13,6 +13,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -40,6 +44,13 @@ module.exports = {
           'css-loader?importLoaders=1',
           'postcss-loader',
           'less-loader'
+        ]
+      },
+      {
+        test: require.resolve('tinymce/tinymce'),
+        loaders: [
+            'imports-loader?this=>window',
+            'exports-loader?window.tinymce'
         ]
       }
     ]

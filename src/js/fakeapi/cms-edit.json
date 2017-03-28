@@ -1,0 +1,22 @@
+{
+	"error": false,
+    "page": [
+        {
+            "id": 1,
+            "lang": "fr",
+            "type": "cms",
+            "dateCreated": "2017-03-16 19:25:13",
+            "dateUpdated": "2017-03-27 09:25:13",
+            "title": "1 - Transfert de deux grues Caillard situées sur le Port de Calais du quai Devot au quai Fournier",
+            "published": true,
+            "url": "http://www.google.fr",
+            "slug": "deux-grues-caillard",
+            "content": "<h2>Sed porttitor lectus nibh</h2><p>Vestibulum ante ipsum primis in faucibus orci luctus et <strong>ultrices posuere</strong> cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta.</p><p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>",
+            "meta": {
+                "title": "My meta title is very importent for SEO | My site name",
+                "description": "My meta description Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Pellentesque in ipsum id orci porta dapibus.",
+                "keywords": "word1, word2, word3, word4"
+            }
+        }
+    ]
+}

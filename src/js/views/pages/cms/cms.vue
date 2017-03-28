@@ -62,7 +62,6 @@
 
                     <pagination class="cc-w-auto" :records="maxDatas" :currentpage="currentPage" :number-per-page="nbPerPage"  @changepage="changePage"></pagination>
 
-
                     <!-- Results table datas -->
                     <div class="boxed cc-ma-0" v-show="datasShown.length >= 1">
                         <table class="cc-hovered">
@@ -83,7 +82,7 @@
                                     <th @click="sortBy('dateUpdated')" :class="[{ active: sortKey == 'dateUpdated' },sortType[0], 'sort']">
                                         Date de modification
                                     </th>
-                                    <th @click="sortBy('status')" :class="[{ active: sortKey == 'status' },sortType[0], 'sort']">
+                                    <th @click="sortBy('published')" :class="[{ active: sortKey == 'published' },sortType[0], 'sort']">
                                         Status
                                     </th>
                                     <th>
@@ -123,7 +122,7 @@
                                     <td>
                                         {{ data.id }}
                                     </td>
-                                    <td>
+                                    <td class="data-date">
                                         {{ data.lang }}
                                     </td>
                                     <td :title="data.title">
@@ -136,10 +135,10 @@
                                         {{ data.dateUpdated | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
                                     <td>
-                                        <span class="badge" :class="data.status | sanitize">{{ data.status | capitalize }}</span>
+                                        <span class="badge" :class="data.published | isPublished | lower">{{ data.published | isPublished }}</span>
                                     </td>
                                     <td>
-                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'admin-profile', params:{id: data.id}}">@TODO : Edit</router-link>
+                                        <router-link class="btn cc-thin cc-bg-primary fa-edit" :to="{name:'cms-edit', params:{id: data.id}}">Edit</router-link>
 
                                         <a @click.prevent="openModal(data.id,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                                     </td>
@@ -448,7 +447,7 @@
 
                 // Make an array with matching search
                 let filtered_datas = _.filter(that.datas, function(p){
-                  return _.includes(p.id,that.searchQuery.toLowerCase()) || _.includes(p.title.toLowerCase(),that.searchQuery.toLowerCase()) || _.includes(p.status.toLowerCase(),that.searchQuery.toLowerCase())
+                  return _.includes(p.id,that.searchQuery.toLowerCase()) || _.includes(p.title.toLowerCase(),that.searchQuery.toLowerCase())
                 })
 
                 // set datasFiltered with filtered results
@@ -515,6 +514,10 @@
             // Pluralize nb of results found (for <h2> in top of page)
             pluralize(value) {
                 return (value > 1) ? value+' pages found' : value+ ' page found'
+            },
+
+            isPublished(value) {
+                return (value == true) ? 'published' : 'pending'
             }
         },
 

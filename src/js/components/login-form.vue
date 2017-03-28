@@ -1,6 +1,6 @@
 <template>
 	<form @submit.prevent="submitForm" class="boxed form">
-        
+
         <h1 class="cc-txt-center">Sign In</h1>
 
         <div class="alert alert-error" v-if="fetchError">
@@ -93,8 +93,8 @@
                     // show loading button
                     this.$refs.submitButton.classList.add('cc-loading')
 
-                
-                    // Launch Ajax login request    
+
+                    // Launch Ajax login request
                     setTimeout(() => {
 
                         // Ajax
@@ -136,12 +136,12 @@
                         }).catch(error => {
 
                             // Error during json parsing, show error message
-                            this.showError('JSON file not found')
+                            this.showError('Error : JSON file not found OR error during fetching datas')
 
                         })
                     },
                     500)
-                    
+
                 }
             },
 

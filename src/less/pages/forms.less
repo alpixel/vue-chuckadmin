@@ -21,8 +21,34 @@ form {
                 font-size: 0.8em;
                 padding: 0.5em 0;
             }
-
         }
+
+        .message {
+            font-size: 1.3rem;
+            margin: 10px 0 0 0;
+        }
+    }
+
+    // Large forms : cms-edit, news-edit...
+    &.form-large {
+
+        textarea,
+        select,
+        input[type="text"] {
+            width: 100%
+        }
+
+        textarea {
+            // Large textarea for body content
+            &.body {
+                min-height: 300px
+            }
+        }
+
+        .form-item {
+            margin:1.5em 0
+        }
+
     }
 
 } // end/ -> forms elements

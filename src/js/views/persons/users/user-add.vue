@@ -10,7 +10,7 @@
                 <div class="cc-inside">
                     <div class="columns">
                         <h1>
-                            Add a new Users 
+                            Add a new Users
                         </h1>
                         <div class="cc-w-auto cc-right">
                             <router-link class="btn cc-bg-green fa-angle-left" :to="{name : 'users'}">Back to users</router-link>
@@ -39,7 +39,7 @@
                     <div class="form-item cc-txt-center" :class="{ 'error': $v.user.firstname.$error }">
                         <label class="block">First Name</label>
                         <input type="text" name="firstname" v-model.trim="user.firstname" @input="$v.user.firstname.$touch()" />
-                        
+
                         <span class="warning" v-if="!$v.user.firstname.minLength">
                             Name must have at least {{$v.user.firstname.$params.minLength.min}} letters.
                         </span>
@@ -53,7 +53,7 @@
                     <div class="form-item cc-txt-center" :class="{ 'error': $v.user.age.$error }">
                         <label class="block">Age</label>
                         <input type="number" name="age" v-model.trim="user.age" @blur="$v.user.age.$touch()" />
-                        
+
                         <span class="warning" v-if="!$v.user.age.between">
                             Must be between {{$v.user.age.$params.between.min}} and {{$v.user.age.$params.between.max}}
                         </span>
@@ -64,7 +64,7 @@
                     <div class="form-item cc-txt-center" :class="{ 'error': $v.user.email.$error }">
                         <label class="block">Email</label>
                         <input type="email" name="email" v-model.trim="user.email" @input="$v.user.email.$touch()" />
-                        
+
                         <span class="warning" v-if="!$v.user.email.email">
                             Must be an email format "@"
                         </span>
@@ -77,7 +77,7 @@
                     <div class="form-item cc-txt-center" :class="{ 'error': $v.user.password.$error }">
                         <label class="block">Password</label>
                         <input type="password" name="password" v-model.trim="user.password" @input="$v.user.password.$touch()" />
-                        
+
                         <span class="warning" v-if="!$v.user.password.required">
                             This field is required
                         </span>
@@ -103,21 +103,21 @@
                     </div>
                     <!-- <pre>{{$v.user.confirmPassword}}</pre> -->
 
-                    
+
                     <div class="cc-txt-center">
                         <button type="submit" class="fa-save" ref="submitButton">Save</button>
                     </div>
-                    
+
 
                     <!-- <pre>{{$v.user}}</pre> -->
                 </form>
 
                 <!-- MODAL SHOWN WHEN USER IS CREATED -->
-                <div :class="[{'active' : modalUserSuccess}, 'modal']">
+                <div :class="[{'active' : modalSuccess}, 'modal']">
                     <!-- Close button -->
-                    <button class="modal-close" @click="modalUserSuccess = false"></button>
+                    <button class="modal-close" @click="modalSuccess = false"></button>
                     <!-- Overlay -->
-                    <div class="modal-overlay" @click="modalUserSuccess = false"></div>
+                    <div class="modal-overlay" @click="modalSuccess = false"></div>
                     <!-- Modal content -->
                     <div class="modal-content">
                         <div class="modal-header">
@@ -148,8 +148,8 @@
                 loading:true,
 
                 // Modal when user is created with success
-                modalUserSuccess: false,
-                
+                modalSuccess: false,
+
                 // Inputs definitions
                 user: {
                     lastname: null,
@@ -236,7 +236,7 @@
                         this.$refs.submitButton.classList.remove('cc-loading')
 
                         // ...show modal...
-                        this.modalUserSuccess = true
+                        this.modalSuccess = true
 
                         // ...reset this.user values...
                         this.user = {
@@ -249,7 +249,7 @@
                         }
                     },
                     2500)
-                    
+
                 }
             }
         }

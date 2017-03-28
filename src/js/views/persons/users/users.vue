@@ -130,7 +130,7 @@
                                         {{ data.registered | formatDate('fr','[Le] DD.MM.YYYY') }}
                                     </td>
                                     <td>
-                                        <router-link class="btn cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: data.id.value}}">Edit</router-link>
+                                        <router-link class="btn cc-thin cc-bg-primary fa-edit" :to="{name:'user-profile', params:{id: data.id.value}}">Edit</router-link>
 
                                         <a @click.prevent="openModal(data.id.value,index)" class="btn cc-thin cc-bg-red fa-times">Del.</a>
                                     </td>

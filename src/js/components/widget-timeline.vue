@@ -101,7 +101,7 @@
 
                 }).catch(error => {
 
-                    this.showError('Error when fetching datas or JSON file not found.')
+                    this.showError('Error : JSON file not found OR error during fetching datas')
 
                 })
 

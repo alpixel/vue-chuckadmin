@@ -7,12 +7,12 @@
         <div v-else>
 
             <div v-if="!fetchError">
-            
+
                 <div class="top-page">
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Administrator 
+                                Administrator
                                 <small>• #{{user.id.value}} </small>
                             </h1>
                             <div class="cc-w-auto cc-right">
@@ -26,7 +26,7 @@
                     <div class="boxed">
                         <pre>{{user}}</pre>
                     </div>
-                </div><!-- /end cc-inside -->       
+                </div><!-- /end cc-inside -->
 
             </div><!-- /end v-if="!fetchError" -->
 
@@ -105,7 +105,7 @@
 
                 }).catch(error => {
 
-                    this.showError('JSON file not found')
+                    this.showError('Error : JSON file not found OR error during fetching datas')
 
                 })
             },

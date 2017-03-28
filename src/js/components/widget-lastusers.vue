@@ -7,11 +7,11 @@
 
         <div v-else>
             <div v-if="!fetchError" class="widget-lastusers">
-                
+
                 <div class="columns">
-                   
+
                     <div v-for="(user, index) in users" class="user-item">
-                            
+
                         <router-link :to="{name:'user-profile', params:{id: user.id.value}}">
                             <img :src="user.picture.medium" :alt="user.name.first" />
 
@@ -106,7 +106,7 @@
                 }).catch(error => {
 
                     // Set the error msg
-                    this.showError('API url not found')
+                    this.showError('Error : JSON file not found OR error during fetching datas')
 
                 })
             },

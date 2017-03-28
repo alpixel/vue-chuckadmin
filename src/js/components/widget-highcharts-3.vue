@@ -59,7 +59,7 @@
 
                 }).catch(error => {
 
-                    this.showError('JSON not found')
+                    this.showError('Error : JSON file not found OR error during fetching datas')
 
                 })
 

@@ -8,8 +8,9 @@
             "dateCreated": "2017-03-16 19:25:13",
             "dateUpdated": "2017-03-27 09:25:13",
             "title": "1 - Transfert de deux grues Caillard situées sur le Port de Calais du quai Devot au quai Fournier",
-            "status": "published",
-            "url": "http://www.google.fr"
+            "published": true,
+            "url": "http://www.google.fr",
+            "slug": "transfert-de-deux-grues-caillard-situees-sur-le-port-de-calais-du-quai-devot-au-quai-fournier"
         },
         {
             "id": 2,
@@ -17,10 +18,10 @@
             "type": "cms",
             "dateCreated": "2017-03-20 19:25:13",
             "dateUpdated": "2017-03-25 09:25:13",
-            "title": "2 -   Prestation de formation maritime \"CAPITAINE 200\" pour 2 agents.",
-            "status": "published",
+            "title": "2 - Prestation de formation maritime \"CAPITAINE 200\" pour 2 agents.",
+            "published": true,
             "url": "http://www.google.fr",
-            "rewriting": "prestation-de-formation-maritime-capitaine-200-pour-2-agents"
+            "slug": "prestation-de-formation-maritime-capitaine-200-pour-2-agents"
         },
         {
             "id": 3,
@@ -29,9 +30,9 @@
             "dateCreated": "2017-03-22 19:25:13",
             "dateUpdated": "2017-03-27 10:25:13",
             "title": "3 - Maintenance des compacteurs sur le site du Port Boulogne Calais",
-            "status": "published",
+            "published": true,
             "url": "http://www.google.fr",
-            "rewriting": "maintenance-des-compacteurs-sur-le-site-du-port-boulogne-calais"
+            "slug": "maintenance-des-compacteurs-sur-le-site-du-port-boulogne-calais"
         },
         {
             "id": 4,
@@ -40,9 +41,9 @@
             "dateCreated": "2017-03-24 19:25:13",
             "dateUpdated": "2017-03-27 08:25:13",
             "title": "4 - Modernization of the management of the traffic of unaccompanied trailers",
-            "status": "published",
+            "published": true,
             "url": "http://www.google.fr",
-            "rewriting": "modernization-of-the-management-of-the-traffic-of-unaccompanied-trailers"
+            "slug": "modernization-of-the-management-of-the-traffic-of-unaccompanied-trailers"
         },
         {
             "id": 5,
@@ -51,9 +52,9 @@
             "dateCreated": "2017-02-24 19:25:13",
             "dateUpdated": "2017-02-27 08:25:13",
             "title": "5 -   Key facts and figures",
-            "status": "published",
+            "published": true,
             "url": "http://www.google.fr",
-            "rewriting": "key-facts-and-figures"
+            "slug": "key-facts-and-figures"
         },
         {
             "id": 6,
@@ -62,9 +63,9 @@
             "dateCreated": "2017-03-26 19:25:13",
             "dateUpdated": "2017-03-26 19:25:13",
             "title": "6 - Photothèque",
-            "status": "pending",
+            "published": false,
             "url": "",
-            "rewriting": ""
+            "slug": ""
         },
         {
             "id": 7,
@@ -73,9 +74,9 @@
             "dateCreated": "2017-03-26 19:25:13",
             "dateUpdated": "2017-03-26 19:25:13",
             "title": "7 - Video library",
-            "status": "pending",
+            "published": false,
             "url": "",
-            "rewriting": ""
+            "slug": ""
         }
     ]
 }

@@ -64,6 +64,13 @@
     Vue.filter('upper', (str) => {
         return _.upperCase(str)
     })
+
+    /*
+        Use case : {{ "hElLO" | upper }} => "hello"
+    */
+    Vue.filter('lower', (str) => {
+        return _.lowerCase(str)
+    })
     /*
         Use case : {{ "hello" | capitalize }} => "Hello"
     */
@@ -76,9 +83,21 @@
     Vue.filter('truncate', (str, length = 30) => {
         return _.truncate(str, {'length':length})
     })
-
+    /*
+        Use case : {{ "hello world !" | sanitaize }} => "hello-world"
+    */
     Vue.filter('sanitize',(str) => {
-        return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-')
+
+        var cleanStr = str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-')
+
+        if(_.endsWith(cleanStr, '-'))
+            cleanStr = cleanStr.slice(0,-1)
+
+        if (_.startsWith(cleanStr, '-'))
+            cleanStr = cleanStr.slice(1)
+
+        return cleanStr
+
     })
 
 

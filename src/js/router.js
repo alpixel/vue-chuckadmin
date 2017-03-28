@@ -65,6 +65,12 @@ var routes = [
         component: require('./views/pages/cms/cms.vue')
         // component: resolve => require(['./views/pages/cms.vue'], resolve)
     },
+    {
+        path: '/pages/cms/edit/:id',
+        component: require('./views/pages/cms/cms-edit.vue'),
+        // component: resolve => require(['./views/pages/cms/cms-edit.vue'], resolve),
+        name: 'cms-edit'
+    },
 
     // 404 -> redirect to Dashboard
     {

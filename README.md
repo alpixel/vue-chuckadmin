@@ -25,3 +25,4 @@
 * Cookies : [Vue-cookie](https://github.com/alfhen/vue-cookie)
 * HighCharts : [Vue-HighCharts](https://github.com/weizhenye/vue-highcharts)
 * Vue Analytics : [Vue-ua](https://github.com/ScreamZ/vue-analytics)
+* Date picker : [Vue-Flatpickr](https://github.com/jrainlau/vue-flatpickr)
