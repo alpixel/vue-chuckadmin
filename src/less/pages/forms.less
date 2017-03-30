@@ -51,4 +51,116 @@ form {
 
     }
 
+    // Dropzone
+    form.dropzone {
+        border: 7px dashed #e5e5e5;
+        border-radius: 10px;
+        min-height: inherit;
+
+        // When cursor in gragging hover the form
+        &.dz-drag-hover {
+            background-color:#f6f6f6;
+            border: 7px dashed #e5e5e5;
+        }
+
+        // Default message "Drop files here to upload"
+        .dz-default.dz-message {
+            font-style: italic;
+            color:#e5e5e5;
+            padding: 50px 0;
+            margin: 0;
+        }
+
+        // Preview
+        .dz-preview {
+            min-width: 200px;
+            min-height: 200px;
+
+            // Image
+            .dz-image {
+                width: 100%;
+                height: 100%;
+            }
+            // Infos : size, name
+            .dz-details {
+                background-color:fade(@gray,70%);
+
+                .dz-size, .dz-filename {
+                    display: none;
+                }
+            }
+            // Progress
+            .dz-progress {
+                background-color:#e5e5e5;
+                width: 90%;
+                left:5%;
+                margin-left: 0;
+
+                .dz-upload {
+                    background-color:@green;
+                }
+
+            }
+            // Success mark
+            .dz-success-mark {
+                text-align: center;
+
+                svg {
+                    margin: 0 auto;
+
+                    g {
+                        fill:@green;
+                    }
+                }
+            }
+            // Error mark
+            .dz-error-mark {
+                text-align: center;
+
+                svg {
+                    margin: 0 auto;
+
+                    g {
+                        fill:@red
+                    }
+                }
+            }
+            // Remove link
+            .dz-remove {
+                display: block;
+                left: 10%;
+                right: 10%;
+                margin: 0;
+                font-weight: 400;
+                font-size: 1.2rem;
+                ._transition;
+
+                &:hover {
+                    background-color:@red;
+                    text-decoration: none
+                }
+            }
+
+            // Error during upload
+            &.dz-error {
+                .dz-error-message {
+                    display: block;
+                    opacity: 1;
+                    top: 0;
+                    left:0;
+                    border-radius: 0;
+                    right: 0;
+                    width: 100%;
+                    text-align: center;
+
+                    &:after {
+                        content:'';
+                        display:none
+                    }
+                }
+
+            }
+        }
+    }
+
 } // end/ -> forms elements

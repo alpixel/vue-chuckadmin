@@ -36,8 +36,14 @@
                                     <div class="message message-error">
                                         @TODO :<br />
                                         <ul>
+                                            <li>Empty value when creating page</li>
                                             <li>Wysiwyg</li>
-                                            <li>Dropzone : skin preview and make it work in local bon sang</li>
+                                            <li>Dropzone :
+                                                <ul>
+                                                    <li>make it work in local bon sang</li>
+                                                    <li>Preload existing pictures</li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -73,10 +79,23 @@
                                     <div class="form-item">
                                         <label class="block">Images</label>
 
+                                        <!-- If existing images -->
+                                        <div v-if="page.media">
+                                            Images trouvées
+                                        </div>
+
+
                                         <dropzone
                                             :id="'dropzone-'+ uniqid"
+                                            :ref="uniqid"
                                             :url="dropzoneConf.url"
-                                            @vdropzone-success="dropzoneSuccess"
+                                            @vdropzone-success="dpSuccess"
+                                            @vdropzone-file-add="dpFileAdd"
+                                            @vdropzone-error="dpError"
+                                            @vdropzone-removed-file="dpRemovedFile"
+                                            @vdropzone-sending="dpSending"
+                                            @vdropzone-success-multiple="dpSuccessMultiple"
+                                            @vdropzone-sending-multiple="dpSendingMultiple"
                                             :dropzone-options="dropzoneConf"
                                             :use-custom-dropzone-options="true"
                                         >
@@ -108,7 +127,11 @@
                                     <div class="form-item" :class="{ 'error': $v.page.dateCreated.$error }">
                                         <label class="block">Created date</label>
 
-                                        <Flatpickr :options="fpOptions" v-model.trim="page.dateCreated" @input="$v.page.dateCreated.$touch()" />
+                                        <Flatpickr
+                                            :options="fpOptions"
+                                            v-model.trim="page.dateCreated"
+                                            @input="$v.page.dateCreated.$touch()"
+                                        />
 
                                         <span class="warning" v-if="!$v.page.dateCreated.required">
                                             Field is required
@@ -152,39 +175,39 @@
                                     </div>
 
                                     <!-- META TITLE -->
-                                    <div class="form-item" :class="{ 'error': $v.page.meta.title.$error }">
-                                        <label class="block">Meta title ({{ $v.page.meta.title.$params.minLength.min }}-{{ $v.page.meta.title.$params.maxLength.max }} caract.)</label>
-                                        <input type="text" v-model.trim="page.meta.title" @input="$v.page.meta.title.$touch()" />
-                                        <span class="warning" v-if="!$v.page.meta.title.required">
+                                    <div class="form-item" :class="{ 'error': $v.page.metatitle.$error }">
+                                        <label class="block">Meta title ({{ $v.page.metatitle.$params.minLength.min }}-{{ $v.page.metatitle.$params.maxLength.max }} caract.)</label>
+                                        <input type="text" v-model.trim="page.metatitle" @input="$v.page.metatitle.$touch()" />
+                                        <span class="warning" v-if="!$v.page.metatitle.required">
                                             Field is required
                                         </span>
-                                        <span class="warning" v-if="!$v.page.meta.title.maxLength">
-                                            Can not be longer than {{ $v.page.meta.title.$params.maxLength.max }} letters.
+                                        <span class="warning" v-if="!$v.page.metatitle.maxLength">
+                                            Can not be longer than {{ $v.page.metatitle.$params.maxLength.max }} letters.
                                         </span>
-                                        <span class="warning" v-if="!$v.page.meta.title.minLength">
-                                            Can not be shorter than {{ $v.page.meta.title.$params.minLength.min }} letters.
+                                        <span class="warning" v-if="!$v.page.metatitle.minLength">
+                                            Can not be shorter than {{ $v.page.metatitle.$params.minLength.min }} letters.
                                         </span>
                                     </div>
 
                                     <!-- META DESCRIPTION -->
-                                    <div class="form-item" :class="{ 'error': $v.page.meta.description.$error }">
-                                        <label class="block">Meta description ({{ $v.page.meta.description.$params.minLength.min }}-{{ $v.page.meta.description.$params.maxLength.max }} caract.)</label>
-                                        <textarea v-model.trim="page.meta.description" @input="$v.page.meta.description.$touch()"></textarea>
-                                        <span class="warning" v-if="!$v.page.meta.description.required">
+                                    <div class="form-item" :class="{ 'error': $v.page.metadescription.$error }">
+                                        <label class="block">Meta description ({{ $v.page.metadescription.$params.minLength.min }}-{{ $v.page.metadescription.$params.maxLength.max }} caract.)</label>
+                                        <textarea v-model.trim="page.metadescription" @input="$v.page.metadescription.$touch()"></textarea>
+                                        <span class="warning" v-if="!$v.page.metadescription.required">
                                             Field is required
                                         </span>
-                                        <span class="warning" v-if="!$v.page.meta.description.maxLength">
-                                            Can not be longer than {{ $v.page.meta.description.$params.maxLength.max }} letters.
+                                        <span class="warning" v-if="!$v.page.metadescription.maxLength">
+                                            Can not be longer than {{ $v.page.metadescription.$params.maxLength.max }} letters.
                                         </span>
-                                        <span class="warning" v-if="!$v.page.meta.description.minLength">
-                                            Can not be shorter than {{ $v.page.meta.description.$params.minLength.min }} letters.
+                                        <span class="warning" v-if="!$v.page.metadescription.minLength">
+                                            Can not be shorter than {{ $v.page.metadescription.$params.minLength.min }} letters.
                                         </span>
                                     </div>
 
                                     <!-- META KEYWORDS -->
-                                    <div class="form-item" :class="{ 'error': $v.page.meta.keywords.$error }">
+                                    <div class="form-item" :class="{ 'error': $v.page.metakeywords.$error }">
                                         <label class="block">Meta keywords (spaced with comas)</label>
-                                        <textarea v-model.trim="page.meta.keywords" ></textarea>
+                                        <textarea v-model.trim="page.metakeywords" ></textarea>
                                     </div>
                                 </div>
 
@@ -294,23 +317,9 @@
                 modalSuccess: false,
                 modalDelete: false,
 
-                page: {
-                    title: null,
-                    content: null,
-                    lang: null,
-                    dateCreated: null,
-                    dateUpdated: null,
-                    published: null,
-                    type: null,
-                    id: null,
-                    url: null,
-                    slug: null,
-                    meta: {
-                        title: null,
-                        description: null,
-                        keywords: null
-                    }
-                },
+                // All page fields & datas
+                page: {},
+
 
                 // Date Picket options : Flatpickr
                 fpOptions: {
@@ -325,21 +334,14 @@
                 // Dropzone configuration
                 dropzoneConf: {
                     headers: {'Token': '2343'},
-                    useFontAwesome: true,
                     url: "https://httpbin.org/post",
-                    thumbnailHeight: 250,
-                    thumbnailWidth: 250,
+                    thumbnailHeight: 200,
+                    thumbnailWidth: 200,
                     acceptedFiles : "image/*, application/pdf",
                     addRemoveLinks: true,
                     maxFilesize: 1,
-                    maxFiles: 2
+                    maxFiles: 50
                 }
-
-                // ,
-                // options: [
-                //     'undo redo | styleselect | bold italic | link image',
-                //     'alignleft aligncenter alignright'
-                // ]
             }
         },
         props : {
@@ -353,10 +355,6 @@
                     separator: '-',
                     complement: 'Made by ALPIXEL agency'
                 }
-            },
-            meta() {
-                return [
-                ]
             }
         },
         validations: {
@@ -390,20 +388,17 @@
                 slug: {
                     required
                 },
-                meta: {
-                    title: {
-                        required,
-                        maxLength: maxLength(100),
-                        minLength: minLength(50)
-                    },
-                    description: {
-                        required,
-                        maxLength: maxLength(200),
-                        minLength: minLength(100)
-                    },
-                    keywords: {
-
-                    }
+                metatitle: {
+                    required,
+                    maxLength: maxLength(100),
+                    minLength: minLength(50)
+                },
+                metadescription: {
+                    required,
+                    maxLength: maxLength(200),
+                    minLength: minLength(100)
+                },
+                metakeywords: {
                 }
             }
         },
@@ -417,9 +412,8 @@
                 return this.page.url+'/<strong>'+this.page.slug+'</strong>'
             },
             uniqid() {
-                return (new Date().getTime() + Math.floor((Math.random()*10000)+1)).toString(16)
+                return Math.floor((Math.random()*9999999)*1234)
             }
-
         },
         created () {
             this.fetchData()
@@ -460,7 +454,7 @@
 
                 this.fetchError = msg
                 this.loading = false
-                this.page = []
+                this.page = {}
 
             },
 
@@ -525,10 +519,65 @@
 
 
             // Dropzone success upload
-            dropzoneSuccess (file) {
-                console.log('Success: '+file)
+            dpSuccess(file, response) {
+                console.log('dpSuccess -> file')
+                console.dir(file)
 
+                console.log('dpSuccess -> response')
+                console.dir(response)
+            },
+
+            dpFileAdd(file) {
+                console.log('dpFileAdd -> file')
+                console.dir(file)
+            },
+
+            dpError(file) {
+                console.log('dpError -> file')
+                console.dir(file)
+            },
+
+            dpRemovedFile(file, error, xhr) {
+                console.log('dpRemovedFile -> file')
+                console.dir(file)
+
+                console.log('dpRemovedFile -> error')
+                console.dir(error)
+
+                console.log('dpRemovedFile -> xhr')
+                console.dir(xhr)
+            },
+
+            dpSending(file, xhr, formData) {
+                console.log('dpSending -> file')
+                console.dir(file)
+
+                console.log('dpSending -> formData')
+                console.dir(formData)
+
+                console.log('dpSending -> xhr')
+                console.dir(xhr)
+            },
+
+            dpSuccessMultiple(files, response) {
+                console.log('dpSuccessMultiple -> files')
+                console.dir(files)
+
+                console.log('dpSuccessMultiple -> response')
+                console.dir(response)
+            },
+
+            dpSendingMultiple(file, xhr, formData) {
+                console.log('dpSendingMultiple -> file')
+                console.dir(file)
+
+                console.log('dpSendingMultiple -> formData')
+                console.dir(formData)
+
+                console.log('dpSendingMultiple -> xhr')
+                console.dir(xhr)
             }
+
         },
         components: {
             Dropzone

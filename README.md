@@ -26,3 +26,4 @@
 * HighCharts : [Vue-HighCharts](https://github.com/weizhenye/vue-highcharts)
 * Vue Analytics : [Vue-ua](https://github.com/ScreamZ/vue-analytics)
 * Date picker : [Vue-Flatpickr](https://github.com/jrainlau/vue-flatpickr)
+* File Uploader : [Vue-Dropzone](https://github.com/rowanwins/vue-dropzone)
