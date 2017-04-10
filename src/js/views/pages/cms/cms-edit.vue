@@ -12,7 +12,13 @@
                     <div class="cc-inside">
                         <div class="columns">
                             <h1>
-                                Edit page : "{{ page.title | truncate(50) }}"
+                                <span v-if="$route.params.id">
+                                    Edit
+                                </span>
+                                <span v-else>
+                                    Create
+                                </span>
+                                CMS page <span v-if="page.title">: "{{ page.title | truncate(50) }}"</span>
                             </h1>
                             <div class="cc-w-auto cc-right">
                                 <router-link class="btn cc-bg-green fa-angle-left" :to="{name : 'cms'}">Back to CMS pages</router-link>
@@ -23,11 +29,11 @@
 
                 <div class="cc-inside">
 
-                    <!-- FORM EDIT DATA -->
+                    <!-- FORM -->
                     <form @submit.prevent="submitForm" class="form-large">
 
                         <div class="columns">
-                            <div class="cc-9">
+                            <div class="cc-12 cc-9-l">
 
                                 <!-- PAGE CONTENT -->
                                 <div class="boxed">
@@ -36,8 +42,7 @@
                                     <div class="message message-error">
                                         @TODO :<br />
                                         <ul>
-                                            <li>Empty value when creating page</li>
-                                            <li>Wysiwyg</li>
+                                            <li>CSS for TinyMCE</li>
                                             <li>Dropzone :
                                                 <ul>
                                                     <li>make it work in local bon sang</li>
@@ -51,6 +56,15 @@
                                     <div class="form-item" :class="{ 'error': $v.page.title.$error }">
                                         <label class="block">
                                             Title
+
+                                            <div class="form-checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="autoSlug" v-model="autoSlug" />
+                                                    Auto-fill slug ?
+                                                </label>
+                                            </div>
+                                            <div class="clearfix"></div>
+
                                         </label>
                                         <input type="text" v-model.trim="page.title" @input="$v.page.title.$touch(), slugify()" />
                                         <span class="warning" v-if="!$v.page.title.maxLength">
@@ -66,28 +80,47 @@
                                         <label class="block">
                                             Body
                                         </label>
-                                        <!-- <tinymce
-                                            :id="'editor-'+ uniqid"
+
+                                        <tinymce
+                                            textareaId="text1"
                                             v-model="page.content"
-                                            :toolbar="options"
-                                            :value="page.content"
-                                            >
-                                        </tinymce> -->
-                                        <textarea v-model.trim="page.content" @input="$v.page.content.$touch()" class="body" /></textarea>
+                                            :content="page.content"
+                                            @input="$v.page.content.$touch()">
+                                        </tinymce>
+
+                                        <span class="warning" v-if="!$v.page.content.required">
+                                            Field is required
+                                        </span>
                                     </div>
 
+                                    <!-- BODY2 -->
+                                    <div class="form-item" :class="{ 'error': $v.page.content2.$error }">
+                                        <label class="block">
+                                            Body 2
+                                        </label>
+
+                                        <tinymce
+                                            textareaId="text2"
+                                            v-model="page.content2"
+                                            :content="page.content2"
+                                            @input="$v.page.content2.$touch()">
+                                        </tinymce>
+                                    </div>
+
+
+                                    <!-- IMAGES - DROPZONE -->
                                     <div class="form-item">
                                         <label class="block">Images</label>
 
                                         <!-- If existing images -->
                                         <div v-if="page.media">
-                                            Images trouvées
+                                            <!-- Images trouvées -->
                                         </div>
 
 
                                         <dropzone
-                                            :id="'dropzone-'+ uniqid"
-                                            :ref="uniqid"
+                                            :id="'dropzone-'+ uniqid()"
+                                            :ref="uniqid()"
                                             :url="dropzoneConf.url"
                                             @vdropzone-success="dpSuccess"
                                             @vdropzone-file-add="dpFileAdd"
@@ -97,15 +130,13 @@
                                             @vdropzone-success-multiple="dpSuccessMultiple"
                                             @vdropzone-sending-multiple="dpSendingMultiple"
                                             :dropzone-options="dropzoneConf"
-                                            :use-custom-dropzone-options="true"
-                                        >
+                                            :use-custom-dropzone-options="true">
                                         </dropzone>
-
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="cc-3">
+                            <div class="cc-12 cc-3-l">
 
                                 <!-- SETTINGS -->
                                 <div class="boxed">
@@ -213,19 +244,42 @@
 
                             </div>
 
+                            <!-- Check form errors -->
+                            <div class="cc-12" v-if="$v.page.$error">
+                                <div class="boxed">
+                                    <p>
+                                        <strong>Please check the following fields before saving the page :</strong>
+                                    </p>
+
+                                    <p class="cc-pat-10">
+                                        <span :class="[$v.page.title.$error ? 'cc-bg-red' : 'cc-bg-green', 'badge']">
+                                            <i :class="[$v.page.title.$error ? 'fa-times' : 'fa-check']"></i> Page Title
+                                        </span>
+                                        <span :class="[$v.page.content.$error ? 'cc-bg-red' : 'cc-bg-green', 'badge']">
+                                            <i :class="[$v.page.content.$error ? 'fa-times' : 'fa-check']"></i> Body
+                                        </span>
+                                        <span :class="[$v.page.lang.$error ? 'cc-bg-red' : 'cc-bg-green', 'badge']">
+                                            <i :class="[$v.page.lang.$error ? 'fa-times' : 'fa-check']"></i> Lang
+                                        </span>
+                                        <span :class="[$v.page.slug.$error ? 'cc-bg-red' : 'cc-bg-green', 'badge']">
+                                            <i :class="[$v.page.slug.$error ? 'fa-times' : 'fa-check']"></i> Slug
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
 
                             <!-- SUBMIT -->
-                            <div>
+                            <div class="cc-12">
                                 <div class="boxed columns">
                                     <div>
-                                        <button type="submit" ref="submitButton" class="fa-save cc-bg-primary">Save</button>
+                                        <button type="submit" ref="submitButton" class="fa-save cc-bg-primary" :class="[$v.page.$error ? 'cc-disabled' : '']">Save</button>
                                     </div>
                                     <div class="cc-w-auto cc-right">
                                         <a class="btn fa-times cc-bg-red" @click.prevent="modalDelete = true">Delete this page</a>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
 
@@ -241,7 +295,7 @@
                                 Success
                             </div>
                             <div class="modal-body">
-                                <div class="alert alert-info fa-thumbs-up">
+                                <div class="alert alert-success fa-thumbs-up">
                                     Page saved with success
                                 </div>
                             </div>
@@ -303,6 +357,7 @@
     import { alpha,alphaNum,and,between,email,maxLength,minLength,numeric,or,required,sameAs } from 'vuelidate/lib/validators'
     import moment from 'moment'
     import Dropzone from 'vue2-dropzone'
+    import tinymce from '../../../components/tinymce.vue'
 
 
     // Set const api url to get datas
@@ -316,9 +371,26 @@
                 fetchError : '',
                 modalSuccess: false,
                 modalDelete: false,
+                autoSlug: true,
 
                 // All page fields & datas
-                page: {},
+                page: {
+                    id: null,
+                    lang: null,
+                    type: 'cms',
+                    dateCreated: moment(new Date()).format('YYYY-MM-DD H:m:s'),
+                    dateUpdated: null,
+                    title: null,
+                    published: false,
+                    url: 'http://www.google.com',
+                    slug: '',
+                    media: [],
+                    content: '',
+                    content2: '',
+                    metatitle: null,
+                    metadescription: null,
+                    metakeywords: null,
+                },
 
 
                 // Date Picket options : Flatpickr
@@ -359,13 +431,8 @@
         },
         validations: {
             page: {
-                title: {
-                    required,
-                    maxLength: maxLength(255)
-                },
-                content: {
-
-                },
+                id: {},
+                type: {},
                 lang: {
                     required
                 },
@@ -375,26 +442,27 @@
                 dateUpdated: {
                     required
                 },
+                title: {
+                    required,
+                    maxLength: maxLength(255)
+                },
                 published: {
                     required
                 },
-                id: {
-                    required,
-                    numeric
-                },
-                url: {
-                    required
-                },
+                url: {},
                 slug: {
                     required
                 },
+                media: {},
+                content: {
+                    required
+                },
+                content2: {},
                 metatitle: {
-                    required,
                     maxLength: maxLength(100),
                     minLength: minLength(50)
                 },
                 metadescription: {
-                    required,
                     maxLength: maxLength(200),
                     minLength: minLength(100)
                 },
@@ -410,15 +478,26 @@
         computed: {
             fullUrl() {
                 return this.page.url+'/<strong>'+this.page.slug+'</strong>'
-            },
-            uniqid() {
-                return Math.floor((Math.random()*9999999)*1234)
             }
         },
         created () {
-            this.fetchData()
+            // If created page (no ID in $router.params)
+            if(_.isUndefined(this.$route.params.id)) {
+
+                this.loading = false
+
+            } else {
+
+                // Load CMS page
+                this.fetchData()
+
+            }
         },
         methods: {
+            uniqid() {
+                return Math.floor((Math.random()*9999999)*1234)
+            },
+
             fetchData () {
 
                 // It's loading dude :)
@@ -455,10 +534,13 @@
                 this.fetchError = msg
                 this.loading = false
                 this.page = {}
-
             },
 
             submitForm () {
+
+                // page.dateUpdated data
+                this.page.dateUpdated = moment(new Date()).format('YYYY-MM-DD H:m:s')
+
 
                 // touch form validators
                 this.$v.page.$touch()
@@ -469,9 +551,6 @@
                     // show loading button
                     this.$refs.submitButton.classList.add('cc-loading')
 
-
-                    // Update dateUpdated data
-                    this.page.dateUpdated = moment(new Date()).format('YYYY-MM-DD H:m:s')
 
                     // Stringify datas
                     let toSave = JSON.stringify(this.page)
@@ -493,7 +572,8 @@
 
             // When Title change, update slug to adapt it to the title
             slugify() {
-                this.page.slug = this.$options.filters.sanitize(this.page.title)
+                if(this.autoSlug)
+                    this.page.slug = this.$options.filters.sanitize(this.page.title)
             },
 
             // Delete a data
@@ -515,8 +595,6 @@
                 },
                 2500)
             },
-
-
 
             // Dropzone success upload
             dpSuccess(file, response) {
@@ -580,7 +658,8 @@
 
         },
         components: {
-            Dropzone
+            Dropzone,
+            tinymce
         }
     }
 </script>

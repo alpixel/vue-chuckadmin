@@ -20,7 +20,7 @@
                                 <small>• {{maxDatas|pluralize}} •</small>
                             </h1>
                             <div class="cc-w-auto cc-right">
-                                <router-link class="btn cc-bg-purple fa-plus" :to="{name:'user-add'}">@TODO : Add a new page</router-link>
+                                <router-link class="btn cc-bg-purple fa-plus" :to="{name:'cms-create'}">Add a new page</router-link>
                             </div>
                         </div>
                     </div>

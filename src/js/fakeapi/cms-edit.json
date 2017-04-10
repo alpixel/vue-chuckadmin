@@ -12,6 +12,7 @@
             "url": "http://www.google.fr",
             "slug": "deux-grues-caillard",
             "content": "<h2>Sed porttitor lectus nibh</h2><p>Vestibulum ante ipsum primis in faucibus orci luctus et <strong>ultrices posuere</strong> cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta.</p><p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>",
+            "content2": "<h2>Prout</h2><p>Vestibulum ante ipsum sed sit amet dui.</p>",
             "media": [
                 "image1.jpg",
                 "image2.jpg"
