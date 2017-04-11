@@ -53,16 +53,30 @@ form {
         .form-item {
             margin:1.5em 0
         }
-
     }
+
+
 
     // Dropzone
     form.dropzone {
         border: 7px dashed #e5e5e5;
         border-radius: 10px;
         min-height: inherit;
+        letter-spacing: 0.2px;
+        color: #777;
+        ._transition;
 
-        // When cursor in gragging hover the form
+        &:hover {
+            background-color: #F6F6F6;
+        }
+
+        i {
+            color: #CCC;
+        }
+
+
+
+        // When cursor in dragging hover the form
         &.dz-drag-hover {
             background-color:#f6f6f6;
             border: 7px dashed #e5e5e5;
@@ -78,22 +92,34 @@ form {
 
         // Preview
         .dz-preview {
-            min-width: 200px;
-            min-height: 200px;
+
+            &:hover {
+                .dz-remove {
+                    opacity: 1;
+                }
+            }
 
             // Image
             .dz-image {
                 width: 100%;
                 height: 100%;
+                border-radius: 0px;
             }
+
             // Infos : size, name
             .dz-details {
-                background-color:fade(@gray,70%);
+                background-color:fade(@gray,50%);
+                bottom: 0px;
+                top: 0px;
+                color: white;
+                transition: opacity .2s linear;
+                text-align: left;
 
                 .dz-size, .dz-filename {
                     display: none;
                 }
             }
+
             // Progress
             .dz-progress {
                 background-color:#e5e5e5;
@@ -102,12 +128,17 @@ form {
                 margin-left: 0;
 
                 .dz-upload {
-                    background-color:@green;
+                    background:@green;
                 }
-
             }
+
             // Success mark
             .dz-success-mark {
+                margin-left: auto!important;
+                margin-top: auto!important;
+                width: 100%!important;
+                top: 35%!important;
+                left: 0;
                 text-align: center;
 
                 svg {
@@ -118,8 +149,14 @@ form {
                     }
                 }
             }
+
             // Error mark
             .dz-error-mark {
+                margin-left: auto!important;
+                margin-top: auto!important;
+                width: 100%!important;
+                top: 35%!important;
+                left: 0;
                 text-align: center;
 
                 svg {
@@ -130,8 +167,20 @@ form {
                     }
                 }
             }
+
             // Remove link
             .dz-remove {
+                position: absolute;
+                z-index: 30;
+                color: white;
+                padding: 10px;
+                top: inherit;
+                bottom: 15px;
+                border: 2px white solid;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 1.1px;
+                opacity: 0;
                 display: block;
                 left: 10%;
                 right: 10%;
@@ -163,9 +212,7 @@ form {
                         display:none
                     }
                 }
-
             }
         }
     }
-
 } // end/ -> forms elements

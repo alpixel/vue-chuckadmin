@@ -114,23 +114,13 @@
 
                                         <!-- If existing images -->
                                         <div v-if="page.media">
-                                            <!-- Images trouvées -->
+                                            {{page.media}}
                                         </div>
 
-
                                         <dropzone
-                                            :id="'dropzone-'+ uniqid()"
-                                            :ref="uniqid()"
+                                            :id="'dropzone1'"
                                             :url="dropzoneConf.url"
-                                            @vdropzone-success="dpSuccess"
-                                            @vdropzone-file-add="dpFileAdd"
-                                            @vdropzone-error="dpError"
-                                            @vdropzone-removed-file="dpRemovedFile"
-                                            @vdropzone-sending="dpSending"
-                                            @vdropzone-success-multiple="dpSuccessMultiple"
-                                            @vdropzone-sending-multiple="dpSendingMultiple"
-                                            :dropzone-options="dropzoneConf"
-                                            :use-custom-dropzone-options="true">
+                                            :dp-options="dropzoneConf">
                                         </dropzone>
                                     </div>
                                 </div>
@@ -241,7 +231,6 @@
                                         <textarea v-model.trim="page.metakeywords" ></textarea>
                                     </div>
                                 </div>
-
                             </div>
 
                             <!-- Check form errors -->
@@ -267,7 +256,6 @@
                                     </p>
                                 </div>
                             </div>
-
 
                             <!-- SUBMIT -->
                             <div class="cc-12">
@@ -324,8 +312,6 @@
                         </div>
                     </div>
 
-
-
                 </div><!-- /end cc-inside -->
 
             </div><!-- /end v-if="!fetchError" -->
@@ -356,7 +342,7 @@
     import Vue from 'vue'
     import { alpha,alphaNum,and,between,email,maxLength,minLength,numeric,or,required,sameAs } from 'vuelidate/lib/validators'
     import moment from 'moment'
-    import Dropzone from 'vue2-dropzone'
+    import Dropzone from '../../../components/dropzone.vue'
     import tinymce from '../../../components/tinymce.vue'
 
 
@@ -412,7 +398,24 @@
                     acceptedFiles : "image/*, application/pdf",
                     addRemoveLinks: true,
                     maxFilesize: 1,
-                    maxFiles: 50
+                    maxFiles: 5,
+                    language: {
+                        dictDefaultMessage: 'Vas-y Robert met ton image ici'
+                    },
+                    previewTemplate: `
+                        <div class="dz-preview dz-file-preview">
+                            <div class="dz-image">
+                                <img data-dz-thumbnail />
+                            </div>
+                            <div class="dz-progress">
+                                <span class="dz-upload" data-dz-uploadprogress></span>
+                            </div>
+                            <div class="dz-error-message">
+                                <span data-dz-errormessage></span>
+                            </div>
+                            <div class="dz-success-mark"></div>
+                            <div class="dz-error-mark"></div>
+                        </div>`
                 }
             }
         },
@@ -594,66 +597,6 @@
                     this.$router.push({name: 'cms'})
                 },
                 2500)
-            },
-
-            // Dropzone success upload
-            dpSuccess(file, response) {
-                console.log('dpSuccess -> file')
-                console.dir(file)
-
-                console.log('dpSuccess -> response')
-                console.dir(response)
-            },
-
-            dpFileAdd(file) {
-                console.log('dpFileAdd -> file')
-                console.dir(file)
-            },
-
-            dpError(file) {
-                console.log('dpError -> file')
-                console.dir(file)
-            },
-
-            dpRemovedFile(file, error, xhr) {
-                console.log('dpRemovedFile -> file')
-                console.dir(file)
-
-                console.log('dpRemovedFile -> error')
-                console.dir(error)
-
-                console.log('dpRemovedFile -> xhr')
-                console.dir(xhr)
-            },
-
-            dpSending(file, xhr, formData) {
-                console.log('dpSending -> file')
-                console.dir(file)
-
-                console.log('dpSending -> formData')
-                console.dir(formData)
-
-                console.log('dpSending -> xhr')
-                console.dir(xhr)
-            },
-
-            dpSuccessMultiple(files, response) {
-                console.log('dpSuccessMultiple -> files')
-                console.dir(files)
-
-                console.log('dpSuccessMultiple -> response')
-                console.dir(response)
-            },
-
-            dpSendingMultiple(file, xhr, formData) {
-                console.log('dpSendingMultiple -> file')
-                console.dir(file)
-
-                console.log('dpSendingMultiple -> formData')
-                console.dir(formData)
-
-                console.log('dpSendingMultiple -> xhr')
-                console.dir(xhr)
             }
 
         },

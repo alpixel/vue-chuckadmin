@@ -1,11 +1,18 @@
 <template>
-    <textarea :id="textareaId">{{content}}</textarea>
+    <div>
+        <textarea :id="textareaId" class="body">{{content}}</textarea>
+    </div>
 </template>
 
 <script>
     import tinymce from 'tinymce/tinymce'
 
     export default {
+        data() {
+            return {
+
+            }
+        },
 
         props: {
             textareaId:    { type: String, required: true },                        // id of the textarea == id of tinymce.Editor (without leading '#'!)
@@ -18,7 +25,7 @@
                         'searchreplace visualblocks code fullscreen',
                         'insertdatetime media table contextmenu paste'
                     ],
-                    toolbar: 'undo redo | table | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link charmap',
+                    toolbar: 'undo redo | table | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link charmap | image | code',
                 }
             }}
         },
@@ -47,6 +54,7 @@
                 .on('undo',   this.updateContent)
                 .on('redo',   this.updateContent)
             })
+
         },
 
         beforeDestroy () {
