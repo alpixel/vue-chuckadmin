@@ -43,12 +43,6 @@
                                         @TODO :<br />
                                         <ul>
                                             <li>CSS for TinyMCE</li>
-                                            <li>Dropzone :
-                                                <ul>
-                                                    <li>make it work in local bon sang</li>
-                                                    <li>Preload existing pictures</li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     </div>
 
@@ -57,7 +51,7 @@
                                         <label class="block">
                                             Title
 
-                                            <div class="form-checkbox">
+                                            <div class="pull-right form-checkbox">
                                                 <label>
                                                     <input type="checkbox" name="autoSlug" v-model="autoSlug" />
                                                     Auto-fill slug ?
@@ -110,17 +104,20 @@
 
                                     <!-- IMAGES - DROPZONE -->
                                     <div class="form-item">
-                                        <label class="block">Images</label>
-
-                                        <!-- If existing images -->
-                                        <div v-if="page.media">
-                                            {{page.media}}
-                                        </div>
+                                        <label class="block cc-mab-10">
+                                            Images
+                                            <span class="pull-right badge cc-bg-red">
+                                                ({{dzOptions.maxFiles}} files max - {{dzOptions.maxFilesize}}Mo max. / file)
+                                            </span>
+                                            <div class="clearfix"></div>
+                                        </label>
 
                                         <dropzone
                                             :id="'dropzone1'"
-                                            :url="dropzoneConf.url"
-                                            :dp-options="dropzoneConf">
+                                            :url="dzOptions.url"
+                                            :dz-options="dzOptions"
+                                            :dz-medias="page.media"
+                                            >
                                         </dropzone>
                                     </div>
                                 </div>
@@ -389,8 +386,8 @@
                     altFormat: "d.m.Y"
                 },
 
-                // Dropzone configuration
-                dropzoneConf: {
+                // Dropzone options
+                dzOptions: {
                     headers: {'Token': '2343'},
                     url: "https://httpbin.org/post",
                     thumbnailHeight: 200,
@@ -398,9 +395,8 @@
                     acceptedFiles : "image/*, application/pdf",
                     addRemoveLinks: true,
                     maxFilesize: 1,
-                    maxFiles: 5,
+                    maxFiles: 3,
                     language: {
-                        dictDefaultMessage: 'Vas-y Robert met ton image ici'
                     },
                     previewTemplate: `
                         <div class="dz-preview dz-file-preview">
