@@ -1,0 +1,218 @@
+// Forms elements
+form {
+
+    input {
+        max-width: 100%;
+
+        // go to page X on users list
+        &.small {
+            width: 70px;
+            text-align:center;
+        }
+    }
+
+    .form-item {
+        span {
+
+            &.warning {
+                display:block;
+                font-style:italic;
+                color:@red;
+                font-size: 0.8em;
+                padding: 0.5em 0;
+            }
+        }
+
+        .message {
+            font-size: 1.3rem;
+            margin: 10px 0 0 0;
+        }
+
+        label .pull-right {
+            ._reset;
+            display:block;
+            float:right;
+
+            &.badge {
+                padding: 0 10px;
+                font-size: 1.2rem;
+                top: 0
+            }
+        }
+    }
+
+    // Large forms : cms-edit, news-edit...
+    &.form-large {
+
+        textarea,
+        select,
+        input[type="text"] {
+            width: 100%
+        }
+
+        .form-item {
+            margin:1.5em 0
+        }
+    }
+
+
+
+    // Dropzone
+    form.dropzone {
+        border: 7px dashed #e5e5e5;
+        border-radius: 10px;
+        min-height: inherit;
+        letter-spacing: 0.2px;
+        color: #777;
+        ._transition;
+
+        &:hover {
+            background-color: #F6F6F6;
+        }
+
+        i {
+            color: #CCC;
+        }
+
+
+
+        // When cursor in dragging hover the form
+        &.dz-drag-hover {
+            background-color:#f6f6f6;
+            border: 7px dashed #e5e5e5;
+        }
+
+        // Default message "Drop files here to upload"
+        .dz-default.dz-message {
+            font-style: italic;
+            color:#e5e5e5;
+            padding: 50px 0;
+            margin: 0;
+        }
+
+        // Preview
+        .dz-preview {
+
+            &:hover {
+                .dz-remove {
+                    opacity: 1;
+                }
+            }
+
+            // Image
+            .dz-image {
+                width: 100%;
+                height: 100%;
+                border-radius: 0px;
+            }
+
+            // Infos : size, name
+            .dz-details {
+                background-color:fade(@gray,50%);
+                bottom: 0px;
+                top: 0px;
+                color: white;
+                transition: opacity .2s linear;
+                text-align: left;
+
+                .dz-size, .dz-filename {
+                    display: none;
+                }
+            }
+
+            // Progress
+            .dz-progress {
+                background-color:#e5e5e5;
+                width: 90%;
+                left:5%;
+                margin-left: 0;
+
+                .dz-upload {
+                    background:@green;
+                }
+            }
+
+            // Success mark
+            .dz-success-mark {
+                margin-left: auto!important;
+                margin-top: auto!important;
+                width: 100%!important;
+                top: 35%!important;
+                left: 0;
+                text-align: center;
+
+                svg {
+                    margin: 0 auto;
+
+                    g {
+                        fill:@green;
+                    }
+                }
+            }
+
+            // Error mark
+            .dz-error-mark {
+                margin-left: auto!important;
+                margin-top: auto!important;
+                width: 100%!important;
+                top: 35%!important;
+                left: 0;
+                text-align: center;
+
+                svg {
+                    margin: 0 auto;
+
+                    g {
+                        fill:@red
+                    }
+                }
+            }
+
+            // Remove link
+            .dz-remove {
+                position: absolute;
+                z-index: 30;
+                color: white;
+                padding: 10px;
+                top: inherit;
+                bottom: 15px;
+                border: 2px white solid;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 1.1px;
+                opacity: 0;
+                display: block;
+                left: 10%;
+                right: 10%;
+                margin: 0;
+                font-weight: 400;
+                font-size: 1.2rem;
+                ._transition;
+
+                &:hover {
+                    background-color:@red;
+                    text-decoration: none
+                }
+            }
+
+            // Error during upload
+            &.dz-error {
+                .dz-error-message {
+                    display: block;
+                    opacity: 1;
+                    top: 0;
+                    left:0;
+                    border-radius: 0;
+                    right: 0;
+                    width: 100%;
+                    text-align: center;
+
+                    &:after {
+                        content:'';
+                        display:none
+                    }
+                }
+            }
+        }
+    }
+} // end/ -> forms elements

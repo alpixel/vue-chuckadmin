@@ -20,7 +20,9 @@
             <div class="columns">
                 <!-- Users -->
                 <div>
-                    <div class="push-item">
+
+                    <!-- <div class="push-item"> -->
+                    <div class="push-item" v-tippy="{title: 'Here my awesome title'}">
                         <span class="push-icon cc-bg-primary">
                             <i class="ion-android-contacts"></i>
                         </span>
@@ -33,6 +35,7 @@
                             </p>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Sales -->
@@ -73,21 +76,6 @@
 
             <!-- WIDGETS -->
             <div class="columns cc-align-start">
-                <!-- TODOS -->
-                <div class="cc-12" style="display:none">
-                    <div class="boxed widget">
-                        <div class="widget-title">
-                            <h2 class="cc-green">Todos</h2>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>Statistiques</li>
-                                <li>Logs</li>
-                                <li>Notify</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Widgets -->
                 <div class="cc-8-m columns">
@@ -191,6 +179,7 @@
 <script>
 
     import { EventBus } from '../../components/bus.js'
+    // import { tippy } from '../../directives/tippyjs.vue'
 
     // Import Widgets
     import widgetHighchartsOne from '../../components/widget-highcharts-1.vue'

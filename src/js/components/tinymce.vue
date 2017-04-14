@@ -26,6 +26,10 @@
                         'insertdatetime media table contextmenu paste'
                     ],
                     toolbar: 'undo redo | table | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link charmap | image | code',
+                    height : 300,
+                    max_height: 500,
+                    body_class: 'my-tinymce',
+                    content_css: '/dist/tinymce.css?' + new Date().getTime()
                 }
             }}
         },

@@ -65,18 +65,16 @@
 
                                 <ul>
                                     <li>
-                                        <router-link :to="{name: 'news'}">
-                                            <i class="ion-arrow-right-b"></i>
-                                            <span>News</span>
-                                        </router-link>
-                                    </li>
-                                    <li>
                                         <router-link :to="{name: 'cms'}">
                                             <i class="ion-arrow-right-b"></i>
                                             <span>CMS</span>
                                         </router-link>
                                     </li>
                                 </ul>
+                            </li>
+
+                            <li class="last">
+                                <a href="" @click.prevent="$store.dispatch('switchTooltips')">Help ? (show tooltips)</a>
                             </li>
                         </ul>
                     </div>
@@ -120,6 +118,7 @@
                 loading: true
             }
         },
+
         created () {
             // check cookie for auto-login user
             this.checkCookie()

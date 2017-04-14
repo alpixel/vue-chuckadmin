@@ -39,13 +39,6 @@
                                 <div class="boxed">
                                     <h3>Page content</h3>
 
-                                    <div class="message message-error">
-                                        @TODO :<br />
-                                        <ul>
-                                            <li>CSS for TinyMCE</li>
-                                        </ul>
-                                    </div>
-
                                     <!-- TITLE -->
                                     <div class="form-item" :class="{ 'error': $v.page.title.$error }">
                                         <label class="block">

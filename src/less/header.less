@@ -1,0 +1,248 @@
+// Header
+header {
+    background-color: white;
+
+    .logo {
+        font-size: 1.7rem;
+    }
+
+    // User picture + name
+    .user-box {
+        display: block;
+
+        img {
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 100%;
+            margin-right: 5px;
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color:#7089a2;
+            ._transition;
+        }
+
+        &:hover {
+            span {
+                color:@primary
+            }
+        }
+    }
+
+    // Logout
+    .logout {
+        display: block;
+        padding: 0 10px;
+
+        i {
+            color:#c1ccd1;
+            font-size: 2.2rem;
+            ._transition;
+
+            &:before {
+                margin-right: 0;
+            }
+        }
+
+        &:hover i {
+            color:@red;
+        }
+    }
+
+    // Notifications
+    .user-notif {
+        position: relative;
+
+        .notifications {
+            position: relative;
+            display: block;
+            padding: 0 10px;
+
+            i {
+                display: block;
+                color:#c1ccd1;
+                font-size: 2.2rem;
+                ._transition;
+
+                &:before {
+                    margin-right: 0;
+                }
+            }
+
+            span {
+                position: absolute;
+                z-index: 11;
+                right: 19px;
+                top: 0;
+                background-color: @red;
+                color:white;
+                display: block;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                padding:0px 6px;
+                text-align: center;
+                line-height: 1.7rem;
+                white-space: nowrap
+            }
+
+            &:hover i {
+                color:@red;
+            }
+        }
+
+        // <ul> containing notifications
+        .notifs-dropdown {
+            ._reset;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            top: 20%;
+            ._scale(0.9);
+            right:-15px;
+            width: 300px;
+            color:#BCC2CB;
+            ._transition;
+            box-shadow: 5px 5px rgba(85,97,111,.2);
+            max-height: 700px;
+            overflow-y: auto;
+
+            &.shown {
+                opacity:1;
+                z-index: 11;
+                top: 115%;
+                ._scale(1)
+            }
+
+
+            &:before {
+                content: ' ';
+                display: block;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 8px 9px 8px;
+                border-color: transparent transparent @dark transparent;
+                position: absolute;
+                top: -8px;
+                right: 25px;
+            }
+
+            li {
+                list-style: none;
+                padding: 10px;
+                border-bottom: 1px solid darken(@dark,5%);
+                background-color: @dark;
+                ._transition;
+
+                &:hover {
+                    background-color: lighten(@dark,5%);
+
+                    .notif-detail a {
+                        right: 0;
+                    }
+                }
+
+                h4 {
+                    color: white;
+                    font-size: 1.4rem;
+                    margin-bottom: 5px;
+
+                    .notif-date {
+                        float: right;
+                        display: inline-block;
+                        background-color: darken(@dark, 5%);
+                        color: darken(#BCC2CB,10%);
+                        font-size: 1.1rem;
+                        line-height: 2.4rem;
+                        padding:0px 6px;
+                        border-radius: 2px;
+
+                        i {
+                            vertical-align: middle;
+                            font-size: 1.7rem;
+                        }
+                    }
+                }
+
+                .notif-detail {
+                    font-size: 1.3rem;
+                    line-height: 1.8rem;
+                    overflow: hidden;
+
+                    a {
+                        display: block;
+                        float: right;
+                        margin-left: 10px;
+                        position: relative;
+                        right: -35px;
+                        ._transition;
+                        width: 20px;
+                        height: 20px;
+                        text-align: center;
+                        border-radius: 5px;
+                        line-height: 2.1rem;
+                        color: @red;
+
+                        i {
+                            &:before {
+                                margin-right: 0;
+                            }
+                        }
+
+                        &:hover {
+                            background-color:white;
+
+                        }
+                    }
+                }
+
+
+                // First
+                &:nth-child(1) {
+                    padding: 6px;
+                    border-bottom-width: 0px;
+                    background-color: darken(@dark,5%);
+
+                    p {
+                        color: #BCC2CB;
+                        ._uppercase;
+                        font-size: 1.3rem;
+                        font-weight: 700
+                    }
+
+                    a {
+                        display: block;
+                        float:right;
+                        padding: 0 10px;
+
+                        i {
+                            &:before {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+
+                &.show-more {
+                    background-color:darken(@dark, 5%);
+                    padding: 3px 0;
+
+                    &:hover {
+                        background-color: lighten(@dark,5%);
+                    }
+
+                    a {
+                        display: block;
+                        text-align: center;
+                        color: darken(#BCC2CB,10%);
+                    }
+                }
+            }
+        }
+    }
+}
+// end/ -> Header

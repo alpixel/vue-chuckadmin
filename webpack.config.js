@@ -21,7 +21,6 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-
           }
         }
       },
@@ -45,19 +44,13 @@ module.exports = {
           'postcss-loader',
           'less-loader'
         ]
-      },
-      {
-        test: require.resolve('tinymce/tinymce'),
-        loaders: [
-            'imports-loader?this=>window',
-            'exports-loader?window.tinymce'
-        ]
       }
     ]
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      tippy$: 'tippy.js/dist/tippy.js'
     }
   },
   devServer: {

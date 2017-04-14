@@ -55,7 +55,7 @@
             <li v-if="nbNotif < 1">
                 <div class="notif-detail cc-clearfix">
                     <p>
-                        Aucune notification !
+                        No notification !
                     </p>
                 </div>
             </li>

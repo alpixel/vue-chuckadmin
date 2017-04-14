@@ -12,14 +12,15 @@
 }
 
 // App Pages
-@import "pages/login";
-@import "pages/header";
-@import "pages/nav";
-@import "pages/forms";
-@import "pages/dashboard";
+@import "login";
+@import "header";
+@import "nav";
+@import "tippyjs";
+@import "forms";
+@import "dashboard";
 
 // Pages with data tables : i.e. users, cms, admins, news...
-@import "pages/datatables-pages";
+@import "datatables-pages";
 @import "animations";
 
 @gray: #8f939e;
@@ -31,6 +32,11 @@
 // VueJS hide during loading app
 [v-cloak] {
     display:none;
+}
+
+// Center app in screen
+.cc-inside {
+    ._inside(90%)
 }
 
 
@@ -78,10 +84,3 @@ body {
         }
     }
 }
-
-
-    .cc-inside {
-        ._inside(90%)
-    }
-
-

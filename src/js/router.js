@@ -54,12 +54,6 @@ var routes = [
 
     // Pages
     {
-        path: '/pages/news',
-        name: 'news',
-        component: require('./views/pages/news/news.vue')
-        // component: resolve => require(['./views/pages/news.vue'], resolve)
-    },
-    {
         path: '/pages/cms',
         name: 'cms',
         component: require('./views/pages/cms/cms.vue')

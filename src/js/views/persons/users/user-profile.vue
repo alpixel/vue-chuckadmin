@@ -41,9 +41,6 @@
 <script>
     import Vue from 'vue'
 
-    // Admin info - call Rest API
-    const api = 'https://randomuser.me/api/?id='+this.id+'&nat=fr'
-
     export default {
         name: 'user-profile',
         data () {
@@ -87,7 +84,10 @@
                 // Set var before fetching datas
                 this.fetchError = null
 
+
                 // API call with Axios
+                const api = 'https://randomuser.me/api/?id='+$router.params.id+'&nat=fr'
+
                 Vue.axios.get(api, {
                     // params
                 }).then(response => {

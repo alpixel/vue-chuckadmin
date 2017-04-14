@@ -1,0 +1,38 @@
+// Login Page
+.login-form {
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    h1 {
+        padding-bottom: 10px;
+        color:@dark;
+
+        &:after {
+            display: block;
+            width: 30%;
+            height: 2px;
+            background-color:@dark;
+            margin: 10px auto 0;
+            content:' '
+        }
+    }
+
+    form {
+
+        span {
+            min-width: 100px;
+        }
+        i {
+            vertical-align: middle;
+            font-size: 2rem;
+        }
+
+        button {
+            display:block;
+            min-width: 100%;
+        }
+    }
+} // end/ -> Login page

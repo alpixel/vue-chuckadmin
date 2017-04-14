@@ -1,0 +1,109 @@
+// Pages with data tables : users, admins, cms, news...
+.datatable-pages {
+
+    // Search, Go to page X, Show X per page
+    .filters {
+        form {
+            padding: 0;
+            .form-item {
+                margin-top: 0;
+                margin-bottom: 0;
+                padding: 0;
+
+                &:last-of-type {
+                    padding-left: 15px;
+                }
+            }
+        }
+    }
+
+    // Pagination
+    #pagination {
+        margin: 1.2em 0;
+        display: flex;
+        justify-content:flex-end;
+
+
+        li {
+            background-color: white;
+
+            &.disabled {
+                pointer-events: none;
+                color:#cccccc;
+                background-color: #f7f7f7;
+                opacity:0.3
+            }
+
+            &:not(.disabled) {
+                a {
+                    cursor:pointer;
+                }
+            }
+        }
+    }
+
+    // Table datas
+    table {
+        background-color: white;
+        margin: 0;
+
+        th {
+            position: relative;
+            background-color: #f5f5f5;
+            padding: 15px 20px 15px 8px;
+
+            &.sort {
+                cursor:pointer;
+                color:darken(@text-mc,2%);
+
+                &:after {
+                    display:block;
+                    position: absolute;
+                    right: 9px;
+                    top: 18px;
+                    ._fa('\f0dc', 1.5rem, #cccccc);
+                }
+            }
+
+            &.active {
+                background-color:@primary;
+                color:white;
+
+                &.asc {
+                    &:after {
+                        ._fa('\f0d7', 1.5rem, white);
+                    }
+                }
+
+                &.desc {
+                    &:after {
+                        ._fa('\f0d8', 1.5rem, white);
+                    }
+                }
+            }
+        }
+
+        td {
+
+            &.data-date {
+                font-size: 1.3rem;
+                color:@gray
+            }
+        }
+
+        .badge {
+            font-size: 1.2rem;
+            border-radius: 2px;
+
+            &.published {
+                background-color:@green;
+                color:white;
+            }
+
+            &.pending {
+                background-color:@red;
+                color:white;
+            }
+        }
+    }
+} // end/ -> Users Homepage
