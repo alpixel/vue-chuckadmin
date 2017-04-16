@@ -33,31 +33,12 @@ header {
         }
     }
 
-    // Logout
-    .logout {
-        display: block;
-        padding: 0 10px;
 
-        i {
-            color:#c1ccd1;
-            font-size: 2.2rem;
-            ._transition;
-
-            &:before {
-                margin-right: 0;
-            }
-        }
-
-        &:hover i {
-            color:@red;
-        }
-    }
-
-    // Notifications
-    .user-notif {
+    // Icons NOTIFS && SETTINGS
+    .header-icon {
         position: relative;
 
-        .notifications {
+        & > a {
             position: relative;
             display: block;
             padding: 0 10px;
@@ -93,51 +74,65 @@ header {
                 color:@red;
             }
         }
+    }
+    // Dropdowns NOTIFS && SETTINGS
+    .dropdown {
+        ._reset;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        top: 150%;
+        ._scale(0.9);
+        right:-15px;
+        width: 300px;
+        color:#BCC2CB;
+        box-shadow: 5px 5px rgba(85,97,111,.2);
+        max-height: 700px;
+        overflow-y: auto;
 
-        // <ul> containing notifications
-        .notifs-dropdown {
-            ._reset;
-            position: absolute;
-            z-index: -1;
-            opacity: 0;
-            top: 20%;
-            ._scale(0.9);
-            right:-15px;
-            width: 300px;
-            color:#BCC2CB;
+        &.shown {
             ._transition;
-            box-shadow: 5px 5px rgba(85,97,111,.2);
-            max-height: 700px;
-            overflow-y: auto;
+            opacity:1;
+            z-index: 11;
+            top: 115%;
+            ._scale(1)
+        }
 
-            &.shown {
-                opacity:1;
-                z-index: 11;
-                top: 115%;
-                ._scale(1)
+        li {
+            list-style: none;
+            padding: 10px;
+            border-bottom: 1px solid darken(@dark,5%);
+            background-color: @dark;
+            ._transition;
+
+            // First
+            &:nth-child(1) {
+                padding: 6px;
+                border-bottom-width: 0px;
+                background-color: darken(@dark,5%);
+
+                p {
+                    color: #BCC2CB;
+                    ._uppercase;
+                    font-size: 1.3rem;
+                    font-weight: 700
+                }
+
+                a {
+                    display: block;
+                    float:right;
+                    padding: 0 10px;
+
+                    i {
+                        &:before {
+                            margin-right: 0;
+                        }
+                    }
+                }
             }
 
-
-            &:before {
-                content: ' ';
-                display: block;
-                width: 0;
-                height: 0;
-                border-style: solid;
-                border-width: 0 8px 9px 8px;
-                border-color: transparent transparent @dark transparent;
-                position: absolute;
-                top: -8px;
-                right: 25px;
-            }
-
-            li {
-                list-style: none;
-                padding: 10px;
-                border-bottom: 1px solid darken(@dark,5%);
-                background-color: @dark;
-                ._transition;
-
+            // All but first
+            &:not(:nth-child(1)) {
                 &:hover {
                     background-color: lighten(@dark,5%);
 
@@ -146,6 +141,20 @@ header {
                     }
                 }
 
+                a:not(.delete-all) {
+                    display: block;
+                    color:#BCC2CB;
+                    ._transition;
+
+                    i {
+                        vertical-align: middle;
+                        font-size: 2.2rem;
+                    }
+                }
+
+                // *********
+                // SPECIFIC TO NOTIFICATIONS
+                // *********
                 h4 {
                     color: white;
                     font-size: 1.4rem;
@@ -167,7 +176,7 @@ header {
                         }
                     }
                 }
-
+                // Notification detail
                 .notif-detail {
                     font-size: 1.3rem;
                     line-height: 1.8rem;
@@ -188,6 +197,8 @@ header {
                         color: @red;
 
                         i {
+                            font-size: 1.5rem;
+
                             &:before {
                                 margin-right: 0;
                             }
@@ -195,38 +206,11 @@ header {
 
                         &:hover {
                             background-color:white;
-
+                            color:@red;
                         }
                     }
                 }
-
-
-                // First
-                &:nth-child(1) {
-                    padding: 6px;
-                    border-bottom-width: 0px;
-                    background-color: darken(@dark,5%);
-
-                    p {
-                        color: #BCC2CB;
-                        ._uppercase;
-                        font-size: 1.3rem;
-                        font-weight: 700
-                    }
-
-                    a {
-                        display: block;
-                        float:right;
-                        padding: 0 10px;
-
-                        i {
-                            &:before {
-                                margin-right: 0;
-                            }
-                        }
-                    }
-                }
-
+                // Show more notifs
                 &.show-more {
                     background-color:darken(@dark, 5%);
                     padding: 3px 0;

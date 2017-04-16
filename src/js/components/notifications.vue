@@ -1,7 +1,7 @@
 <template>
-    <div class="user-notif">
+    <div class="header-icon">
 
-        <a href="javascript:void(0)" class="notifications" @click.prevent="openNotifsPanel">
+        <a href="javascript:void(0)" @click.prevent="openNotifsPanel" @mouseenter="isHoverNotifs = true" @mouseleave="delayClosePanel">
             <span v-if="nbNotif > 0">
                 {{nbNotifString}}
             </span>
@@ -9,7 +9,7 @@
             <i class="ion-ios-bell-outline" :class="{'shake': nbNotif > 0 && !showNotifs}"></i>
         </a>
 
-        <ul class="notifs-dropdown" :class="{shown:showNotifs}" @mouseenter="isHoverNotifs = true" @mouseleave="delayClosePanel">
+        <ul class="dropdown" :class="{shown:showNotifs}" @mouseenter="isHoverNotifs = true" @mouseleave="delayClosePanel">
             <li class="cc-clearfix">
                 <a href="javascript:void(0)" @click.prevent="closeNotifsPanel" class="cc-red">
                     <i class="ion-close-round"></i>
@@ -47,7 +47,7 @@
             </li>
 
             <li class="cc-txt-center" v-if="nbNotif > 0">
-                <a href="javascript:void(0)" class="btn cc-thin cc-bg-red" @click.prevent="deleteAll">
+                <a href="javascript:void(0)" class="btn cc-thin cc-bg-red delete-all" @click.prevent="deleteAll">
                     Delete all
                 </a>
             </li>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-    import { EventBus } from './bus.js'
+    // import { EventBus } from './bus.js'
 
 	export default {
 		name: 'notifications',

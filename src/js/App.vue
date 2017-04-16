@@ -72,10 +72,6 @@
                                     </li>
                                 </ul>
                             </li>
-
-                            <li class="last">
-                                <a href="" @click.prevent="$store.dispatch('switchTooltips')">Help ? (show tooltips)</a>
-                            </li>
                         </ul>
                     </div>
                 </nav>

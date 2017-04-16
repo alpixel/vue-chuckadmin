@@ -50,7 +50,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      tippy$: 'tippy.js/dist/tippy.js'
+      'tippy$': 'tippy.js/dist/tippy.js'
     }
   },
   devServer: {

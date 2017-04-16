@@ -22,7 +22,7 @@
                 <div>
 
                     <!-- <div class="push-item"> -->
-                    <div class="push-item" v-tippy="{title: 'Here my awesome title'}">
+                    <div class="push-item" v-tooltip="{title: 'Here my awesome title'}">
                         <span class="push-icon cc-bg-primary">
                             <i class="ion-android-contacts"></i>
                         </span>
@@ -40,7 +40,7 @@
 
                 <!-- Sales -->
                 <div>
-                    <div class="push-item">
+                    <div class="push-item" v-tooltip="{title: 'I\'m the second tooltip dude ^^'}">
                         <span class="push-icon cc-bg-green">
                             <i class="ion-android-cart"></i>
                         </span>
@@ -177,10 +177,6 @@
 </template>
 
 <script>
-
-    import { EventBus } from '../../components/bus.js'
-    // import { tippy } from '../../directives/tippyjs.vue'
-
     // Import Widgets
     import widgetHighchartsOne from '../../components/widget-highcharts-1.vue'
     import widgetHighchartsTwo from '../../components/widget-highcharts-2.vue'

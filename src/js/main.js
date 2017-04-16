@@ -17,7 +17,7 @@ import 'vue-flatpickr/theme/material_blue.css'
 import less from '../less/front.less'
 import router from './router.js'
 import filters from './components/filters.vue'
-import './directives/tippyjs.vue'
+import './directives/tooltips.vue'
 
 import store from './store.js'
 

@@ -23,9 +23,33 @@
                 </div>
 
                 <div class="cc-w-auto">
-                    <a href="javascript:void(0)" @click.prevent="logout"  class="logout" title="Logout">
-                        <i class="ion-ios-unlocked-outline"></i>
-                    </a>
+                    <div class="header-icon">
+                        <a href="javascript:void(0);" @click.prevent="openSettingsPanel" @mouseenter="isHoverSettings = true" @mouseleave="delayClosePanel">
+                            <i class="ion-ios-gear-outline"></i>
+                        </a>
+
+                        <ul class="dropdown" :class="{shown:showSettings}" @mouseenter="isHoverSettings = true" @mouseleave="delayClosePanel">
+                            <li class="cc-clearfix">
+                                <a href="javascript:void(0)" @click.prevent="closeSettingsPanel" class="cc-red">
+                                    <i class="ion-close-round"></i>
+                                </a>
+
+                                <p>
+                                    Settings
+                                </p>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" @click.prevent="$store.dispatch('switchTooltips'), closeSettingsPanel()">
+                                    <i class="ion-ios-help-outline"></i> {{getTooltipMsg}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" @click.prevent="logout">
+                                    <i class="ion-ios-unlocked-outline"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,7 +64,8 @@
 		name: 'header',
         data() {
             return {
-
+                showSettings : false,
+                isHoverSettings: false
             }
         },
 		props: {
@@ -48,10 +73,36 @@
 	            type: Object
 	        }
 	    },
+        computed: {
+            getTooltipMsg() {
+                return (store.state.showTooltips == true) ? 'Hide Tooltips' : 'Show Tooltips'
+            }
+        },
         methods: {
             logout() {
                 this.$emit('logout')
-            }
+            },
+
+            // Open Settings panel
+            openSettingsPanel() {
+                this.showSettings = !this.showSettings
+            },
+
+            // Close Settings panel
+            closeSettingsPanel() {
+                this.showSettings = false
+            },
+
+            delayClosePanel() {
+                let that = this
+
+                that.isHoverSettings = false
+
+                _.delay(function() {
+                    if (!that.isHoverSettings)
+                        that.closeSettingsPanel()
+                }, 450)
+            },
         },
         components: {
             notifications
