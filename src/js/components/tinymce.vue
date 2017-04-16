@@ -29,7 +29,7 @@
                     height : 300,
                     max_height: 500,
                     body_class: 'my-tinymce',
-                    content_css: '/dist/tinymce.css?' + new Date().getTime()
+                    content_css: 'dist/tinymce.css?' + new Date().getTime()
                 }
             }}
         },

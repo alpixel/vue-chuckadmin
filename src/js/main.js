@@ -16,12 +16,14 @@ import 'vue-flatpickr/theme/material_blue.css'
 // App specific features
 import less from '../less/front.less'
 import router from './router.js'
+import store from './store.js'
 import filters from './components/filters.vue'
+
+// Custom directives
 import './directives/tooltips.vue'
 
-import store from './store.js'
 
-
+// Use Plugins
 Vue.use(VueHead)
 Vue.use(VueAxios, axios)
 Vue.use(Vuelidate)
@@ -36,7 +38,7 @@ Vue.use(VueAnalytics, {
 })
 
 
-
+// Make the world better
 const app = new Vue({
     store,
     router,

@@ -40,7 +40,7 @@
 
                 <!-- Sales -->
                 <div>
-                    <div class="push-item" v-tooltip="{title: 'I\'m the second tooltip dude ^^'}">
+                    <div class="push-item">
                         <span class="push-icon cc-bg-green">
                             <i class="ion-android-cart"></i>
                         </span>

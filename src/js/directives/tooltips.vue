@@ -2,7 +2,7 @@
     import Vue from 'vue'
     import Vuex from 'vuex'
     import store from '../store.js'
-    // import Tippy from 'tippy'
+    import Tippy from 'tippy'
     
 
 
