@@ -29,3 +29,8 @@
 * Date picker : [Vue-Flatpickr](https://github.com/jrainlau/vue-flatpickr)
 * Files uploader : [Dropzone](https://github.com/enyo/dropzone/)
 * Tooltips : [TippyJS](https://github.com/atomiks/tippyjs)
+
+
+### @TODOS
+* User profile page
+* Statistics page
