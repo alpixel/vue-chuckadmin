@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const state = {
 
-    // Does the user enabled / disabled the Tootlips helpers ?
+    // Does the user enabled/disabled tootlips ?
     showTooltips: false
 }
 

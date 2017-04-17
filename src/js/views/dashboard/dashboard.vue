@@ -21,7 +21,6 @@
                 <!-- Users -->
                 <div>
 
-                    <!-- <div class="push-item"> -->
                     <div class="push-item" v-tooltip="{title: 'Here my awesome title'}">
                         <span class="push-icon cc-bg-primary">
                             <i class="ion-android-contacts"></i>

@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="cc-w-auto">
-                    <router-link :to="{name : 'home'}"  class="user-box">
+                    <router-link :to="{name:'user-profile', params:{id: loggedUser.id}}"  class="user-box">
                         <!-- User img -->
                         <img :src="loggedUser.picture" :alt="loggedUser.name" />
 

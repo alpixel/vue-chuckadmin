@@ -66,7 +66,6 @@
 </template>
 
 <script>
-    // import { EventBus } from './bus.js'
 
 	export default {
 		name: 'notifications',

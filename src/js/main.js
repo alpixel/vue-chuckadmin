@@ -8,19 +8,19 @@ import VueHead from 'vue-head'
 import Vuelidate from 'vuelidate'
 import VueCookie from 'vue-cookie'
 import VueAnalytics from 'vue-ua'
-
-// FlatPickr
 import VueFlatpickr from 'vue-flatpickr'
 import 'vue-flatpickr/theme/material_blue.css'
-
-// App specific features
-import less from '../less/front.less'
 import router from './router.js'
 import store from './store.js'
-import filters from './components/filters.vue'
 
-// Custom directives
-import './directives/tooltips.vue'
+// ChuckCSS Framework, FontAwesome, Ionicons, fonts
+import less from '../less/front.less'
+
+// Custom Filters
+import filters from './filters/filters.vue'
+
+// Custom Directives
+import './directives/directives.vue'
 
 
 // Use Plugins

@@ -1,11 +1,20 @@
 <script>
     import Vue from 'vue'
+    
+    // Store management
     import Vuex from 'vuex'
     import store from '../store.js'
+    
+    // Tooltips
     import Tippy from 'tippy'
     
 
-
+    /*
+        Tooltip directive
+        Show Tooltip regards to `showTooltips` state in store management
+        * Use case :
+            - <div v-tooltip="{title: 'Here my awesome title'}"></div>
+    */
     Vue.directive('tooltip', {
         inserted(el,binding,vnode) {
 
@@ -65,75 +74,6 @@
             el.addEventListener("mouseleave", function( event ) {
                 tippyInstance.hide(popper)
             }, false)
-        },
-
-        bind(el,binding,vnode) {
-        },
-
-        update(el,binding,vnode) {
-        },
-
-        componentUpdates(el) {
-        },
-
-        unbind(el) {
         }
     })
 </script>
-
-
-
-<!--<script>
-//     import Vue from 'vue'
-//     import Vuex from 'vuex'
-//     import store from '../store.js'
-
-//     function getHelp() {
-//         return store.state.showTooltips
-//     }
-
-//     Vue.directive('tooltip', {
-
-//         inserted(el,binding,vnode) {
-
-//         },
-
-//         bind(el,binding,vnode) {
-
-//             console.log('bind')
-
-//             if(_.trim(binding.value.title) != '') {
-            
-//                 el.addEventListener("mouseover", function( event ) {
-
-//                     console.log('mouseover event created')
-
-//                     if(store.state.showTooltips) {
-//                         el.setAttribute('aria-label', binding.value.title)
-//                         el.classList.add('hint--top')
-//                         el.classList.add('hint--bounce')
-//                     }
-
-//                 }, false)
-
-//                 el.addEventListener("mouseleave", function( event ) {
-
-//                     el.removeAttribute('aria-label')
-//                     el.classList.remove('hint--top')
-//                     el.classList.remove('hint--bounce')
-
-//                 }, false)
-
-//             }
-//         },
-
-//         update(el,binding,vnode) {
-//         },
-
-//         componentUpdates(el) {
-//         },
-
-//         unbind(el) {
-//         }
-//     })
-</script>-->

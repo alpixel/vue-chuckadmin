@@ -85,7 +85,7 @@
                 this.fetchError = null
 
                 // API call with Axios
-                const api = 'https://randomuser.me/api/?id='+$router.params.id+'&nat=fr'
+                const api = 'https://randomuser.me/api/?id='+this.$route.params.id+'&nat=fr'
 
                 Vue.axios.get(api, {
                     // params

@@ -54,7 +54,6 @@
 	import Vue from 'vue'
     import { minLength,required } from 'vuelidate/lib/validators'
 
-    // const api = 'https://randomuser.me/api/?results=1&nat=fr'
     const api = 'src/js/fakeapi/login.json'
 
 	export default {
