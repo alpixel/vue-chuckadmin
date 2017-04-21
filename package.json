@@ -10,12 +10,11 @@
   },
   "dependencies": {
     "ChuckCSS": "^3",
-    "cross-env": "^3.2",
+    "cross-env": "^3.2.4",
     "karma-cli": "^1.0.1",
     "vue": "^2.2",
-    "vue-template-compiler": "^2.2",
-    "webpack": "^2.3",
-    "webpack-dev-server": "^2.4"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "devDependencies": {
     "accounting": "^0.4.1",
@@ -31,6 +30,7 @@
     "css-loader": "^0.25.0",
     "dropzone": "^4.3.0",
     "expose-loader": "^0.7.3",
+    "extract-text-webpack-plugin": "^2.1",
     "file-loader": "^0.9.0",
     "highcharts": "^5",
     "jasmine-core": "^2.5.2",
@@ -60,6 +60,7 @@
     "vue-highcharts": "0.0.9",
     "vue-loader": "^10.0.0",
     "vue-router": "^2.2.1",
+    "vue-template-compiler": "^2.2",
     "vue-ua": "^1.3.0",
     "vuelidate": "^0.4",
     "vuex": "^2.3.0"

@@ -265,8 +265,3 @@
         }
     }
 </script>
-
-
-<style scoped>
-    @import '~dropzone/dist/dropzone.css';
-</style>

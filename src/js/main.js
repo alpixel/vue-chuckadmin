@@ -9,7 +9,6 @@ import Vuelidate from 'vuelidate'
 import VueCookie from 'vue-cookie'
 import VueAnalytics from 'vue-ua'
 import VueFlatpickr from 'vue-flatpickr'
-import 'vue-flatpickr/theme/material_blue.css'
 import router from './router.js'
 import store from './store.js'
 

@@ -1,5 +1,10 @@
 @charset "UTF-8";
+
+// NPM CSS Imports
 @import "~ChuckCSS/chuckcss/front";
+@import "~vue-flatpickr/theme/material_blue.css";
+@import '~dropzone/dist/dropzone.css';
+
 
 // External libraries
 @import "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
@@ -7,9 +12,6 @@
 @import "//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
 @import "//fonts.googleapis.com/css?family=Droid+Sans:400,700";
 
-._droid() {
-    font-family: 'Droid Sans', sans-serif;
-}
 
 // App Pages
 @import "login";
@@ -22,6 +24,12 @@
 // Pages with data tables : i.e. users, cms, admins, news...
 @import "datatables-pages";
 @import "animations";
+
+
+
+._droid() {
+    font-family: 'Droid Sans', sans-serif;
+}
 
 @gray: #8f939e;
 @black: #23272d;
