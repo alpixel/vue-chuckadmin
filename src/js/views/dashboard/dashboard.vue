@@ -207,30 +207,44 @@
         head: {
             title() {
                 return {
-                    inner: this.msg,
-                    separator: '-',
-                    complement: 'Made by ALPIXEL agency'
+                    inner: this.msg
                 }
             },
             meta() {
                 return [
-                    { name: 'application-name', content: 'ChuckAdmin' },
-                    { name: 'description', content: 'A VueJS & ChuckCSS administration', id: 'desc' }, // id to replace intead of create element
-                    // ...
-                    // Twitter
-                    { name: 'twitter:title', content: 'ChuckAdmin' },
-                    // with shorthand
-                    { n: 'twitter:description', c: 'A VueJS & ChuckCSS administration'},
-                    // ...
-                    // Google+ / Schema.org
-                    { itemprop: 'name', content: 'ChuckAdmin' },
-                    { itemprop: 'description', content: 'A VueJS & ChuckCSS administration' }
-                    // ...
-                    // Facebook / Open Graph
-                    // { property: 'fb:app_id', content: '123456789' },
-                    // { property: 'og:title', content: 'Content Title' },
-                    // with shorthand
-                    // { p: 'og:image', c: 'https://example.com/image.jpg' }
+                    // Meta Description
+                    { 
+                        n: 'description', 
+                        c: 'A VueJS & ChuckCSS administration'
+                    },
+
+                    // Twitter card
+                    { n: 'twitter:card', c:'summary' },
+                    // { n: 'twitter:site', c:'@site_account' },
+                    // { n: 'twitter:creator', c:'@individual_account' },
+                    { n: 'twitter:url', c:'' },
+                    { n: 'twitter:title', c:'A VueJS & ChuckCSS administration' },
+                    { n: 'twitter:image', c:'' },
+                    { n: 'twitter:description', c: 'A VueJS & ChuckCSS administration' },
+
+                    // FaceBook / Open Graph
+                    { p: 'fb:app_id', c:'' },
+                    { p: 'og:url', c:'' },
+                    { p: 'og:type', c:'website' },
+                    { p: 'og:title', c:'A VueJS & ChuckCSS administration' },
+                    { p: 'og:image', c:'' },
+                    { p: 'og:description', c: 'A VueJS & ChuckCSS administration' },
+                    { p: 'og:site_name', c: 'VueJS & ChuckCSS administration' },
+                    { p: 'og:locale', c: 'en_US' },
+                    { p: 'article:author', c: 'ALPIXEL Agency' },
+
+                    // Google+ / Schema.org : itemprop meta
+                    { ip: 'name', c: 'ChuckAdmin' },
+                    { ip: 'description', c: 'A VueJS & ChuckCSS administration' }
+                ]
+            },
+            link() {
+                return [
                 ]
             }
         },

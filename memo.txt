@@ -23,12 +23,12 @@ mkdir ~/.npm-global/lib && mkdir ~/.npm-global/lib/node_modules && mkdir ~/.npm-
 sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
 
 
-6. (in /var/www/)
-sudo npm install --no-bin-links
+6. (in /var/www/) Thanks windows..
+sudo npm i --no-bin-links
 
 
-7.
-sudo npm install cross-env webpack webpack-dev-server --save
+7. Thanks windows..
+sudo npm i -g cross-env webpack webpack-dev-server --save
 
 
 8.

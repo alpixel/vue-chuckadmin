@@ -114,7 +114,6 @@
                 loading: true
             }
         },
-
         created () {
             // check cookie for auto-login user
             this.checkCookie()

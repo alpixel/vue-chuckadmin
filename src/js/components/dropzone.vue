@@ -6,6 +6,8 @@
     import Dropzone from 'dropzone'
 
     export default {
+        name: 'dropzone',
+        
         data() {
             return {
 

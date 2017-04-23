@@ -23,7 +23,10 @@ import './directives/directives.vue'
 
 
 // Use Plugins
-Vue.use(VueHead)
+Vue.use(VueHead,{
+  separator: '-',
+  complement: 'Made by ALPIXEL Agency'
+})
 Vue.use(VueAxios, axios)
 Vue.use(Vuelidate)
 Vue.use(VueCookie)
@@ -34,6 +37,9 @@ Vue.use(VueAnalytics, {
     trackingId: 'UA-9271946-13',
     debug: false,
     vueRouter: router
+
+    // If router, you can exclude some routes name (case insensitive) (optional)
+    // ignoredViews: ['homepage'], 
 })
 
 

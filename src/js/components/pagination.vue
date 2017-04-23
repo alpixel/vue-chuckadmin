@@ -72,13 +72,11 @@
             }
         },
 
-        // When component is created, create the pagination
         created() {
 
             this.createPagination()
         },
 
-        // Computed datas
         computed: {
             // Show first & prev buttons ?
             showLeft() {
@@ -120,6 +118,7 @@
                 this.current = (this.currentpage < 1) ? 1 : this.currentpage
             }
         },
+
         methods: {
 
             // When the page change
