@@ -35,3 +35,4 @@
 * User profile page
 * Statistics page
 * Users roles
+* Use http://flickity.metafizzy.co/
